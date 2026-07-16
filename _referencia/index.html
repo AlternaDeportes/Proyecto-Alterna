@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="ALTERNA — narrativa transmedia documental sobre deportes alternativos en Santa Fe: Ultimate, Newcom y Wingfoil. Explorá el mapa y sumate a la comunidad." />
+  <meta name="theme-color" content="#1a1f2e" />
+  <title>ALTERNA | Deportes alternativos en Santa Fe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+  <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
+
+  <header class="nav-principal visible" id="navPrincipal" role="banner">
+    <div class="nav-principal__inner">
+      <a href="#inicio" class="nav-principal__logo" aria-label="ALTERNA — inicio">ALTERNA</a>
+      <button type="button" class="nav-hamburguesa" id="btnMenu" aria-expanded="false" aria-controls="menuNav" aria-label="Abrir menú">☰</button>
+      <nav aria-label="Principal">
+        <ul class="nav-principal__links" id="menuNav">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#documental">Documental</a></li>
+          <li><a href="#deportes">Deportes</a></li>
+          <li><a href="#mapa">Mapa</a></li>
+          <li><a href="#podcast">Podcast</a></li>
+          <li><a href="#comunidad">Comunidad</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><button type="button" class="chip-login" id="btnLoginNav">Ingresar</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="sitioPrincipal">
+    <section id="inicio" class="hero-inicio hero-inicio--inmersivo" aria-labelledby="tituloInicio">
+      <div class="hero-inicio__media" aria-hidden="true">
+        <video
+          class="hero-inicio__video"
+          id="heroVideo"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="assets/video/hero-loop.webm" type="video/webm" />
+          <source src="assets/video/hero-loop.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-inicio__overlay"></div>
+      </div>
+      <div class="contenedor revelar">
+        <p class="hero-kicker">Proyecto transmedia · Santa Fe</p>
+        <h1 id="tituloInicio">Explorá alternativas deportivas</h1>
+        <p>Ultimate Frisbee, Newcom y Wingfoil: comunidades reales, historias poco mediáticas y formas distintas de practicar deporte en la ciudad.</p>
+        <div class="etiquetas" role="list">
+          <span class="etiqueta" role="listitem">Documental</span>
+          <span class="etiqueta" role="listitem">Deportes alternativos</span>
+          <span class="etiqueta" role="listitem">Santa Fe, Argentina</span>
+        </div>
+        <div class="hero-acciones">
+          <a href="#mapa" class="btn btn--primario">Explorá alternativas</a>
+          <a href="#documental" class="btn btn--outline hero-btn-secundario">Ver documental</a>
+        </div>
+        <ul class="hero-datos" aria-label="Datos rápidos del proyecto">
+          <li><strong>3</strong><span>disciplinas</span></li>
+          <li><strong>4</strong><span>protagonistas</span></li>
+          <li><strong>1</strong><span>mapa comunitario</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="documental" class="seccion contenedor seccion-media">
+      <div class="media-encabezado revelar">
+        <div>
+          <span class="media-kicker">Narrativa audiovisual</span>
+          <h2>Documental</h2>
+          <p class="media-descripcion">Trailer y episodios para profundizar en las historias humanas detrás de cada disciplina.</p>
+        </div>
+        <p class="media-pista">Orden sugerido: Trailer → Episodio 01 → Episodio 02</p>
+      </div>
+      <div class="media-grid revelar">
+        <article class="tarjeta bloque-media media-card media-card--destacada media-card--proximo">
+          <span class="etiqueta-proximo">Próximamente</span>
+          <span class="media-etiqueta">Comenzá acá</span>
+          <p class="media-card__meta">Trailer</p>
+          <h3>Primer vistazo</h3>
+          <p>Presentación del universo narrativo de ALTERNA.</p>
+          <span class="media-card__cta" aria-disabled="true">En producción</span>
+        </article>
+        <article class="tarjeta bloque-media media-card media-card--proximo">
+          <span class="etiqueta-proximo">Próximamente</span>
+          <span class="media-etiqueta">Historia 1</span>
+          <p class="media-card__meta">Episodio 01</p>
+          <h3>Ultimate Frisbee</h3>
+          <p>Comunidad, entrenamiento y espíritu deportivo sin árbitros.</p>
+          <span class="media-card__cta" aria-disabled="true">En producción</span>
+        </article>
+        <article class="tarjeta bloque-media media-card media-card--proximo">
+          <span class="etiqueta-proximo">Próximamente</span>
+          <span class="media-etiqueta">Historia 2</span>
+          <p class="media-card__meta">Episodio 02</p>
+          <h3>Newcom y Wingfoil</h3>
+          <p>Diversidad de prácticas y apropiación del territorio santafesino.</p>
+          <span class="media-card__cta" aria-disabled="true">En producción</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="deportes" class="seccion contenedor">
+      <h2 class="revelar">Deportes</h2>
+      <p class="revelar" style="margin-bottom:1.25rem;max-width:50ch;">Tres disciplinas poco mediáticas, muy vivas en la ciudad. Elegí la que te intrigue — o probá las tres.</p>
+      <div class="grid-3">
+        <article class="tarjeta disciplina-card disciplina-card--ultimate revelar">
+          <img class="disciplina-card__img" src="assets/deporte-ultimate.png" alt="Jugadores de Ultimate Frisbee en cancha al aire libre" width="800" height="500" loading="lazy" />
+          <div class="disciplina-card__cuerpo">
+            <h3>Ultimate Frisbee</h3>
+            <p>Fútbol con disco: corre, saltá y pasá en equipo. Sin árbitros — el fair play lo arman los jugadores.</p>
+            <a class="media-card__cta" href="deportes/ultimate-frisbee.html">Ver perfil del deporte →</a>
+          </div>
+        </article>
+        <article class="tarjeta disciplina-card disciplina-card--newcom revelar">
+          <img class="disciplina-card__img" src="assets/hero-newcom.png" alt="Práctica de Newcom con red en gimnasio" width="800" height="500" loading="lazy" />
+          <div class="disciplina-card__cuerpo">
+            <h3>Newcom</h3>
+            <p>Vóley adaptado con red baja y reglas propias. Comunidad fuerte, partidos intensos y mucha autogestión.</p>
+            <a class="media-card__cta" href="deportes/newcom.html">Ver perfil del deporte →</a>
+          </div>
+        </article>
+        <article class="tarjeta disciplina-card disciplina-card--wingfoil revelar">
+          <img class="disciplina-card__img" src="assets/deporte-wingfoil.png" alt="Practicante de wingfoil en laguna" width="800" height="500" loading="lazy" />
+          <div class="disciplina-card__cuerpo">
+            <h3>Wingfoil</h3>
+            <p>Tabla + ala sobre el agua. Libertad, viento y aprendizaje progresivo junto al río y la laguna.</p>
+            <a class="media-card__cta" href="deportes/wingfoil.html">Ver perfil del deporte →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="protagonistas" class="seccion contenedor" aria-labelledby="tituloProtagonistas">
+      <h2 id="tituloProtagonistas" class="revelar">Protagonistas</h2>
+      <p class="revelar" style="max-width:52ch;margin-bottom:1rem;">Personas reales del documental. Sus voces sostienen cada plataforma de ALTERNA.</p>
+      <div class="voces-grid">
+        <article class="persona persona--ancho-7 revelar">
+          <figure class="persona__foto"><img src="assets/voces-01.png" alt="Retrato de Lucila Luchi Farías" width="600" height="800" loading="lazy" /></figure>
+          <div class="persona__info"><h3>Lucila «Luchi» Farías</h3><p class="persona__rol">Ultimate Frisbee · jugadora</p></div>
+        </article>
+        <article class="persona persona--ancho-5 revelar">
+          <figure class="persona__foto"><img src="assets/voces-02.png" alt="Retrato de Adriel Ciclo Dussex" width="600" height="800" loading="lazy" /></figure>
+          <div class="persona__info"><h3>Adriel «Ciclo» Dussex</h3><p class="persona__rol">Ultimate Frisbee · entrenador</p></div>
+        </article>
+        <article class="persona persona--ancho-5 revelar">
+          <figure class="persona__foto"><img src="assets/voces-03.png" alt="Retrato de Mónica Lovecchio" width="600" height="800" loading="lazy" /></figure>
+          <div class="persona__info"><h3>Mónica Lovecchio</h3><p class="persona__rol">Newcom · jugadora</p></div>
+        </article>
+        <article class="persona persona--ancho-7 revelar">
+          <figure class="persona__foto"><img src="assets/voces-04.png" alt="Retrato de Lucio Cinaglia" width="600" height="800" loading="lazy" /></figure>
+          <div class="persona__info"><h3>Lucio Cinaglia</h3><p class="persona__rol">Wingfoil · instructor</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="mapa" class="seccion mapa-seccion" aria-labelledby="tituloMapa">
+      <div class="contenedor">
+        <div class="mapa-cabecera revelar">
+          <h2 id="tituloMapa">Encontrá tu deporte</h2>
+          <p>El mapa es el núcleo de ALTERNA: actividades amateur cerca tuyo en Santa Fe. Filtrá, ajustá el radio y sumá tu espacio.</p>
+        </div>
+        <div class="filtros-deporte revelar" id="filtrosDeporte" role="group" aria-label="Filtrar por deporte">
+          <button type="button" class="filtro-chip activo" data-filtro="Todos">Todos</button>
+          <button type="button" class="filtro-chip" data-filtro="Ultimate Frisbee"><span class="punto-color" style="background:var(--color-ultimate)"></span> Ultimate</button>
+          <button type="button" class="filtro-chip" data-filtro="Newcom"><span class="punto-color" style="background:var(--color-newcom)"></span> Newcom</button>
+          <button type="button" class="filtro-chip" data-filtro="Wingfoil"><span class="punto-color" style="background:var(--color-wingfoil)"></span> Wingfoil</button>
+        </div>
+        <div class="control-radio revelar">
+          <label for="radioBusqueda">Radio de búsqueda</label>
+          <input type="range" id="radioBusqueda" min="2" max="30" value="10" aria-valuemin="2" aria-valuemax="30" aria-valuenow="10" />
+          <output id="valorRadio" for="radioBusqueda">10 km</output>
+          <span class="contador-actividades" id="contadorActividades" aria-live="polite">0 actividades cerca</span>
+        </div>
+        <div class="mapa-contenedor revelar">
+          <div id="mapaLeaflet" role="application" aria-label="Mapa de actividades deportivas en Santa Fe"></div>
+          <aside class="hoja-inferior abierta" id="hojaInferior" aria-label="Lista de lugares cercanos">
+            <button type="button" class="hoja-inferior__agarre" id="agarreHoja" aria-label="Arrastrar panel de lugares"></button>
+            <div class="hoja-inferior__cabecera">
+              <strong style="color:var(--titulo)">Cerca tuyo</strong>
+              <button type="button" class="btn btn-secundario" id="toggleHoja" style="padding:0.4rem 0.75rem;font-size:0.8rem;">Ver lista</button>
+            </div>
+            <div class="hoja-inferior__lista" id="listaLugares" role="list"></div>
+            <div class="panel-actividad" id="panelActividad">
+              <h4 id="tituloActividad">Seleccioná un punto</h4>
+              <p id="metaActividad" style="font-size:0.84rem;color:var(--texto-suave);">Al tocar un marcador vas a ver comentarios de la comunidad.</p>
+              <div class="comentarios-mapa" id="comentariosMapa"></div>
+              <form class="form-comentario-mapa" id="formComentarioMapa">
+                <textarea name="comentarioMapa" placeholder="Dejá tu comentario de este lugar..." minlength="6" required></textarea>
+                <button type="submit" class="btn btn--primario" style="padding:0.55rem 0.9rem;">Comentar punto</button>
+              </form>
+              <p id="estadoComentarioMapa" class="estado-accion" aria-live="polite">Seleccioná un punto para comentar.</p>
+            </div>
+          </aside>
+          <button type="button" class="btn-flotante-mapa" id="btnAgregarDeporte">+ Agregar mi deporte</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="podcast" class="seccion contenedor seccion-media">
+      <div class="media-encabezado revelar">
+        <div>
+          <span class="media-kicker">Voces en primera persona</span>
+          <h2>Podcast</h2>
+          <p class="media-descripcion">Charlas con entrenadores, jugadoras y referentes para ampliar la historia más allá de la imagen.</p>
+        </div>
+        <p class="media-pista">Escuchá mientras explorás el mapa o salís a entrenar.</p>
+      </div>
+      <div class="media-grid revelar">
+        <article class="tarjeta media-card media-card--destacada media-card--proximo">
+          <span class="etiqueta-proximo">Próximamente</span>
+          <span class="media-etiqueta">Recomendado</span>
+          <p class="media-card__meta">Episodio</p>
+          <h3>Entrenar en comunidad</h3>
+          <p>Conversación sobre autogestión, constancia y pertenencia local.</p>
+          <span class="media-card__cta" aria-disabled="true">En producción</span>
+        </article>
+        <article class="tarjeta media-card media-card--proximo">
+          <span class="etiqueta-proximo">Próximamente</span>
+          <span class="media-etiqueta">Nuevo</span>
+          <p class="media-card__meta">Episodio</p>
+          <h3>Jugar fuera del foco</h3>
+          <p>Historias de quienes sostienen deportes invisibilizados.</p>
+          <span class="media-card__cta" aria-disabled="true">En producción</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="quienes-somos" class="seccion contenedor seccion-quienes" aria-labelledby="tituloQuienes">
+      <h2 id="tituloQuienes" class="revelar">¿Quiénes somos?</h2>
+      <p class="revelar" style="max-width:58ch;margin-top:0.5rem;">
+        ALTERNA es un proyecto transmedia documental hecho en Santa Fe para visibilizar deportes alternativos
+        y las comunidades que los practican. La web centraliza la exploración; el documental, las redes y el podcast amplían la misma historia.
+      </p>
+      <div class="transmedia-grid revelar">
+        <article class="tarjeta">
+          <h3>¿Qué es transmedia?</h3>
+          <p>Una historia contada en varios soportes — video, redes, encuentros y web — donde cada plataforma aporta algo único.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Equipo</h3>
+          <p>Estudiantes y realizadores documentales de la ciudad, con mentoría docente y voces de la comunidad deportiva local.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="comunidad" class="seccion contenedor seccion-comunidad" aria-labelledby="tituloComunidad">
+      <h2 id="tituloComunidad" class="revelar">Comunidad</h2>
+      <p class="revelar" style="max-width:52ch;">
+        Sumate al mapa, comentá en los puntos deportivos y participá de ALTERNA.
+        Para comentar o agregar actividades necesitás iniciar sesión con tu cuenta de Gmail (próximamente verificación obligatoria).
+      </p>
+      <div class="comunidad-acciones revelar">
+        <a href="#mapa" class="btn btn--primario">Ir al mapa</a>
+        <button type="button" class="btn btn--outline hero-btn-secundario" id="btnLoginComunidad">Ingresar con Gmail</button>
+        <a href="#contacto" class="btn btn--outline hero-btn-secundario">Escribinos</a>
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion contenedor" aria-labelledby="tituloContacto">
+      <h2 id="tituloContacto" class="revelar">Contacto</h2>
+      <p class="revelar" style="max-width:52ch;">Formulario, correo directo o redes: elegí cómo querés acercarte al proyecto.</p>
+
+      <div class="contacto-grid revelar">
+        <div class="contacto-canal">
+          <h3>Escribinos</h3>
+          <form class="formulario-contacto" id="formContacto" novalidate>
+            <label id="lblNombre">Nombre
+              <input type="text" name="nombre" required minlength="2" autocomplete="name" />
+              <span class="error-msg">Ingresá al menos 2 caracteres.</span>
+            </label>
+            <label id="lblEmail">Email
+              <input type="email" name="email" required autocomplete="email" />
+              <span class="error-msg">Ingresá un email válido.</span>
+            </label>
+            <label>¿Qué te interesa?
+              <select name="interes" required>
+                <option value="">Seleccioná</option>
+                <option>Ultimate Frisbee</option>
+                <option>Newcom</option>
+                <option>Wingfoil</option>
+                <option>Colaborar con ALTERNA</option>
+              </select>
+              <span class="error-msg">Elegí una opción.</span>
+            </label>
+            <label>Mensaje
+              <textarea name="mensaje" rows="4" required minlength="10" placeholder="Contanos en pocas palabras..."></textarea>
+              <span class="error-msg">El mensaje debe tener al menos 10 caracteres.</span>
+            </label>
+            <button type="submit" class="btn btn--primario">Enviar mensaje</button>
+            <p class="mensaje-exito" id="msgExitoContacto" role="status">¡Gracias! Te responderemos pronto.</p>
+          </form>
+        </div>
+
+        <div class="contacto-canal">
+          <h3>Email</h3>
+          <p style="font-size:0.92rem;color:var(--texto-suave);">Para consultas, prensa o colaboraciones:</p>
+          <a class="contacto-mail" href="mailto:hola@alterna.sf">hola@alterna.sf</a>
+        </div>
+
+        <div class="contacto-canal">
+          <h3>Redes</h3>
+          <p style="font-size:0.92rem;color:var(--texto-suave);">Seguinos y enterate de estrenos y eventos.</p>
+          <ul class="redes-lista">
+            <li>
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+                YouTube <span>Documental</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                Instagram <span>Comunidad</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">
+                Spotify <span>Podcast</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <strong>ALTERNA</strong>
+      <p>Santa Fe, Argentina · Deportes alternativos · Proyecto transmedia</p>
+      <p style="margin-top:0.5rem;">
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a> ·
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a> ·
+        <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Spotify</a>
+      </p>
+    </div>
+  </footer>
+
+  <dialog id="dialogoDeporte" aria-labelledby="tituloDialogoDeporte">
+    <form id="formAgregarDeporte" method="dialog">
+      <h3 id="tituloDialogoDeporte" style="margin:0 0 0.25rem;color:var(--titulo);font-family:var(--fuente-display);text-transform:uppercase;">Sumá tu punto al mapa</h3>
+      <p style="font-size:0.9rem;color:var(--texto-suave);">Completá los datos. Se mostrará cerca de tu ubicación (demo local).</p>
+      <div class="dialogo-form">
+        <label>Deporte
+          <select name="deporte" required><option value="">Seleccioná</option><option>Ultimate Frisbee</option><option>Newcom</option><option>Wingfoil</option><option>Otro</option></select>
+          <span class="error-msg">Elegí un deporte.</span>
+        </label>
+        <label>Nombre del lugar
+          <input type="text" name="lugar" required minlength="3" maxlength="80" />
+          <span class="error-msg">Mínimo 3 caracteres.</span>
+        </label>
+        <label>Dirección
+          <input type="text" name="direccion" required minlength="5" maxlength="120" />
+          <span class="error-msg">Indicá una dirección válida.</span>
+        </label>
+        <label>Días y horarios
+          <input type="text" name="horarios" required placeholder="Ej: Mar y jue 19:30" minlength="4" maxlength="80" />
+          <span class="error-msg">Indicá horarios.</span>
+        </label>
+        <label>Contacto (Instagram, WhatsApp o mail)
+          <input type="text" name="contacto" required minlength="4" maxlength="80" />
+          <span class="error-msg">Indicá un contacto.</span>
+        </label>
+      </div>
+      <div class="dialogo-acciones">
+        <button type="button" class="btn btn-secundario" id="btnCancelarDeporte">Cancelar</button>
+        <button type="submit" class="btn btn--primario" value="default">Publicar en el mapa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogoLogin" aria-labelledby="tituloLogin">
+    <form id="formLogin">
+      <h3 id="tituloLogin" style="margin:0 0 0.35rem;color:var(--titulo);font-family:var(--fuente-display);text-transform:uppercase;">Ingresar</h3>
+      <p style="font-size:0.9rem;color:var(--texto-suave);">Necesitás iniciar sesión para comentar y agregar deportes. <strong>FUTURO:</strong> verificación con Gmail.</p>
+      <div class="dialogo-form">
+        <label>Nombre
+          <input type="text" name="nombreLogin" minlength="2" required />
+          <span class="error-msg">Ingresá tu nombre.</span>
+        </label>
+        <label>Email
+          <input type="email" name="emailLogin" required />
+          <span class="error-msg">Ingresá un email válido.</span>
+        </label>
+      </div>
+      <div class="dialogo-acciones">
+        <button type="button" class="btn btn-secundario" id="btnCancelarLogin">Cancelar</button>
+        <button type="submit" class="btn btn--primario">Entrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+// ALTERNA — Schema PostgreSQL (portable: Neon, Railway, AWS RDS, local)
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum RolNombre {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+enum Dificultad {
+  PRINCIPIANTE
+  INTERMEDIO
+  AVANZADO
+}
+
+enum MediaTipo {
+  IMAGEN
+  VIDEO
+  AUDIO
+}
+
+enum ModeracionEstado {
+  PENDIENTE
+  APROBADO
+  RECHAZADO
+}
+
+enum AuditAccion {
+  CREAR
+  ACTUALIZAR
+  ELIMINAR
+  PUBLICAR
+  LOGIN
+}
+
+// ─── Auth y usuarios ─────────────────────────────────────────────────────────
+
+model Rol {
+  id        String    @id @default(cuid())
+  nombre    RolNombre @unique
+  usuarios  Usuario[]
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("roles")
+}
+
+model Usuario {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  nombre          String
+  avatarUrl       String?   @map("avatar_url")
+  emailVerificado Boolean   @default(false) @map("email_verificado")
+  rolId           String    @map("rol_id")
+  rol             Rol       @relation(fields: [rolId], references: [id])
+
+  favoritos       Favorito[]
+  comentarios     Comentario[]
+  ubicaciones     Ubicacion[]      @relation("UbicacionCreador")
+  mensajes        ContactoMensaje[]
+  auditLogs       AuditLog[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([rolId])
+  @@index([deletedAt])
+  @@map("usuarios")
+}
+
+// ─── Territorio (multi-ciudad) ───────────────────────────────────────────────
+
+model Ciudad {
+  id        String  @id @default(cuid())
+  nombre    String
+  region    String
+  pais      String
+  slug      String  @unique
+  lat       Float?
+  lng       Float?
+
+  deportes    Deporte[]
+  ubicaciones Ubicacion[]
+  eventos     Evento[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([slug])
+  @@map("ciudades")
+}
+
+// ─── Deportes ────────────────────────────────────────────────────────────────
+
+model Categoria {
+  id        String    @id @default(cuid())
+  nombre    String    @unique
+  slug      String    @unique
+  deportes  Deporte[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("categorias")
+}
+
+model Deporte {
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  nombre        String
+  descripcion   String     @db.Text
+  historia      String?    @db.Text
+  dificultad    Dificultad @default(PRINCIPIANTE)
+  jugadoresMin  Int?       @map("jugadores_min")
+  jugadoresMax  Int?       @map("jugadores_max")
+  equipamiento  String?    @db.Text
+  colorPrimario String     @map("color_primario") @db.VarChar(7)
+  destacado     Boolean    @default(false)
+
+  ciudadId    String  @map("ciudad_id")
+  ciudad      Ciudad  @relation(fields: [ciudadId], references: [id])
+  categoriaId String? @map("categoria_id")
+  categoria   Categoria? @relation(fields: [categoriaId], references: [id])
+
+  historias     Historia[]
+  ubicaciones   Ubicacion[]
+  multimedia    Multimedia[]
+  episodiosPod  PodcastEpisodioDeporte[]
+  eventos       EventoDeporte[]
+
+  seoTitle       String? @map("seo_title")
+  seoDescription String? @map("seo_description") @db.Text
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@index([ciudadId])
+  @@index([slug])
+  @@index([publishedAt])
+  @@index([deletedAt])
+  @@map("deportes")
+}
+
+// ─── Historias ───────────────────────────────────────────────────────────────
+
+model Historia {
+  id         String  @id @default(cuid())
+  slug       String  @unique
+  titulo     String
+  cuerpo     String  @db.Text
+  pullQuote  String? @map("pull_quote") @db.Text
+  destacada  Boolean @default(false)
+
+  deporteId String  @map("deporte_id")
+  deporte   Deporte @relation(fields: [deporteId], references: [id])
+
+  multimedia Multimedia[]
+
+  seoTitle       String? @map("seo_title")
+  seoDescription String? @map("seo_description") @db.Text
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@index([deporteId])
+  @@index([destacada])
+  @@index([deletedAt])
+  @@map("historias")
+}
+
+// ─── Mapa ────────────────────────────────────────────────────────────────────
+
+model Ubicacion {
+  id         String           @id @default(cuid())
+  nombre     String
+  direccion  String
+  lat        Float
+  lng        Float
+  horarios   String
+  contacto   String?
+  historia   String?          @db.Text
+  mediaUrl   String?          @map("media_url")
+  moderacion ModeracionEstado @default(APROBADO)
+
+  deporteId String  @map("deporte_id")
+  deporte   Deporte @relation(fields: [deporteId], references: [id])
+  ciudadId  String  @map("ciudad_id")
+  ciudad    Ciudad  @relation(fields: [ciudadId], references: [id])
+
+  creadoPorId String?  @map("creado_por_id")
+  creadoPor   Usuario? @relation("UbicacionCreador", fields: [creadoPorId], references: [id])
+
+  comentarios Comentario[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([deporteId])
+  @@index([ciudadId])
+  @@index([lat, lng])
+  @@index([moderacion])
+  @@index([deletedAt])
+  @@map("ubicaciones")
+}
+
+model Comentario {
+  id      String @id @default(cuid())
+  texto   String @db.Text
+
+  ubicacionId String    @map("ubicacion_id")
+  ubicacion   Ubicacion @relation(fields: [ubicacionId], references: [id], onDelete: Cascade)
+  usuarioId   String    @map("usuario_id")
+  usuario     Usuario   @relation(fields: [usuarioId], references: [id])
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([ubicacionId])
+  @@index([usuarioId])
+  @@map("comentarios")
+}
+
+// ─── Multimedia ──────────────────────────────────────────────────────────────
+
+model Multimedia {
+  id          String    @id @default(cuid())
+  tipo        MediaTipo
+  url         String
+  cloudinaryId String?  @map("cloudinary_id")
+  altText     String?   @map("alt_text")
+  orden       Int       @default(0)
+
+  deporteId String?  @map("deporte_id")
+  deporte   Deporte? @relation(fields: [deporteId], references: [id], onDelete: Cascade)
+  historiaId String? @map("historia_id")
+  historia   Historia? @relation(fields: [historiaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([deporteId])
+  @@index([historiaId])
+  @@map("multimedia")
+}
+
+// ─── Podcast ─────────────────────────────────────────────────────────────────
+
+model Podcast {
+  id          String @id @default(cuid())
+  slug        String @unique
+  titulo      String
+  descripcion String @db.Text
+  coverUrl    String? @map("cover_url")
+
+  episodios PodcastEpisodio[]
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@map("podcasts")
+}
+
+model PodcastEpisodio {
+  id          String @id @default(cuid())
+  slug        String @unique
+  titulo      String
+  descripcion String? @db.Text
+  audioUrl    String? @map("audio_url")
+  duracionSeg Int?    @map("duracion_seg")
+  numero      Int
+
+  podcastId String  @map("podcast_id")
+  podcast   Podcast @relation(fields: [podcastId], references: [id], onDelete: Cascade)
+
+  deportes PodcastEpisodioDeporte[]
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@index([podcastId])
+  @@map("podcast_episodios")
+}
+
+model PodcastEpisodioDeporte {
+  episodioId String @map("episodio_id")
+  deporteId  String @map("deporte_id")
+  episodio   PodcastEpisodio @relation(fields: [episodioId], references: [id], onDelete: Cascade)
+  deporte    Deporte         @relation(fields: [deporteId], references: [id], onDelete: Cascade)
+
+  @@id([episodioId, deporteId])
+  @@map("podcast_episodio_deportes")
+}
+
+// ─── Documentales ────────────────────────────────────────────────────────────
+
+model Documental {
+  id          String @id @default(cuid())
+  slug        String @unique
+  titulo      String
+  sinopsis    String @db.Text
+  coverUrl    String? @map("cover_url")
+
+  episodios DocumentalEpisodio[]
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@map("documentales")
+}
+
+model DocumentalEpisodio {
+  id          String @id @default(cuid())
+  slug        String @unique
+  titulo      String
+  sinopsis    String? @db.Text
+  videoUrl    String? @map("video_url")
+  duracionSeg Int?    @map("duracion_seg")
+  numero      Int
+
+  documentalId String     @map("documental_id")
+  documental   Documental @relation(fields: [documentalId], references: [id], onDelete: Cascade)
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@index([documentalId])
+  @@map("documental_episodios")
+}
+
+// ─── Eventos ─────────────────────────────────────────────────────────────────
+
+model Evento {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  titulo      String
+  descripcion String   @db.Text
+  fechaInicio DateTime @map("fecha_inicio")
+  fechaFin    DateTime? @map("fecha_fin")
+  lugar       String?
+
+  ciudadId String @map("ciudad_id")
+  ciudad   Ciudad @relation(fields: [ciudadId], references: [id])
+
+  deportes EventoDeporte[]
+
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  @@index([ciudadId])
+  @@index([fechaInicio])
+  @@map("eventos")
+}
+
+model EventoDeporte {
+  eventoId  String @map("evento_id")
+  deporteId String @map("deporte_id")
+  evento    Evento  @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  deporte   Deporte @relation(fields: [deporteId], references: [id], onDelete: Cascade)
+
+  @@id([eventoId, deporteId])
+  @@map("evento_deportes")
+}
+
+// ─── Comunidad ───────────────────────────────────────────────────────────────
+
+model Favorito {
+  id         String @id @default(cuid())
+  entidad    String
+  entidadId  String @map("entidad_id")
+
+  usuarioId String  @map("usuario_id")
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([usuarioId, entidad, entidadId])
+  @@index([usuarioId])
+  @@map("favoritos")
+}
+
+model ContactoMensaje {
+  id      String @id @default(cuid())
+  nombre  String
+  email   String
+  interes String
+  mensaje String @db.Text
+  leido   Boolean @default(false)
+
+  usuarioId String?  @map("usuario_id")
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@map("contacto_mensajes")
+}
+
+// ─── Auditoría ───────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id        String      @id @default(cuid())
+  accion    AuditAccion
+  entidad   String
+  entidadId String?     @map("entidad_id")
+  payload   Json?
+
+  usuarioId String?  @map("usuario_id")
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([entidad, entidadId])
+  @@index([usuarioId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

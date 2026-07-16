@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newcom | ALTERNA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --fondo:#f2ebe0; --oscuro:#1a1f2e; --texto:#3d4454; --acento:#e07a2f; --tarjeta:#fff; --borde:#ddd5c8; }
+    * { box-sizing:border-box; } body { margin:0; font-family:"DM Sans",sans-serif; background:var(--fondo); color:var(--texto); }
+    .contenedor { width:min(1020px,92%); margin:0 auto; } .hero { background:var(--oscuro); color:#faf6ef; padding:3.2rem 0 2.2rem; }
+    .hero h1 { margin:0 0 .5rem; font:900 clamp(2rem,6vw,3.2rem)/1.1 "Archivo Black",sans-serif; text-transform:uppercase; }
+    .btn { display:inline-block; margin-top:1rem; padding:.7rem 1rem; border-radius:999px; text-decoration:none; font-weight:700; background:var(--acento); color:#fff; }
+    .seccion { padding:2rem 0; } .grid { display:grid; gap:1rem; } .tarjeta { background:#fff; border:1px solid var(--borde); border-radius:14px; padding:1rem; }
+    img { max-width:100%; border-radius:12px; } h2 { margin:.2rem 0 .8rem; color:var(--oscuro); font-family:"Archivo Black",sans-serif; text-transform:uppercase; font-size:1.35rem; }
+    label { display:grid; gap:.25rem; margin-bottom:.7rem; font-weight:700; } input, textarea { font:inherit; border:1px solid var(--borde); border-radius:8px; padding:.55rem .65rem; }
+    button { border:none; background:var(--oscuro); color:#fff; border-radius:999px; padding:.65rem 1rem; font-weight:700; cursor:pointer; }
+    .lista { margin-top:.9rem; display:grid; gap:.6rem; } .item { background:#fff; border:1px solid var(--borde); border-radius:10px; padding:.65rem .75rem; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="contenedor">
+      <h1>Newcom</h1>
+      <p>Disciplina colectiva con fuerte presencia barrial y autogestión en clubes locales.</p>
+      <a class="btn" href="../index.html#deportes">Volver a ALTERNA</a>
+    </div>
+  </header>
+  <main class="contenedor">
+    <section class="seccion"><h2>Historia</h2><div class="tarjeta"><p>Newcom reúne generaciones y fortalece redes comunitarias. En Santa Fe, muchos equipos nacen en clubes y centros vecinales.</p></div></section>
+    <section class="seccion grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+      <article class="tarjeta"><h2>Multimedia</h2><img src="../assets/hero-newcom.png" alt="Entrenamiento de newcom en gimnasio" /><p style="margin-top:.6rem;">Cobertura visual de prácticas y encuentros comunitarios.</p></article>
+      <article class="tarjeta"><h2>Clubes</h2><p><strong>Club Regatas</strong> · Mar/Vie 18:30</p><p><strong>C.I.C. F. Zuviría</strong> · Lun/Mié/Vie 17:00</p></article>
+      <article class="tarjeta"><h2>Podcast relacionado</h2><p>Episodio: <em>Jugar fuera del foco</em></p><a class="btn" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Escuchar</a></article>
+    </section>
+    <section class="seccion">
+      <h2>Comentarios</h2>
+      <form id="formComentariosNewcom">
+        <label>Nombre <input name="nombre" required minlength="2" /></label>
+        <label>Comentario <textarea name="comentario" rows="3" required minlength="8"></textarea></label>
+        <button type="submit">Publicar</button>
+      </form>
+      <div class="lista" id="listaComentariosNewcom"></div>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const comentarios = [{ nombre: "Mónica", texto: "Acá siempre hay lugar para sumarse." }];
+      const form = document.getElementById("formComentariosNewcom");
+      const lista = document.getElementById("listaComentariosNewcom");
+      function renderizar() {
+        lista.textContent = "";
+        comentarios.forEach((c) => { const i=document.createElement("article"); i.className="item"; const s=document.createElement("strong"); s.textContent=c.nombre; const p=document.createElement("p"); p.textContent=c.texto; i.append(s,p); lista.appendChild(i); });
+      }
+      form.addEventListener("submit",(e)=>{ e.preventDefault(); const d=new FormData(form); const n=String(d.get("nombre")||"").trim(); const t=String(d.get("comentario")||"").trim(); if(n.length<2||t.length<8)return; comentarios.unshift({nombre:n,texto:t}); form.reset(); renderizar(); });
+      renderizar();
+    })();
+  </script>
+</body>
+</html>
