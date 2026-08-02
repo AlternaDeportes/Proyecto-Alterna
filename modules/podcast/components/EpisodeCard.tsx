@@ -14,16 +14,17 @@ interface EpisodeCardProps {
 export function EpisodeCard({ episodio, destacada, className }: EpisodeCardProps) {
   return (
     <Card
+      surface="ink"
       className={cn(
-        "relative flex h-full flex-col border-white/10 bg-white/[0.04] p-5 transition hover:border-white/25",
-        destacada && "border-brand-secondary/40 bg-brand-secondary/5",
+        "relative flex h-full flex-col",
+        destacada && "ring-1 ring-brand-secondary/40 bg-brand-secondary/5",
         className
       )}
     >
       {episodio.proximo ? (
-        <span className="absolute right-4 top-4 rounded-full bg-brand-accent/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-accent">
+        <Badge variant="accent" className="absolute right-4 top-4">
           Próximamente
-        </span>
+        </Badge>
       ) : null}
 
       <p className="text-xs font-semibold uppercase tracking-wider text-white/45">
@@ -34,7 +35,7 @@ export function EpisodeCard({ episodio, destacada, className }: EpisodeCardProps
       <h3 className="mt-2 pr-24 font-display text-lg font-bold uppercase text-white">
         <Link
           href={`/podcasts/${episodio.slug}`}
-          className="hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-secondary"
+          className="rounded-sm hover:text-brand-secondary focus-ring"
         >
           {episodio.titulo}
         </Link>
@@ -52,8 +53,8 @@ export function EpisodeCard({ episodio, destacada, className }: EpisodeCardProps
             <Badge
               key={d.slug}
               variant="muted"
-              className="border-0 text-[10px]"
-              style={{ backgroundColor: `${d.colorPrimario}33`, color: "#fff" }}
+              className="border-0 text-[10px] text-white"
+              style={{ backgroundColor: `${d.colorPrimario}33` }}
             >
               {d.nombre}
             </Badge>
@@ -64,7 +65,7 @@ export function EpisodeCard({ episodio, destacada, className }: EpisodeCardProps
       <Link
         href={`/podcasts/${episodio.slug}`}
         className={cn(
-          "mt-4 inline-block text-sm font-semibold",
+          "mt-4 inline-block rounded-sm text-sm font-semibold focus-ring",
           episodio.proximo
             ? "text-white/45"
             : "text-brand-secondary hover:underline"

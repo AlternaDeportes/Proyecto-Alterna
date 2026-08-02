@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { auth, isAuthConfigured } from "@/lib/auth";
-import { Badge } from "@/components/ui/badge";
-import { BlobBackground } from "@/components/ui/blob-background";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { LoginButton } from "@/modules/autenticacion/components/LoginButton";
 import { SignOutButton } from "@/modules/autenticacion/components/SignOutButton";
@@ -29,26 +30,16 @@ export default async function IngresarPage({ searchParams }: IngresarPageProps) 
 
   return (
     <main id="contenido-principal">
-      <section className="relative overflow-hidden border-b border-white/10 py-20 pt-28 sm:py-24 sm:pt-32">
-        <BlobBackground variant="section" />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <Badge variant="secondary">Comunidad</Badge>
-            <h1 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase text-white sm:text-5xl">
-              Ingresar
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/75">
-              Usá tu cuenta de Google para comentar, sumar puntos al mapa y guardar favoritos
-              cuando esas funciones estén disponibles.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Comunidad"
+        title="Ingresar"
+        description="Usá tu cuenta de Google para comentar, sumar puntos al mapa y guardar favoritos cuando esas funciones estén disponibles."
+      />
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-lg px-4 sm:px-6">
+      <Section density="tight">
+        <Container className="max-w-lg">
           <Reveal>
-            <Card className="border-white/10 bg-white/[0.04] p-6 sm:p-8">
+            <Card surface="ink" className="sm:p-8">
               {session?.user ? (
                 <div className="space-y-5">
                   <div className="flex items-center gap-4">
@@ -96,7 +87,10 @@ export default async function IngresarPage({ searchParams }: IngresarPageProps) 
                   </p>
 
                   {error ? (
-                    <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200" role="alert">
+                    <p
+                      className="rounded-soft border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                      role="alert"
+                    >
                       No se pudo iniciar sesión. Revisá las credenciales de Google o intentá de
                       nuevo.
                     </p>
@@ -108,7 +102,7 @@ export default async function IngresarPage({ searchParams }: IngresarPageProps) 
                       callbackUrl={callbackUrl && callbackUrl.startsWith("/") ? callbackUrl : "/"}
                     />
                   ) : (
-                    <div className="space-y-3 rounded-xl border border-brand-accent/30 bg-brand-accent/10 px-4 py-4 text-sm text-white/85">
+                    <div className="space-y-3 rounded-soft border border-brand-accent/30 bg-brand-accent/10 px-4 py-4 text-sm text-white/85">
                       <p className="font-semibold text-brand-accent">Auth aún no configurado</p>
                       <p>
                         En <code className="text-white/90">.env.local</code> agregá:
@@ -149,8 +143,8 @@ export default async function IngresarPage({ searchParams }: IngresarPageProps) 
               )}
             </Card>
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
     </main>
   );
 }

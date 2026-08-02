@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { designTokens } from "@/config/design-tokens";
 import { siteConfig } from "@/config/site";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -10,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     orientation: "portrait-primary",
-    background_color: "#1D1D1B",
-    theme_color: "#1D1D1B",
+    background_color: designTokens.colors.ink,
+    theme_color: designTokens.colors.ink,
     lang: "es-AR",
     categories: ["sports", "entertainment", "education"],
     icons: [

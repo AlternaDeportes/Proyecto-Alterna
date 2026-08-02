@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import { Badge } from "@/components/ui/badge";
-import { BlobBackground } from "@/components/ui/blob-background";
+import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { StoryCard } from "@/modules/historias/components/StoryCard";
 import { historiaService } from "@/modules/historias/services/historia.service";
@@ -23,24 +24,14 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
 
   return (
     <main id="contenido-principal">
-      <section className="relative overflow-hidden border-b border-white/10 py-20 pt-28 sm:py-24 sm:pt-32">
-        <BlobBackground variant="section" />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <Badge variant="secondary">Voces</Badge>
-            <h1 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase text-white sm:text-5xl">
-              Historias
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/75">
-              Personas reales del documental. Sus voces sostienen cada plataforma de{" "}
-              {siteConfig.name}.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Voces"
+        title="Historias"
+        description={`Personas reales del documental. Sus voces sostienen cada plataforma de ${siteConfig.name}.`}
+      />
 
-      <section className="bg-white py-16 text-brand-ink sm:py-20" aria-label="Listado de historias">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <Section tone="paper" aria-label="Listado de historias" density="tight">
+        <Container>
           {!historias.length ? (
             <p className="text-brand-ink/60">Todavía no hay historias publicadas.</p>
           ) : (
@@ -52,8 +43,8 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
               ))}
             </div>
           )}
-        </div>
-      </section>
+        </Container>
+      </Section>
     </main>
   );
 }

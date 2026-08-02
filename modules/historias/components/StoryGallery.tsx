@@ -25,7 +25,7 @@ export function StoryGallery({ items, accentColor, titulo }: StoryGalleryProps) 
             key={item.id}
             className="relative aspect-[4/3] overflow-hidden rounded-organic border border-white/10"
             style={{
-              background: `linear-gradient(${135 + index * 40}deg, ${accentColor}55 0%, #1D1D1B 70%)`,
+              background: `linear-gradient(${135 + index * 40}deg, ${accentColor}55 0%, var(--color-brand-ink) 70%)`,
             }}
           >
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/90 to-transparent p-4">

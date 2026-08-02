@@ -1,4 +1,5 @@
 import type { HistoriaDetalle, HistoriaListItem } from "@/modules/historias/types";
+import { designTokens } from "@/config/design-tokens";
 
 function excerptFrom(cuerpo: string, max = 160) {
   const clean = cuerpo.replace(/\s+/g, " ").trim();
@@ -44,7 +45,7 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
     deporte: {
       nombre: "Ultimate Frisbee",
       slug: "ultimate-frisbee",
-      colorPrimario: "#2d6a4f",
+      colorPrimario: designTokens.sports.ultimate,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
     seoTitle: "Lucila Farías — Ultimate Frisbee | ALTERNA",
@@ -66,7 +67,7 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
     deporte: {
       nombre: "Ultimate Frisbee",
       slug: "ultimate-frisbee",
-      colorPrimario: "#2d6a4f",
+      colorPrimario: designTokens.sports.ultimate,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
     seoTitle: "Adriel Dussex — Ultimate Frisbee | ALTERNA",
@@ -88,7 +89,7 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
     deporte: {
       nombre: "Newcom",
       slug: "newcom",
-      colorPrimario: "#e07a2f",
+      colorPrimario: designTokens.sports.newcom,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
     seoTitle: "Mónica Lovecchio — Newcom | ALTERNA",
@@ -110,7 +111,7 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
     deporte: {
       nombre: "Wingfoil",
       slug: "wingfoil",
-      colorPrimario: "#1d7596",
+      colorPrimario: designTokens.sports.wingfoil,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
     seoTitle: "Lucio Cinaglia — Wingfoil | ALTERNA",

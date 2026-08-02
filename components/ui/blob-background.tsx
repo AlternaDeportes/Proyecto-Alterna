@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { designTokens } from "@/config/design-tokens";
 
 interface BlobBackgroundProps {
   className?: string;
@@ -6,10 +7,12 @@ interface BlobBackgroundProps {
 }
 
 /**
- * Blobs orgánicos de marca — evitan layouts rígidos.
- * SVG inline para cero requests extra y portabilidad.
+ * Blobs orgánicos de marca — Manual de identidad.
+ * SVG inline; colores desde design tokens (sin hex sueltos).
  */
 export function BlobBackground({ className, variant = "hero" }: BlobBackgroundProps) {
+  const { primary, secondary, accent } = designTokens.colors;
+
   return (
     <div
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
@@ -25,7 +28,7 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
       >
         <path
           d="M280 40C340 80 380 150 360 220C340 290 260 330 190 320C120 310 50 260 40 190C30 120 90 50 160 30C210 18 250 20 280 40Z"
-          fill="#2A5FF4"
+          fill={primary}
         />
       </svg>
       <svg
@@ -38,7 +41,7 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
       >
         <path
           d="M60 120C20 180 30 260 90 310C150 360 250 350 310 290C370 230 380 130 320 70C260 10 150 10 90 50C70 65 55 90 60 120Z"
-          fill="#AFEB00"
+          fill={secondary}
         />
       </svg>
       <svg
@@ -48,7 +51,7 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
       >
         <path
           d="M100 20C140 25 175 55 180 95C185 135 155 170 115 178C75 186 35 160 25 120C15 80 45 40 85 25C92 22 96 20 100 20Z"
-          fill="#FFA300"
+          fill={accent}
         />
       </svg>
     </div>

@@ -4,11 +4,26 @@
 
 @layer base {
   :root {
+    /* Colores — espejo de config/design-tokens.ts */
     --color-brand-primary: #2a5ff4;
     --color-brand-secondary: #afeb00;
     --color-brand-accent: #ffa300;
     --color-brand-ink: #1d1d1b;
     --color-brand-surface: #ffffff;
+    --color-brand-ink-deep: #0a0d14;
+    --color-brand-ink-blue: #121824;
+    --color-brand-primary-deep: #152a6b;
+
+    --color-sport-ultimate: #2d6a4f;
+    --color-sport-newcom: #e07a2f;
+    --color-sport-wingfoil: #1d7596;
+
+    --radius-organic: 2rem 1rem 2.5rem 1.2rem;
+    --radius-frame: 1.75rem 0.85rem 2.1rem 1rem;
+    --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+
+    --shadow-soft: 0 20px 50px rgba(29, 29, 27, 0.08);
+    --shadow-lift: 0 24px 48px rgba(29, 29, 27, 0.18);
   }
 
   html {
@@ -30,11 +45,93 @@
   }
 
   body {
-    @apply bg-brand-surface font-body text-brand-ink antialiased;
+    @apply bg-brand-ink font-body text-white antialiased;
   }
 
-  .dark body {
-    @apply bg-brand-ink text-white;
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand-primary) 45%, transparent);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Contenedor de contenido del sistema */
+  .ds-container {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6;
+  }
+
+  /* Ritmo vertical de sección */
+  .ds-section {
+    @apply relative py-20 sm:py-24;
+  }
+
+  .ds-section--tight {
+    @apply relative py-14 sm:py-16;
+  }
+
+  /* Título display de marca */
+  .ds-display {
+    @apply font-display font-black uppercase tracking-tight text-balance;
+  }
+
+  /* Eyebrow tipográfico (sin pill si no hace falta) */
+  .ds-eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-brand-secondary;
+  }
+
+  /* Marco fotográfico — Manual de identidad */
+  .ds-frame {
+    border-radius: var(--radius-frame);
+    @apply relative overflow-hidden;
+  }
+
+  .ds-frame--ink {
+    @apply ring-1 ring-white/15;
+  }
+
+  .ds-frame--paper {
+    @apply shadow-soft ring-1 ring-brand-ink/10;
+  }
+
+  .ds-frame--primary {
+    @apply ring-2 ring-brand-primary/50;
+  }
+
+  .ds-frame--accent {
+    box-shadow: 0 0 0 3px var(--color-brand-ink), 0 0 0 6px var(--color-brand-accent);
+  }
+
+  /* Superficies del sistema */
+  .ds-surface-ink {
+    @apply rounded-organic border border-white/10 bg-white/[0.04] backdrop-blur-sm;
+  }
+
+  .ds-surface-paper {
+    @apply rounded-organic border border-brand-ink/[0.08] bg-white shadow-soft;
+  }
+
+  /* Patrón de marca — malla de blobs sutiles (SVG data URI) */
+  .ds-pattern-dots {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--color-brand-primary) 22%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  .ds-pattern-grid {
+    background-image:
+      linear-gradient(
+        color-mix(in srgb, var(--color-brand-secondary) 8%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-brand-secondary) 8%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 48px 48px;
   }
 }
 
@@ -56,11 +153,20 @@
   }
 
   .hero-video--fallback {
-    background: linear-gradient(135deg, #0a0d14 0%, #1d1d1b 45%, #121824 100%);
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-ink-deep) 0%,
+      var(--color-brand-ink) 45%,
+      var(--color-brand-ink-blue) 100%
+    );
   }
 
   .reveal-on-scroll {
-    animation: reveal-up 0.7s ease both;
+    animation: reveal-up 0.7s var(--ease-brand) both;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary;
   }
 }
 

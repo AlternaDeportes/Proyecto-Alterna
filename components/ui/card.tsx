@@ -1,31 +1,49 @@
 import { forwardRef, type HTMLAttributes } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
+const cardVariants = cva("transition-all duration-base ease-brand", {
+  variants: {
+    surface: {
+      /** Superficie oscura documental */
+      ink: "ds-surface-ink p-6",
+      /** Superficie clara editorial */
+      paper: "ds-surface-paper p-6",
+      /** Sin chrome — solo contenedor */
+      plain: "p-0",
+    },
+    interactive: {
+      true: "hover:-translate-y-1",
+      false: "",
+    },
+  },
+  defaultVariants: {
+    surface: "ink",
+    interactive: false,
+  },
+});
+
+export interface CardProps
+  extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardVariants> {}
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  ({ className, surface, interactive, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "rounded-organic border border-white/10 bg-white/5 p-6 backdrop-blur-sm",
-        "dark:border-white/10 dark:bg-white/[0.04]",
-        className
-      )}
+      className={cn(cardVariants({ surface, interactive }), className)}
       {...props}
     />
   )
 );
 Card.displayName = "Card";
 
-export const CardLight = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Alias semántico — superficie paper del Design System */
+export const CardLight = forwardRef<HTMLDivElement, Omit<CardProps, "surface">>(
   ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "rounded-organic border border-brand-ink/8 bg-white p-6 shadow-[0_20px_50px_rgba(29,29,27,0.08)]",
-        className
-      )}
-      {...props}
-    />
+    <Card ref={ref} surface="paper" className={className} {...props} />
   )
 );
 CardLight.displayName = "CardLight";
+
+export { cardVariants };

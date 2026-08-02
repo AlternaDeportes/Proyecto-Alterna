@@ -2,7 +2,9 @@ import { StoryCard } from "@/modules/historias/components/StoryCard";
 import { historiaService } from "@/modules/historias/services/historia.service";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 
 /** Bloque de historias destacadas para la home */
 export async function HistoriasTeaser() {
@@ -11,18 +13,15 @@ export async function HistoriasTeaser() {
   if (!historias.length) return null;
 
   return (
-    <section
-      className="border-y border-white/10 bg-white py-20 text-brand-ink sm:py-24"
-      aria-labelledby="historias-home-titulo"
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <Section tone="paper" border="y" aria-labelledby="historias-home-titulo">
+      <Container>
         <Reveal>
           <Badge variant="mutedLight">Voces</Badge>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <div>
               <h2
                 id="historias-home-titulo"
-                className="font-display text-3xl font-black uppercase sm:text-4xl"
+                className="ds-display text-display-sm sm:text-4xl"
               >
                 Historias destacadas
               </h2>
@@ -43,7 +42,7 @@ export async function HistoriasTeaser() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

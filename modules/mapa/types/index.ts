@@ -1,3 +1,5 @@
+import { designTokens } from "@/config/design-tokens";
+
 export interface MapDeporteRef {
   nombre: string;
   slug: string;
@@ -19,11 +21,15 @@ export interface MapUbicacion {
 
 export type FiltroDeporteSlug = "todos" | "ultimate-frisbee" | "newcom" | "wingfoil";
 
-export const FILTROS_DEPORTE: { slug: FiltroDeporteSlug; label: string; color?: string }[] = [
+export const FILTROS_DEPORTE: {
+  slug: FiltroDeporteSlug;
+  label: string;
+  color?: string;
+}[] = [
   { slug: "todos", label: "Todos" },
-  { slug: "ultimate-frisbee", label: "Ultimate", color: "#2d6a4f" },
-  { slug: "newcom", label: "Newcom", color: "#e07a2f" },
-  { slug: "wingfoil", label: "Wingfoil", color: "#1d7596" },
+  { slug: "ultimate-frisbee", label: "Ultimate", color: designTokens.sports.ultimate },
+  { slug: "newcom", label: "Newcom", color: designTokens.sports.newcom },
+  { slug: "wingfoil", label: "Wingfoil", color: designTokens.sports.wingfoil },
 ];
 
 export interface LatLng {

@@ -2,7 +2,9 @@ import { DocEpisodeCard } from "@/modules/documentales/components/DocEpisodeCard
 import { documentalService } from "@/modules/documentales/services/documental.service";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 
 export async function DocumentalesTeaser() {
   const show = await documentalService.obtenerShow();
@@ -11,18 +13,15 @@ export async function DocumentalesTeaser() {
   if (!episodios.length) return null;
 
   return (
-    <section
-      className="border-y border-white/10 py-20 sm:py-24"
-      aria-labelledby="documental-home-titulo"
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <Section border="y" aria-labelledby="documental-home-titulo">
+      <Container>
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <Badge variant="secondary">Documental</Badge>
+              <Badge variant="soft">Documental</Badge>
               <h2
                 id="documental-home-titulo"
-                className="mt-3 font-display text-3xl font-black uppercase text-white sm:text-4xl"
+                className="mt-3 ds-display text-display-sm text-white sm:text-4xl"
               >
                 Narrativa audiovisual
               </h2>
@@ -44,7 +43,7 @@ export async function DocumentalesTeaser() {
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

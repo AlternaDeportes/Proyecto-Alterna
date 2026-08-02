@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BlobBackground } from "@/components/ui/blob-background";
 import { ButtonLink } from "@/components/ui/button";
+import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -13,14 +13,14 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function OfflinePage() {
   return (
-    <main id="contenido-principal" className="relative overflow-hidden">
-      <section className="relative flex min-h-[70dvh] flex-col items-center justify-center px-4 py-28 text-center sm:pt-32">
-        <BlobBackground variant="section" />
-        <div className="relative z-10 max-w-lg">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
-            Offline
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-black uppercase text-white sm:text-5xl">
+    <main id="contenido-principal">
+      <Section
+        blobs="section"
+        className="flex min-h-[70dvh] flex-col items-center justify-center pt-28 text-center sm:pt-32"
+      >
+        <div className="relative z-raised max-w-lg px-4">
+          <p className="ds-eyebrow">Offline</p>
+          <h1 className="mt-3 ds-display text-display-sm text-white sm:text-display-md">
             Sin conexión
           </h1>
           <p className="mt-4 text-base leading-relaxed text-white/70">
@@ -45,7 +45,7 @@ export default function OfflinePage() {
             </Link>
           </p>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

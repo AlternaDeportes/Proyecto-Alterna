@@ -1,24 +1,34 @@
-# Componentes compartidos
+# Componentes compartidos — Design System ALTERNA
 
-## `components/ui/` — Átomos (patrón shadcn)
+## `components/brand/`
+
+| Componente | Uso |
+|------------|-----|
+| `BrandLogo` | Wordmark oficial (PNG transparente del manual). Variantes `blanco` / `azul`. |
+
+## `components/ui/` — Átomos del sistema
 
 | Componente | Archivo | Uso |
 |------------|---------|-----|
-| Button / ButtonLink | `button.tsx` | CTAs, acciones |
-| Card / CardLight | `card.tsx` | Bloques editoriales |
-| Badge | `badge.tsx` | Estados, etiquetas |
-| Tag | `tag.tsx` | Chips del hero |
-| BlobBackground | `blob-background.tsx` | Formas orgánicas de marca |
-| Reveal | `reveal.tsx` | Animación sutil de entrada |
+| Button / ButtonLink | `button.tsx` | CTAs |
+| Card (`surface`: ink \| paper \| plain) | `card.tsx` | Superficies |
+| Badge (`primary` \| `secondary` \| `accent` \| `soft` \| `muted` \| `mutedLight`) | `badge.tsx` | Eyebrows, chips, estados |
+| Container | `container.tsx` | Ancho + gutters |
+| Section | `section.tsx` | Ritmo vertical, tono, blobs, patrones |
+| PageHeader | `page-header.tsx` | Cabecera de página unificada |
+| PhotoFrame | `photo-frame.tsx` | Marcos fotográficos de marca |
+| BrandPattern | `brand-pattern.tsx` | Patrones dots/grid |
+| BlobBackground | `blob-background.tsx` | Blobs orgánicos (tokens) |
+| Reveal | `reveal.tsx` | Entrada sutil |
 
-## `components/layout/` — Organismos de layout
+## `components/layout/`
 
-| Componente | Archivo |
-|------------|---------|
-| Navbar | `Navbar.tsx` |
-| Footer | `Footer.tsx` |
-| Hero | `Hero.tsx` |
-| HeroVideo | `HeroVideo.tsx` |
-| SiteShell | `SiteShell.tsx` |
+Navbar (con BrandLogo), Footer, Hero, HeroVideo, SiteShell.
+
+## Tokens
+
+Fuente de verdad: `config/design-tokens.ts` → Tailwind + `app/globals.css`.
+
+**No hardcodear hex de marca.** Importar desde tokens o usar clases `brand.*` / `sport.*`.
 
 Los componentes de negocio viven en `modules/<dominio>/components/`.

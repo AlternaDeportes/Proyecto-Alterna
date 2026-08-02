@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
+import { Container } from "@/components/ui/container";
 import { siteConfig, socialLinks } from "@/config/site";
 
 export function Footer() {
@@ -6,12 +8,10 @@ export function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-brand-ink text-white/75">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+      <Container className="grid gap-10 py-14 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <p className="font-display text-2xl font-black uppercase tracking-wide text-white">
-            {siteConfig.name}
-          </p>
-          <p className="mt-2 text-sm font-semibold text-brand-secondary">
+          <BrandLogo variant="blanco" size="md" href="/" />
+          <p className="mt-3 text-sm font-semibold text-brand-secondary">
             {siteConfig.tagline}
           </p>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
@@ -28,7 +28,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="transition-colors hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+                  className="transition-colors hover:text-brand-secondary focus-ring rounded-sm"
                 >
                   {item.label}
                 </Link>
@@ -44,7 +44,7 @@ export function Footer() {
           <p className="mt-4 text-sm">
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="font-semibold text-white hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+              className="rounded-sm font-semibold text-white hover:text-brand-secondary focus-ring"
             >
               {siteConfig.contact.email}
             </a>
@@ -56,7 +56,7 @@ export function Footer() {
                   href={siteConfig.social[key]}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-baseline gap-2 transition-colors hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+                  className="inline-flex items-baseline gap-2 rounded-sm transition-colors hover:text-brand-secondary focus-ring"
                 >
                   <span className="font-semibold text-white">{label}</span>
                   <span className="text-white/45">{hint}</span>
@@ -65,10 +65,10 @@ export function Footer() {
             ))}
           </ul>
         </div>
-      </div>
+      </Container>
 
       <div className="border-t border-white/10 py-5">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center text-xs text-white/45 sm:flex-row sm:px-6 sm:text-left">
+        <Container className="flex flex-col items-center justify-between gap-3 text-center text-xs text-white/45 sm:flex-row sm:text-left">
           <p>
             © {year} {siteConfig.name} · {siteConfig.defaultCity.name},{" "}
             {siteConfig.defaultCity.country}
@@ -76,24 +76,24 @@ export function Footer() {
           <nav aria-label="Legal" className="flex flex-wrap justify-center gap-x-4 gap-y-1">
             <Link
               href="/privacidad"
-              className="hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+              className="rounded-sm hover:text-brand-secondary focus-ring"
             >
               Privacidad
             </Link>
             <Link
               href="/terminos"
-              className="hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+              className="rounded-sm hover:text-brand-secondary focus-ring"
             >
               Términos
             </Link>
             <Link
               href="/cookies"
-              className="hover:text-brand-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+              className="rounded-sm hover:text-brand-secondary focus-ring"
             >
               Cookies
             </Link>
           </nav>
-        </div>
+        </Container>
       </div>
     </footer>
   );

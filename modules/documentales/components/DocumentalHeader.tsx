@@ -12,7 +12,7 @@ export function DocumentalHeader({ show }: DocumentalHeaderProps) {
     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <Badge variant="secondary">Narrativa audiovisual</Badge>
-        <h1 className="mt-3 font-display text-4xl font-black uppercase text-white sm:text-5xl">
+        <h1 className="mt-3 ds-display text-display-sm text-white sm:text-display-md">
           Documental
         </h1>
         <p className="mt-2 font-display text-lg font-bold text-brand-secondary">

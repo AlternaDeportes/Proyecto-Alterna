@@ -3,6 +3,7 @@ import type {
   PodcastEpisodioListItem,
   PodcastShow,
 } from "@/modules/podcast/types";
+import { designTokens } from "@/config/design-tokens";
 
 const SHOW = {
   id: "pod-alterna",
@@ -27,7 +28,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     publishedAt: null,
     proximo: true,
     deportes: [
-      { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: "#2d6a4f" },
+      { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: designTokens.sports.ultimate },
     ],
     capitulos: [
       { titulo: "Cómo empezó el grupo" },
@@ -52,7 +53,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     publishedAt: null,
     proximo: true,
     deportes: [
-      { nombre: "Newcom", slug: "newcom", colorPrimario: "#e07a2f" },
+      { nombre: "Newcom", slug: "newcom", colorPrimario: designTokens.sports.newcom },
     ],
     capitulos: [
       { titulo: "El club como refugio" },
@@ -77,7 +78,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     publishedAt: null,
     proximo: true,
     deportes: [
-      { nombre: "Wingfoil", slug: "wingfoil", colorPrimario: "#1d7596" },
+      { nombre: "Wingfoil", slug: "wingfoil", colorPrimario: designTokens.sports.wingfoil },
     ],
     capitulos: [
       { titulo: "Primera clase en el agua" },

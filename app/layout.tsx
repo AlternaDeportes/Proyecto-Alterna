@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat_Alternates } from "next/font/google";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { designTokens } from "@/config/design-tokens";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import { buildRootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
@@ -23,8 +24,8 @@ export const metadata: Metadata = buildRootMetadata();
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#1D1D1B" },
-    { media: "(prefers-color-scheme: light)", color: "#1D1D1B" },
+    { media: "(prefers-color-scheme: dark)", color: designTokens.colors.ink },
+    { media: "(prefers-color-scheme: light)", color: designTokens.colors.ink },
   ],
   width: "device-width",
   initialScale: 1,
@@ -46,7 +47,7 @@ export default function RootLayout({
         <JsonLdScript id="ld-website" data={websiteJsonLd()} />
         <a
           href="#contenido-principal"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-brand-ink focus:outline focus:outline-2 focus:outline-brand-primary"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-toast focus:rounded-soft focus:bg-brand-surface focus:px-4 focus:py-2 focus:text-brand-ink focus-ring"
         >
           Saltar al contenido principal
         </a>

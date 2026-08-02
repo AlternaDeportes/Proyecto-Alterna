@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { BlobBackground } from "@/components/ui/blob-background";
+import { Container } from "@/components/ui/container";
+import { PageHeader } from "@/components/ui/page-header";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 
 interface LegalSection {
   title: string;
@@ -26,22 +27,16 @@ export function LegalDocument({
 }: LegalPageProps) {
   return (
     <main id="contenido-principal">
-      <section className="relative overflow-hidden border-b border-white/10 py-20 pt-28 sm:py-24 sm:pt-32">
-        <BlobBackground variant="section" />
-        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
-          <Reveal>
-            <Badge variant="secondary">{badge}</Badge>
-            <h1 className="mt-3 font-display text-4xl font-black uppercase text-white sm:text-5xl">
-              {title}
-            </h1>
-            <p className="mt-4 text-lg text-white/75">{summary}</p>
-            <p className="mt-3 text-xs text-white/45">Última actualización: {updatedAt}</p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow={badge}
+        title={title}
+        description={summary}
+      >
+        <p className="mt-3 text-xs text-white/45">Última actualización: {updatedAt}</p>
+      </PageHeader>
 
-      <article className="py-14 sm:py-16">
-        <div className="mx-auto max-w-3xl space-y-10 px-4 sm:px-6">
+      <Section as="article" density="tight">
+        <Container narrow className="space-y-10">
           {sections.map((section) => (
             <Reveal key={section.title}>
               <section aria-labelledby={slugify(section.title)}>
@@ -82,8 +77,8 @@ export function LegalDocument({
             </Link>
             .
           </p>
-        </div>
-      </article>
+        </Container>
+      </Section>
     </main>
   );
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import { BlobBackground } from "@/components/ui/blob-background";
+import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { DocEpisodeCard } from "@/modules/documentales/components/DocEpisodeCard";
 import { DocumentalHeader } from "@/modules/documentales/components/DocumentalHeader";
@@ -18,20 +19,17 @@ export default async function DocumentalesPage() {
 
   return (
     <main id="contenido-principal">
-      <section className="relative overflow-hidden border-b border-white/10 py-20 pt-28 sm:py-24 sm:pt-32">
-        <BlobBackground variant="section" />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <Section tone="ink" border="bottom" blobs="section" className="pt-28 sm:pt-32">
+        <Container>
           <Reveal>
             <DocumentalHeader show={show} />
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      <section className="py-16 sm:py-20" aria-label="Episodios del documental">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="font-display text-2xl font-black uppercase text-white">
-            Capítulos
-          </h2>
+      <Section aria-label="Episodios del documental" density="tight">
+        <Container>
+          <h2 className="ds-display text-2xl text-white">Capítulos</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {show.episodios.map((ep, i) => (
               <Reveal key={ep.id} delay={i * 50}>
@@ -39,8 +37,8 @@ export default async function DocumentalesPage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
     </main>
   );
 }

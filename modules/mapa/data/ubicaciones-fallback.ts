@@ -1,4 +1,5 @@
 import type { MapUbicacion } from "@/modules/mapa/types";
+import { designTokens } from "@/config/design-tokens";
 
 export const UBICACIONES_FALLBACK: MapUbicacion[] = [
   {
@@ -10,7 +11,7 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Lun y jue 20:00",
     contacto: "@ultimate.sf",
     historia: "Entrenan con foco en juego limpio y mixto.",
-    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: "#2d6a4f" },
+    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: designTokens.sports.ultimate },
     comentariosCount: 1,
   },
   {
@@ -22,7 +23,7 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Mar y vie 18:30",
     contacto: "@newcom.sf",
     historia: "Grupo abierto con fuerte espíritu comunitario.",
-    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: "#e07a2f" },
+    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: designTokens.sports.newcom },
     comentariosCount: 1,
   },
   {
@@ -34,7 +35,7 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Sáb y dom 10:00",
     contacto: "wingfoil.sf@gmail.com",
     historia: "Iniciación progresiva en aguas de la región.",
-    deporte: { nombre: "Wingfoil", slug: "wingfoil", colorPrimario: "#1d7596" },
+    deporte: { nombre: "Wingfoil", slug: "wingfoil", colorPrimario: designTokens.sports.wingfoil },
     comentariosCount: 1,
   },
   {
@@ -46,7 +47,7 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Mié 19:00",
     contacto: "@ultimate.garay",
     historia: "Entrenamientos recreativos para sumarse desde cero.",
-    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: "#2d6a4f" },
+    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: designTokens.sports.ultimate },
     comentariosCount: 0,
   },
   {
@@ -58,7 +59,7 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Lun, mié y vie 17:00",
     contacto: "@newcom.zuviria",
     historia: "Participación intergeneracional y torneos barriales.",
-    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: "#e07a2f" },
+    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: designTokens.sports.newcom },
     comentariosCount: 0,
   },
 ];

@@ -1,9 +1,12 @@
 import { ImageResponse } from "next/og";
+import { designTokens } from "@/config/design-tokens";
 import { siteConfig } from "@/config/site";
 
 export const alt = `${siteConfig.name} — ${siteConfig.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const { ink, primary, primaryDeep, secondary, surface } = designTokens.colors;
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -15,7 +18,7 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #1D1D1B 0%, #152a6b 55%, #2A5FF4 100%)",
+          background: `linear-gradient(135deg, ${ink} 0%, ${primaryDeep} 55%, ${primary} 100%)`,
           padding: "64px 72px",
           fontFamily: "sans-serif",
         }}
@@ -27,7 +30,7 @@ export default function OpenGraphImage() {
             fontWeight: 700,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#AFEB00",
+            color: secondary,
           }}
         >
           {siteConfig.defaultCity.name}
@@ -36,15 +39,15 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 96,
+              fontSize: 88,
               fontWeight: 900,
               letterSpacing: "-0.04em",
-              color: "#ffffff",
-              textTransform: "uppercase",
+              color: surface,
+              textTransform: "lowercase",
               lineHeight: 1,
             }}
           >
-            {siteConfig.name}
+            alterna
           </div>
           <div
             style={{

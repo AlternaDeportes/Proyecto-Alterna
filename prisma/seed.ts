@@ -5,6 +5,7 @@ import {
   RolNombre,
 } from "@prisma/client";
 import { cuerpoHistoriaPorSlug } from "../modules/historias/data/historias-fallback";
+import { designTokens } from "../config/design-tokens";
 
 const prisma = new PrismaClient();
 
@@ -53,7 +54,7 @@ async function main() {
       jugadoresMin: 7,
       jugadoresMax: 14,
       equipamiento: "Disco, cancha amplia, calzado deportivo",
-      colorPrimario: "#2d6a4f",
+      colorPrimario: designTokens.sports.ultimate,
       destacado: true,
     },
     {
@@ -67,7 +68,7 @@ async function main() {
       jugadoresMin: 6,
       jugadoresMax: 12,
       equipamiento: "Red baja, pelota, espacio cubierto",
-      colorPrimario: "#e07a2f",
+      colorPrimario: designTokens.sports.newcom,
       destacado: true,
     },
     {
@@ -81,7 +82,7 @@ async function main() {
       jugadoresMin: 1,
       jugadoresMax: 1,
       equipamiento: "Tabla, ala, arnés, traje según temporada",
-      colorPrimario: "#1d7596",
+      colorPrimario: designTokens.sports.wingfoil,
       destacado: true,
     },
   ] as const;

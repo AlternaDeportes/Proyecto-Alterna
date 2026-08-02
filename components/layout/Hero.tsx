@@ -2,13 +2,18 @@ import { siteConfig } from "@/config/site";
 import { BlobBackground } from "@/components/ui/blob-background";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { Tag } from "@/components/ui/tag";
+import { Container } from "@/components/ui/container";
 import { HeroVideo } from "@/components/layout/HeroVideo";
 
+/**
+ * Hero de marca — Fase A: wordmark implícito vía nav + tagline + CTAs.
+ * Stats y chips se reducen; la composición prioriza marca + una idea + acción.
+ * (Fase C refinará el arco narrativo completo.)
+ */
 export function Hero() {
   return (
     <section
-      className="hero-video relative flex min-h-[92dvh] items-end overflow-hidden bg-brand-ink pb-16 pt-28 sm:items-center sm:pb-20 sm:pt-32"
+      className="hero-video relative flex min-h-[88dvh] items-end overflow-hidden bg-brand-ink pb-16 pt-28 sm:min-h-[92dvh] sm:items-center sm:pb-20 sm:pt-32"
       aria-labelledby="hero-titulo"
     >
       <div className="absolute inset-0">
@@ -17,57 +22,44 @@ export function Hero() {
         <BlobBackground />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <Badge variant="secondary" className="mb-4">
+      <Container className="relative z-raised w-full">
+        <p className="ds-eyebrow mb-4">
           {siteConfig.defaultCity.name} · Proyecto transmedia
-        </Badge>
+        </p>
 
         <h1
           id="hero-titulo"
-          className="max-w-4xl font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl"
+          className="ds-display max-w-4xl text-display-sm text-white sm:text-display-lg lg:text-display-xl"
         >
           {siteConfig.tagline}
         </h1>
 
-        <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-white/80 sm:text-lg">
-          Ultimate, Newcom, Wingfoil y más: historias reales, comunidades vivas y
-          formas distintas de practicar deporte en la ciudad.
+        <p className="mt-5 max-w-xl text-balance text-base leading-relaxed text-white/80 sm:text-lg">
+          Historias reales de deportes amateurs y alternativos. Comunidades vivas y un mapa
+          para descubrir otra forma de jugar en la ciudad.
         </p>
-
-        <div className="mt-6 flex flex-wrap gap-2" role="list">
-          <Tag>Documental</Tag>
-          <Tag>Deportes alternativos</Tag>
-          <Tag>Mapa comunitario</Tag>
-        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="/mapa" variant="primary" size="lg">
-            Explorá alternativas
+            Explorá el mapa
           </ButtonLink>
           <ButtonLink href="/documentales" variant="outline" size="lg">
             Ver documental
           </ButtonLink>
         </div>
 
-        <dl className="mt-10 grid max-w-lg grid-cols-3 gap-3 text-center sm:gap-4">
-          {[
-            { value: "3", label: "disciplinas" },
-            { value: "4+", label: "historias" },
-            { value: "1", label: "mapa vivo" },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-organic border border-white/15 bg-white/5 px-3 py-3 backdrop-blur-sm"
-            >
-              <dt className="sr-only">{item.label}</dt>
-              <dd className="font-display text-xl font-black text-white">{item.value}</dd>
-              <dd className="mt-1 text-[0.65rem] font-semibold uppercase tracking-wide text-white/65">
-                {item.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+        <ul className="mt-10 flex flex-wrap gap-2" aria-label="Universo ALTERNA">
+          <li>
+            <Badge variant="soft">Documental</Badge>
+          </li>
+          <li>
+            <Badge variant="soft">Historias</Badge>
+          </li>
+          <li>
+            <Badge variant="soft">Mapa comunitario</Badge>
+          </li>
+        </ul>
+      </Container>
     </section>
   );
 }

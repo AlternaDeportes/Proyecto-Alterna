@@ -19,7 +19,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
       />
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
         <Badge variant="secondary">{historia.deporte.nombre}</Badge>
-        <h1 className="mt-4 font-display text-4xl font-black uppercase leading-tight text-white sm:text-5xl">
+        <h1 className="mt-4 ds-display text-display-sm text-white sm:text-display-md">
           {historia.titulo}
         </h1>
         {historia.pullQuote ? (

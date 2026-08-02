@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+import { designTokens } from "@/config/design-tokens";
 import { distanciaKm } from "@/lib/geo";
 import { MapFilters } from "@/modules/mapa/components/MapFilters";
 import { LocationPanel } from "@/modules/mapa/components/LocationPanel";
@@ -112,9 +113,9 @@ export function MapExplorer({ ubicaciones, deporteInicial }: MapExplorerProps) {
             center={mapCenter}
             radius={radioKm * 1000}
             pathOptions={{
-              color: "#2A5FF4",
+              color: designTokens.colors.primary,
               weight: 2,
-              fillColor: "#2A5FF4",
+              fillColor: designTokens.colors.primary,
               fillOpacity: 0.08,
             }}
           />

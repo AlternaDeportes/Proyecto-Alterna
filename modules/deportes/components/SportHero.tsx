@@ -15,7 +15,7 @@ export function SportHero({ deporte }: SportHeroProps) {
       className="relative overflow-hidden pb-16 pt-28 sm:pt-32"
       aria-labelledby="deporte-titulo"
       style={{
-        background: `linear-gradient(160deg, ${deporte.colorPrimario}22 0%, #1d1d1b 45%, #1d1d1b 100%)`,
+        background: `linear-gradient(160deg, ${deporte.colorPrimario}22 0%, var(--color-brand-ink) 45%, var(--color-brand-ink) 100%)`,
       }}
     >
       <BlobBackground className="opacity-60" />
@@ -33,7 +33,7 @@ export function SportHero({ deporte }: SportHeroProps) {
         </Badge>
         <h1
           id="deporte-titulo"
-          className="max-w-4xl font-display text-4xl font-black uppercase leading-tight text-white sm:text-5xl lg:text-6xl"
+          className="ds-display max-w-4xl text-display-sm text-white sm:text-display-md lg:text-display-lg"
         >
           {deporte.nombre}
         </h1>

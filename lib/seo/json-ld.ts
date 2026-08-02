@@ -14,7 +14,7 @@ export function organizationJsonLd(): JsonLd {
     url: getSiteUrl(),
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
-    logo: absoluteUrl("/brand/logo-wordmark.svg"),
+    logo: absoluteUrl("/brand/logo-blanco-transparent.png"),
     sameAs,
     address: {
       "@type": "PostalAddress",

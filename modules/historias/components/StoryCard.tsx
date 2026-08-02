@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CardLight } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { HistoriaListItem } from "@/modules/historias/types";
 
@@ -10,11 +10,10 @@ interface StoryCardProps {
 
 export function StoryCard({ historia, className }: StoryCardProps) {
   return (
-    <CardLight
-      className={cn(
-        "flex h-full flex-col border-l-4 transition hover:-translate-y-0.5 hover:shadow-lg",
-        className
-      )}
+    <Card
+      surface="paper"
+      interactive
+      className={cn("flex h-full flex-col border-l-4", className)}
       style={{ borderLeftColor: historia.deporte.colorPrimario }}
     >
       <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink/45">
@@ -28,7 +27,7 @@ export function StoryCard({ historia, className }: StoryCardProps) {
       <h3 className="mt-4 font-display text-lg font-bold uppercase text-brand-ink">
         <Link
           href={`/historias/${historia.slug}`}
-          className="hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-primary"
+          className="rounded-sm hover:text-brand-primary focus-ring"
         >
           {historia.titulo}
         </Link>
@@ -38,10 +37,10 @@ export function StoryCard({ historia, className }: StoryCardProps) {
       </p>
       <Link
         href={`/historias/${historia.slug}`}
-        className="mt-4 inline-block text-sm font-semibold text-brand-primary hover:underline"
+        className="mt-4 inline-block rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
       >
         Leer historia →
       </Link>
-    </CardLight>
+    </Card>
   );
 }

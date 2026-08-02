@@ -12,7 +12,7 @@ export function PodcastHeader({ show }: PodcastHeaderProps) {
     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <Badge variant="secondary">Voces en primera persona</Badge>
-        <h1 className="mt-3 font-display text-4xl font-black uppercase text-white sm:text-5xl">
+        <h1 className="mt-3 ds-display text-display-sm text-white sm:text-display-md">
           {show.titulo}
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-white/75">{show.descripcion}</p>

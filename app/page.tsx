@@ -7,9 +7,10 @@ import { PodcastTeaser } from "@/components/sections/PodcastTeaser";
 import { DocumentalesTeaser } from "@/components/sections/DocumentalesTeaser";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { CardLight } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { BlobBackground } from "@/components/ui/blob-background";
+import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -23,19 +24,19 @@ export default function HomePage() {
     <main id="contenido-principal">
       <Hero />
 
-      <section
-        className="relative overflow-hidden bg-white py-20 text-brand-ink sm:py-28"
+      <Section
+        tone="paper"
+        blobs="section"
         aria-labelledby="manifiesto-titulo"
       >
-        <BlobBackground variant="section" className="opacity-40 [&_svg]:opacity-10" />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <Container>
           <Reveal>
             <Badge variant="mutedLight" className="mb-4">
               Manifiesto
             </Badge>
             <h2
               id="manifiesto-titulo"
-              className="max-w-3xl font-display text-3xl font-black uppercase leading-tight sm:text-5xl"
+              className="ds-display max-w-3xl text-display-sm sm:text-display-md"
             >
               No explicamos reglas.
               <span className="block text-brand-primary">Mostramos personas.</span>
@@ -46,19 +47,13 @@ export default function HomePage() {
               esfuerzo de quienes juegan sin reflectores.
             </p>
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      <section
-        className="relative border-y border-white/10 py-20 sm:py-24"
-        aria-labelledby="que-es-titulo"
-      >
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <Section border="y" aria-labelledby="que-es-titulo">
+        <Container className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <h2
-              id="que-es-titulo"
-              className="font-display text-3xl font-black uppercase text-white sm:text-4xl"
-            >
+            <h2 id="que-es-titulo" className="ds-display text-display-sm text-white sm:text-4xl">
               ¿Qué es {siteConfig.name}?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/75">
@@ -72,38 +67,32 @@ export default function HomePage() {
 
           <Reveal delay={120}>
             <div className="grid gap-4 sm:grid-cols-2">
-              <CardLight>
+              <Card surface="paper">
                 <h3 className="font-display text-sm font-bold uppercase">Transmedia</h3>
                 <p className="mt-2 text-sm text-brand-ink/70">
                   Cada plataforma suma una capa distinta: emoción, territorio, voz y encuentro.
                 </p>
-              </CardLight>
-              <CardLight className="sm:translate-y-6">
+              </Card>
+              <Card surface="paper" className="sm:translate-y-6">
                 <h3 className="font-display text-sm font-bold uppercase">Descubrimiento</h3>
                 <p className="mt-2 text-sm text-brand-ink/70">
                   Explorá deportes poco mediáticos y encontrá dónde practicarlos cerca tuyo.
                 </p>
-              </CardLight>
+              </Card>
             </div>
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       <DeportesTeaser />
-
       <DocumentalesTeaser />
-
       <HistoriasTeaser />
-
       <PodcastTeaser />
 
-      <section
-        className="relative overflow-hidden bg-brand-primary py-20 text-white sm:py-24"
-        aria-labelledby="mapa-titulo"
-      >
-        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+      <Section tone="primary" aria-labelledby="mapa-titulo">
+        <Container className="text-center">
           <Reveal>
-            <h2 id="mapa-titulo" className="font-display text-3xl font-black uppercase sm:text-4xl">
+            <h2 id="mapa-titulo" className="ds-display text-display-sm sm:text-4xl">
               El mapa es el corazón
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-white/85">
@@ -114,19 +103,16 @@ export default function HomePage() {
               Abrir mapa interactivo
             </ButtonLink>
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      <section
-        className="border-t border-white/10 py-20 sm:py-24"
-        aria-labelledby="comunidad-home-titulo"
-      >
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <Section border="top" aria-labelledby="comunidad-home-titulo">
+        <Container>
           <Reveal>
             <Badge variant="secondary">Comunidad</Badge>
             <h2
               id="comunidad-home-titulo"
-              className="mt-3 max-w-2xl font-display text-3xl font-black uppercase text-white sm:text-4xl"
+              className="mt-3 max-w-2xl ds-display text-display-sm text-white sm:text-4xl"
             >
               Sumate, comentá, aportá
             </h2>
@@ -143,8 +129,8 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </Reveal>
-        </div>
-      </section>
+        </Container>
+      </Section>
     </main>
   );
 }
