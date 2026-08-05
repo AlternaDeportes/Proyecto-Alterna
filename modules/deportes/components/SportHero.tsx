@@ -1,6 +1,10 @@
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { BrandIcon } from "@/components/brand/BrandIcon";
+import { ColorStripe } from "@/components/brand/ColorStripe";
 import { ButtonLink } from "@/components/ui/button";
 import { BlobBackground } from "@/components/ui/blob-background";
+import { Container } from "@/components/ui/container";
+import { resolveSportIcon } from "@/config/brand-assets";
 import type { DeporteDetalle } from "@/modules/deportes/types";
 import { DIFICULTAD_LABEL } from "@/modules/deportes/types";
 import { FavoriteButton } from "@/modules/usuarios/components/FavoriteButton";
@@ -14,42 +18,59 @@ export function SportHero({ deporte }: SportHeroProps) {
     <section
       className="relative overflow-hidden pb-16 pt-28 sm:pt-32"
       aria-labelledby="deporte-titulo"
-      style={{
-        background: `linear-gradient(160deg, ${deporte.colorPrimario}22 0%, var(--color-brand-ink) 45%, var(--color-brand-ink) 100%)`,
-      }}
     >
-      <BlobBackground className="opacity-60" />
+      <ColorStripe className="absolute inset-x-0 top-0 z-raised" />
+      {deporte.coverUrl ? (
+        <Image
+          src={deporte.coverUrl}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-40"
+          aria-hidden
+        />
+      ) : null}
       <div
-        className="pointer-events-none absolute inset-0 opacity-30"
+        className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse 80% 50% at 20% 40%, ${deporte.colorPrimario}55, transparent)`,
+          background: `linear-gradient(160deg, ${deporte.colorPrimario}33 0%, var(--color-brand-ink) 48%, var(--color-brand-ink) 100%)`,
         }}
         aria-hidden
       />
+      <BlobBackground className="opacity-50" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <Badge variant="secondary" className="mb-4">
+      <Container className="relative z-raised">
+        <BrandIcon
+          id={resolveSportIcon(deporte.slug)}
+          size="xl"
+          className="mb-5 drop-shadow-lg"
+        />
+        <p className="ds-eyebrow ds-eyebrow--secondary mb-4">
           {DIFICULTAD_LABEL[deporte.dificultad]}
-        </Badge>
+        </p>
         <h1
           id="deporte-titulo"
           className="ds-display max-w-4xl text-display-sm text-white sm:text-display-md lg:text-display-lg"
         >
           {deporte.nombre}
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80">
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white">
           {deporte.descripcion}
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <ButtonLink href="/mapa" variant="primary" size="lg">
             Dónde practicarlo
           </ButtonLink>
-          <ButtonLink href="/documentales" variant="outline" size="lg">
+          <ButtonLink href="/documentales" variant="outlineLight" size="lg">
             Ver documental
+          </ButtonLink>
+          <ButtonLink href="/historias" variant="accent" size="lg">
+            Historias
           </ButtonLink>
           <FavoriteButton entidad="deporte" entidadId={deporte.id} />
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

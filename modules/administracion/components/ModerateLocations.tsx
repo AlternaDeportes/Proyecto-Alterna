@@ -40,7 +40,7 @@ export function ModerateLocations({ items: initial }: ModerateLocationsProps) {
 
   if (!items.length) {
     return (
-      <p className="mt-3 text-sm text-white/55">No hay puntos pendientes de revisión.</p>
+      <p className="mt-3 text-sm text-brand-ink/55">No hay puntos pendientes de revisión.</p>
     );
   }
 
@@ -50,21 +50,21 @@ export function ModerateLocations({ items: initial }: ModerateLocationsProps) {
       {items.map((u) => (
         <article
           key={u.id}
-          className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-4"
+          className="rounded-xl border border-brand-ink/10 bg-brand-ink/[0.03] px-4 py-4"
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h3 className="font-semibold text-white">{u.nombre}</h3>
-              <p className="mt-1 text-xs text-white/50">
+              <h3 className="font-semibold text-brand-ink">{u.nombre}</h3>
+              <p className="mt-1 text-xs text-brand-ink/50">
                 {u.deporteNombre} · {u.ciudadNombre} · {u.direccion}
               </p>
               {u.creadorEmail ? (
-                <p className="mt-1 text-xs text-white/40">
+                <p className="mt-1 text-xs text-brand-ink/40">
                   Propuesto por {u.creadorNombre ?? "usuario"} ({u.creadorEmail})
                 </p>
               ) : null}
               {u.historia ? (
-                <p className="mt-2 max-w-xl text-sm text-white/70">{u.historia}</p>
+                <p className="mt-2 max-w-xl text-sm text-brand-ink/70">{u.historia}</p>
               ) : null}
             </div>
             <div className="flex flex-wrap gap-2">

@@ -98,7 +98,7 @@ export function FavoriteButton({
     <Button
       type="button"
       size="sm"
-      variant={activo ? "secondary" : light ? "outlineDark" : "outline"}
+      variant={activo ? "secondary" : light ? "outline" : "outlineLight"}
       disabled={loading}
       onClick={() => void toggle()}
       className={className}

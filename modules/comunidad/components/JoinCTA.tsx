@@ -30,7 +30,7 @@ export function JoinCTA({ autenticado }: JoinCTAProps) {
       </ButtonLink>
       <Link
         href="#sumarse"
-        className="inline-flex h-12 items-center px-2 text-sm font-semibold text-brand-secondary underline-offset-4 hover:underline"
+        className="inline-flex h-12 items-center px-2 text-sm font-semibold text-brand-primary underline-offset-4 hover:underline"
       >
         Completar formulario →
       </Link>

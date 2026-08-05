@@ -50,8 +50,11 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     if (error instanceof ComunidadValidationError) {
+      const first =
+        Object.values(error.fieldErrors).flat().find(Boolean) ??
+        "Revisá el formulario.";
       return NextResponse.json(
-        { ok: false, errors: error.fieldErrors, message: "Revisá el formulario." },
+        { ok: false, errors: error.fieldErrors, message: first },
         { status: 400 }
       );
     }

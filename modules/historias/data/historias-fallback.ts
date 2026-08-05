@@ -1,5 +1,6 @@
 import type { HistoriaDetalle, HistoriaListItem } from "@/modules/historias/types";
 import { designTokens } from "@/config/design-tokens";
+import { storyCover, storyGallery } from "@/config/media";
 
 function excerptFrom(cuerpo: string, max = 160) {
   const clean = cuerpo.replace(/\s+/g, " ").trim();
@@ -48,13 +49,11 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
       colorPrimario: designTokens.sports.ultimate,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
+    coverUrl: storyCover("luchi-farias"),
     seoTitle: "Lucila Farías — Ultimate Frisbee | ALTERNA",
     seoDescription:
       "Historia de Luchi Farías, jugadora de Ultimate Frisbee en Santa Fe, en el documental ALTERNA.",
-    galeria: [
-      { id: "g1", alt: "Entrenamiento de Ultimate", label: "Entrenamiento" },
-      { id: "g2", alt: "Equipo en el parque", label: "Equipo" },
-    ],
+    galeria: storyGallery("luchi-farias"),
   },
   {
     id: "hist-ciclo",
@@ -70,13 +69,11 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
       colorPrimario: designTokens.sports.ultimate,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
+    coverUrl: storyCover("ciclo-dussex"),
     seoTitle: "Adriel Dussex — Ultimate Frisbee | ALTERNA",
     seoDescription:
       "Historia de Ciclo Dussex, entrenador de Ultimate en Santa Fe, en ALTERNA.",
-    galeria: [
-      { id: "g1", alt: "Práctica de pases", label: "Práctica" },
-      { id: "g2", alt: "Grupo de principiantes", label: "Comunidad" },
-    ],
+    galeria: storyGallery("ciclo-dussex"),
   },
   {
     id: "hist-monica",
@@ -92,13 +89,11 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
       colorPrimario: designTokens.sports.newcom,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
+    coverUrl: storyCover("monica-lovecchio"),
     seoTitle: "Mónica Lovecchio — Newcom | ALTERNA",
     seoDescription:
       "Historia de Mónica Lovecchio y la comunidad de Newcom en Santa Fe.",
-    galeria: [
-      { id: "g1", alt: "Partido de Newcom", label: "Partido" },
-      { id: "g2", alt: "Club y red baja", label: "Club" },
-    ],
+    galeria: storyGallery("monica-lovecchio"),
   },
   {
     id: "hist-lucio",
@@ -114,13 +109,11 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
       colorPrimario: designTokens.sports.wingfoil,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
+    coverUrl: storyCover("lucio-cinaglia"),
     seoTitle: "Lucio Cinaglia — Wingfoil | ALTERNA",
     seoDescription:
       "Historia de Lucio Cinaglia, instructor de Wingfoil en Santa Fe.",
-    galeria: [
-      { id: "g1", alt: "Wingfoil en la laguna", label: "Laguna" },
-      { id: "g2", alt: "Clase de iniciación", label: "Clase" },
-    ],
+    galeria: storyGallery("lucio-cinaglia"),
   },
 ];
 

@@ -28,31 +28,36 @@ export function LegalDocument({
   return (
     <main id="contenido-principal">
       <PageHeader
+        tone="paper"
         eyebrow={badge}
+        eyebrowTone="primary"
         title={title}
         description={summary}
       >
-        <p className="mt-3 text-xs text-white/45">Última actualización: {updatedAt}</p>
+        <p className="mt-3 text-xs text-brand-ink/45">Última actualización: {updatedAt}</p>
       </PageHeader>
 
-      <Section as="article" density="tight">
+      <Section as="article" tone="paper" density="tight">
         <Container narrow className="space-y-10">
           {sections.map((section) => (
             <Reveal key={section.title}>
               <section aria-labelledby={slugify(section.title)}>
                 <h2
                   id={slugify(section.title)}
-                  className="font-display text-xl font-bold uppercase text-white"
+                  className="font-display text-xl font-bold uppercase text-brand-ink"
                 >
                   {section.title}
                 </h2>
                 {section.paragraphs.map((p) => (
-                  <p key={p.slice(0, 40)} className="mt-3 text-sm leading-relaxed text-white/70">
+                  <p
+                    key={p.slice(0, 40)}
+                    className="mt-3 text-sm leading-relaxed text-brand-ink/70"
+                  >
                     {p}
                   </p>
                 ))}
                 {section.bullets ? (
-                  <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-white/70">
+                  <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-brand-ink/70">
                     {section.bullets.map((b) => (
                       <li key={b}>{b}</li>
                     ))}
@@ -62,17 +67,17 @@ export function LegalDocument({
             </Reveal>
           ))}
 
-          <p className="border-t border-white/10 pt-8 text-sm text-white/50">
+          <p className="border-t border-brand-ink/10 pt-8 text-sm text-brand-ink/50">
             También podés leer{" "}
-            <Link href="/privacidad" className="text-brand-secondary hover:underline">
+            <Link href="/privacidad" className="text-brand-primary hover:underline">
               Privacidad
             </Link>
             ,{" "}
-            <Link href="/terminos" className="text-brand-secondary hover:underline">
+            <Link href="/terminos" className="text-brand-primary hover:underline">
               Términos
             </Link>{" "}
             y{" "}
-            <Link href="/cookies" className="text-brand-secondary hover:underline">
+            <Link href="/cookies" className="text-brand-primary hover:underline">
               Cookies
             </Link>
             .

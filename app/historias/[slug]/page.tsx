@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { breadcrumbJsonLd } from "@/lib/seo/json-ld";
 import { articleJsonLd } from "@/lib/seo/article-json-ld";
@@ -66,15 +67,22 @@ export default async function HistoriaDetallePage({ params }: PageProps) {
 
       <StoryHero historia={historia} />
 
-      <article className="border-b border-white/10 bg-white py-14 text-brand-ink sm:py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          {paragraphs.map((p) => (
-            <p key={p.slice(0, 48)} className="mt-5 text-base leading-relaxed text-brand-ink/80 first:mt-0 sm:text-lg">
+      <article className="border-b border-brand-ink/10 bg-brand-surface py-16 text-brand-ink sm:py-24">
+        <Container narrow>
+          {paragraphs.map((p, i) => (
+            <p
+              key={p.slice(0, 48)}
+              className={
+                i === 0
+                  ? "text-xl font-medium leading-relaxed text-brand-ink/90 sm:text-2xl"
+                  : "mt-6 text-base leading-relaxed text-brand-ink/75 sm:text-lg"
+              }
+            >
               {p}
             </p>
           ))}
 
-          <p className="mt-10 text-sm text-brand-ink/50">
+          <p className="mt-12 border-t border-brand-ink/10 pt-8 text-sm text-brand-ink/50">
             Relato vinculado a{" "}
             <Link
               href={`/deportes/${historia.deporte.slug}`}
@@ -84,33 +92,37 @@ export default async function HistoriaDetallePage({ params }: PageProps) {
             </Link>
             .
           </p>
-        </div>
+        </Container>
       </article>
 
-      <section className="py-14 sm:py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+      <section className="bg-brand-ink py-16 sm:py-20">
+        <Container>
           <StoryGallery
             items={historia.galeria}
             accentColor={historia.deporte.colorPrimario}
             titulo={historia.titulo}
           />
-        </div>
+        </Container>
       </section>
 
-      <section className="border-t border-white/10 bg-brand-primary py-14">
-        <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
-          <h2 className="font-display text-2xl font-black uppercase text-white">
-            Seguí explorando
-          </h2>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+      <section
+        className="py-16"
+        style={{ backgroundColor: historia.deporte.colorPrimario }}
+      >
+        <Container className="text-center">
+          <h2 className="ds-display text-2xl text-white">Seguí explorando</h2>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/historias" variant="secondary">
               Más historias
             </ButtonLink>
-            <ButtonLink href={`/mapa?deporte=${historia.deporte.slug}`} variant="outline">
+            <ButtonLink
+              href={`/mapa?deporte=${historia.deporte.slug}`}
+              variant="outlineLight"
+            >
               Ver en el mapa
             </ButtonLink>
           </div>
-        </div>
+        </Container>
       </section>
     </main>
   );

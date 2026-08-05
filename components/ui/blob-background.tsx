@@ -20,8 +20,8 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
     >
       <svg
         className={cn(
-          "absolute -left-[10%] top-[8%] h-[55%] w-[55%] opacity-30 blur-2xl motion-safe:animate-blob-drift",
-          variant === "section" && "opacity-20"
+          "absolute -left-[10%] top-[8%] h-[55%] w-[55%] opacity-40 blur-2xl motion-safe:animate-blob-drift",
+          variant === "section" && "opacity-28"
         )}
         viewBox="0 0 400 400"
         fill="none"
@@ -33,8 +33,8 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
       </svg>
       <svg
         className={cn(
-          "absolute -right-[5%] bottom-[5%] h-[45%] w-[45%] opacity-25 blur-2xl motion-safe:animate-blob-drift-reverse",
-          variant === "section" && "opacity-15"
+          "absolute -right-[5%] bottom-[5%] h-[45%] w-[45%] opacity-35 blur-2xl motion-safe:animate-blob-drift-reverse",
+          variant === "section" && "opacity-24"
         )}
         viewBox="0 0 400 400"
         fill="none"
@@ -45,7 +45,7 @@ export function BlobBackground({ className, variant = "hero" }: BlobBackgroundPr
         />
       </svg>
       <svg
-        className="absolute left-[35%] top-[45%] h-[30%] w-[30%] opacity-20 blur-xl motion-safe:animate-blob-pulse"
+        className="absolute left-[35%] top-[45%] h-[30%] w-[30%] opacity-32 blur-xl motion-safe:animate-blob-pulse"
         viewBox="0 0 200 200"
         fill="none"
       >

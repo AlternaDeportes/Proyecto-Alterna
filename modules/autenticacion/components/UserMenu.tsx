@@ -16,7 +16,7 @@ export function UserMenu({ className, compact }: UserMenuProps) {
   if (status === "loading") {
     return (
       <span
-        className={cn("inline-block h-9 w-24 animate-pulse rounded-full bg-white/10", className)}
+        className={cn("inline-block h-9 w-24 animate-pulse rounded-full bg-brand-ink/10", className)}
         aria-hidden
       />
     );
@@ -43,7 +43,7 @@ export function UserMenu({ className, compact }: UserMenuProps) {
     <div className={cn("flex items-center gap-2", className)}>
       <Link
         href="/perfil"
-        className="hidden max-w-[8rem] truncate text-sm font-medium text-white/85 hover:text-white sm:inline"
+        className="hidden max-w-[8rem] truncate text-sm font-medium text-brand-ink/75 hover:text-brand-ink sm:inline"
         title={session.user.email ?? undefined}
       >
         {nombre}
@@ -55,7 +55,7 @@ export function UserMenu({ className, compact }: UserMenuProps) {
           alt=""
           width={32}
           height={32}
-          className="h-8 w-8 rounded-full border border-white/20 object-cover"
+          className="h-8 w-8 rounded-full border border-brand-ink/15 object-cover"
         />
       ) : null}
       {esStaff ? (

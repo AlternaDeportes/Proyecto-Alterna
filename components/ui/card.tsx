@@ -12,13 +12,13 @@ const cardVariants = cva("transition-all duration-base ease-brand", {
       /** Sin chrome — solo contenedor */
       plain: "p-0",
     },
-    interactive: {
-      true: "hover:-translate-y-1",
+        interactive: {
+      true: "motion-safe:hover:-translate-y-1",
       false: "",
     },
   },
   defaultVariants: {
-    surface: "ink",
+    surface: "paper",
     interactive: false,
   },
 });

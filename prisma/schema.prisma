@@ -196,6 +196,8 @@ model Ubicacion {
   historia   String?          @db.Text
   mediaUrl   String?          @map("media_url")
   moderacion ModeracionEstado @default(APROBADO)
+  /** Nombre del deporte cuando no es uno de los tres foco (slug "otros"). */
+  deporteOtroNombre String?   @map("deporte_otro_nombre")
 
   deporteId String  @map("deporte_id")
   deporte   Deporte @relation(fields: [deporteId], references: [id])

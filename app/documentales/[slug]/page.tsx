@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { breadcrumbJsonLd } from "@/lib/seo/json-ld";
@@ -78,19 +77,19 @@ export default async function DocumentalEpisodioPage({ params }: PageProps) {
         ]}
       />
 
-      <header className="border-b border-white/10 py-20 pt-28 sm:py-24 sm:pt-32">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <Badge variant="secondary">
+      <header className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-20">
+        <div className="ds-container max-w-3xl">
+          <p className="ds-eyebrow ds-eyebrow--accent mb-4">
             {meta}
             {episodio.proximo ? " · Próximamente" : ""}
-          </Badge>
-          <h1 className="mt-4 font-display text-4xl font-black uppercase text-white sm:text-5xl">
+          </p>
+          <h1 className="ds-display text-display-sm text-brand-ink sm:text-display-md">
             {episodio.titulo}
           </h1>
           {episodio.sinopsis ? (
-            <p className="mt-4 text-lg text-white/75">{episodio.sinopsis}</p>
+            <p className="mt-5 text-lg leading-relaxed text-brand-ink/70">{episodio.sinopsis}</p>
           ) : null}
-          <p className="mt-4 text-sm text-white/50">
+          <p className="mt-4 text-sm text-brand-ink/45">
             {episodio.documental.titulo}
             {episodio.duracionSeg
               ? ` · ${formatDuracionVideo(episodio.duracionSeg)}`
@@ -100,11 +99,12 @@ export default async function DocumentalEpisodioPage({ params }: PageProps) {
       </header>
 
       <section className="py-14 sm:py-16">
-        <div className="mx-auto max-w-3xl space-y-8 px-4 sm:px-6">
+        <div className="ds-container max-w-3xl space-y-8">
           <DocVideoPlayer
             titulo={episodio.titulo}
             videoUrl={episodio.videoUrl}
             proximo={episodio.proximo}
+            coverUrl={episodio.coverUrl}
           />
 
           <div className="flex flex-wrap gap-3">

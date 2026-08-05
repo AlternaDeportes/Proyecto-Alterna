@@ -15,15 +15,16 @@ export default function OfflinePage() {
   return (
     <main id="contenido-principal">
       <Section
+        tone="paper"
         blobs="section"
         className="flex min-h-[70dvh] flex-col items-center justify-center pt-28 text-center sm:pt-32"
       >
         <div className="relative z-raised max-w-lg px-4">
           <p className="ds-eyebrow">Offline</p>
-          <h1 className="mt-3 ds-display text-display-sm text-white sm:text-display-md">
+          <h1 className="mt-3 ds-display text-display-sm text-brand-ink sm:text-display-md">
             Sin conexión
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-white/70">
+          <p className="mt-4 text-base leading-relaxed text-brand-ink/70">
             No hay red en este momento. Cuando vuelvas a conectarte, recargá la página.
             Algunas secciones visitadas antes pueden seguir disponibles.
           </p>
@@ -35,12 +36,12 @@ export default function OfflinePage() {
               Deportes
             </ButtonLink>
           </div>
-          <p className="mt-6 text-sm text-white/40">
-            <Link href="/mapa" className="hover:underline">
+          <p className="mt-6 text-sm text-brand-ink/45">
+            <Link href="/mapa" className="text-brand-primary hover:underline">
               Mapa
             </Link>
             {" · "}
-            <Link href="/historias" className="hover:underline">
+            <Link href="/historias" className="text-brand-primary hover:underline">
               Historias
             </Link>
           </p>

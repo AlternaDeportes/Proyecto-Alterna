@@ -13,7 +13,9 @@ export function organizationJsonLd(): JsonLd {
     description: siteConfig.description,
     url: getSiteUrl(),
     email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phone,
+    ...(siteConfig.contact.phone
+      ? { telephone: siteConfig.contact.phone }
+      : {}),
     logo: absoluteUrl("/brand/logo-blanco-transparent.png"),
     sameAs,
     address: {

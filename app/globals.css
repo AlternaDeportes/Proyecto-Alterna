@@ -45,12 +45,12 @@
   }
 
   body {
-    @apply bg-brand-ink font-body text-white antialiased;
+    @apply bg-brand-surface font-body text-brand-ink antialiased;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-brand-primary) 45%, transparent);
-    color: #fff;
+    background: color-mix(in srgb, var(--color-brand-secondary) 55%, transparent);
+    color: var(--color-brand-ink);
   }
 }
 
@@ -74,9 +74,63 @@
     @apply font-display font-black uppercase tracking-tight text-balance;
   }
 
-  /* Eyebrow tipográfico (sin pill si no hace falta) */
+  /* Eyebrow — primary por contraste sobre papel; lima/accent en fills o sobre ink */
   .ds-eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.18em] text-brand-secondary;
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-brand-primary;
+  }
+
+  .ds-eyebrow--primary {
+    @apply text-brand-primary;
+  }
+
+  .ds-eyebrow--secondary {
+    @apply text-brand-primary;
+  }
+
+  .ds-eyebrow--accent {
+    @apply text-brand-accent;
+  }
+
+  .ds-eyebrow--lime {
+    @apply text-brand-secondary;
+  }
+
+  .ds-eyebrow--white {
+    @apply text-white;
+  }
+
+  /* Franja tricolor utilitaria (cuando no usamos el componente) */
+  .ds-tricolor {
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-primary) 0%,
+      var(--color-brand-primary) 33.33%,
+      var(--color-brand-secondary) 33.33%,
+      var(--color-brand-secondary) 66.66%,
+      var(--color-brand-accent) 66.66%,
+      var(--color-brand-accent) 100%
+    );
+  }
+
+  .ds-tricolor-text {
+    background: linear-gradient(
+      105deg,
+      var(--color-brand-primary),
+      var(--color-brand-secondary) 45%,
+      var(--color-brand-accent)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Texto blanco como contraste secundario sobre ink */
+  .ds-text-muted {
+    @apply text-white/70;
+  }
+
+  .ds-text-faint {
+    @apply text-white/50;
   }
 
   /* Marco fotográfico — Manual de identidad */
@@ -110,7 +164,7 @@
     @apply rounded-organic border border-brand-ink/[0.08] bg-white shadow-soft;
   }
 
-  /* Patrón de marca — malla de blobs sutiles (SVG data URI) */
+  /* Patrón de marca — malla de blobs sutiles */
   .ds-pattern-dots {
     background-image: radial-gradient(
       circle at 1px 1px,
@@ -132,6 +186,28 @@
         transparent 1px
       );
     background-size: 48px 48px;
+  }
+
+  /*
+   * Motion Design System — 3 intenciones:
+   * 1) presencia (reveal/page enter)
+   * 2) respiración de media (zoom)
+   * 3) chrome (nav / progress)
+   */
+  .ds-media-zoom {
+    @apply transition-transform duration-[900ms] ease-brand motion-reduce:transition-none;
+  }
+
+  .group:hover .ds-media-zoom,
+  .group:focus-visible .ds-media-zoom {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover .ds-media-zoom,
+    .group:focus-visible .ds-media-zoom {
+      transform: none;
+    }
   }
 }
 

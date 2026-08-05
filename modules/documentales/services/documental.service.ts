@@ -1,4 +1,5 @@
 import { isDatabaseConfigured } from "@/config/env";
+import { documentalCover } from "@/config/media";
 import {
   listarEpisodioDocSlugsFallback,
   obtenerDocumentalFallback,
@@ -36,6 +37,7 @@ function mapEpisodioList(
     numero: row.numero,
     duracionSeg: row.duracionSeg,
     videoUrl: row.videoUrl,
+    coverUrl: documentalCover(row.slug, fallback?.coverUrl),
     publishedAt: row.publishedAt?.toISOString() ?? null,
     proximo: !row.videoUrl || !row.publishedAt,
     etiqueta: fallback?.etiqueta ?? etiquetaFromNumero(row.numero),
@@ -57,7 +59,7 @@ function mapShow(
     slug: row.slug,
     titulo: row.titulo,
     sinopsis: row.sinopsis,
-    coverUrl: row.coverUrl,
+    coverUrl: documentalCover(row.slug, row.coverUrl),
     publishedAt: row.publishedAt?.toISOString() ?? null,
     episodios: row.episodios.map(mapEpisodioList),
   };

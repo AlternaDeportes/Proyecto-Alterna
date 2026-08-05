@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 import { INTERESES_CONTACTO } from "@/modules/contacto/validations/contacto.schema";
 
 const fieldClass =
-  "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 transition-colors focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/30";
+  "w-full rounded-xl border border-brand-ink/15 bg-white px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 transition-colors focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/25";
 
-const labelClass = "grid gap-1.5 text-sm font-semibold text-white/90";
+const labelClass = "grid gap-1.5 text-sm font-semibold text-brand-ink";
 
 interface FieldErrors {
   nombre?: string;
@@ -77,11 +77,11 @@ export function ContactForm() {
   }
 
   return (
-    <Card className="border-white/10 bg-white/[0.04] p-6 sm:p-8">
-      <h2 className="font-display text-lg font-bold uppercase tracking-wide text-white">
+    <Card surface="paper" className="p-6 sm:p-8">
+      <h2 className="font-display text-lg font-bold uppercase tracking-wide text-brand-ink">
         Escribinos
       </h2>
-      <p className="mt-1 text-sm text-white/60">
+      <p className="mt-1 text-sm text-brand-ink/60">
         Consultas, prensa, colaboraciones o para contarnos tu experiencia.
       </p>
 
@@ -104,7 +104,7 @@ export function ContactForm() {
             aria-describedby={errors.nombre ? "error-nombre" : undefined}
           />
           {errors.nombre ? (
-            <span id="error-nombre" className="text-xs font-medium text-red-300">
+            <span id="error-nombre" className="text-xs font-medium text-red-600">
               {errors.nombre}
             </span>
           ) : null}
@@ -122,7 +122,7 @@ export function ContactForm() {
             aria-describedby={errors.email ? "error-email" : undefined}
           />
           {errors.email ? (
-            <span id="error-email" className="text-xs font-medium text-red-300">
+            <span id="error-email" className="text-xs font-medium text-red-600">
               {errors.email}
             </span>
           ) : null}
@@ -142,13 +142,13 @@ export function ContactForm() {
               Seleccioná
             </option>
             {INTERESES_CONTACTO.map((opcion) => (
-              <option key={opcion} value={opcion} className="bg-brand-ink text-white">
+              <option key={opcion} value={opcion}>
                 {opcion}
               </option>
             ))}
           </select>
           {errors.interes ? (
-            <span id="error-interes" className="text-xs font-medium text-red-300">
+            <span id="error-interes" className="text-xs font-medium text-red-600">
               {errors.interes}
             </span>
           ) : null}
@@ -167,7 +167,7 @@ export function ContactForm() {
             aria-describedby={errors.mensaje ? "error-mensaje" : undefined}
           />
           {errors.mensaje ? (
-            <span id="error-mensaje" className="text-xs font-medium text-red-300">
+            <span id="error-mensaje" className="text-xs font-medium text-red-600">
               {errors.mensaje}
             </span>
           ) : null}
@@ -180,7 +180,7 @@ export function ContactForm() {
         </label>
 
         {errors.form ? (
-          <p className="text-sm font-medium text-red-300" role="alert">
+          <p className="text-sm font-medium text-red-600" role="alert">
             {errors.form}
           </p>
         ) : null}
@@ -192,7 +192,7 @@ export function ContactForm() {
         {exito ? (
           <p
             id="contacto-exito"
-            className="text-sm font-semibold text-brand-secondary"
+            className="text-sm font-semibold text-brand-primary"
             role="status"
           >
             ¡Gracias! Te responderemos pronto.

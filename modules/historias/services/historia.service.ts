@@ -1,4 +1,5 @@
 import { isDatabaseConfigured } from "@/config/env";
+import { storyCover, storyGallery } from "@/config/media";
 import {
   cuerpoHistoriaPorSlug,
   listarHistoriasFallback,
@@ -35,6 +36,7 @@ function mapList(
     excerpt: excerptFrom(cuerpo),
     deporte: row.deporte,
     publishedAt: row.publishedAt?.toISOString() ?? null,
+    coverUrl: storyCover(row.slug),
   };
 }
 
@@ -42,17 +44,15 @@ function mapDetalle(
   row: NonNullable<Awaited<ReturnType<typeof historiaRepository.findBySlug>>>
 ): HistoriaDetalle {
   const cuerpo = enrichCuerpo(row.slug, row.cuerpo);
-  const galeria =
+  const fromDb =
     row.multimedia.length > 0
       ? row.multimedia.map((m, i) => ({
           id: m.id,
+          src: m.url,
           alt: m.altText ?? row.titulo,
           label: m.altText ?? `Imagen ${i + 1}`,
         }))
-      : [
-          { id: "ph-1", alt: `${row.titulo} — retrato`, label: "Retrato" },
-          { id: "ph-2", alt: `${row.titulo} — contexto`, label: "Contexto" },
-        ];
+      : undefined;
 
   return {
     ...mapList(row),
@@ -60,7 +60,8 @@ function mapDetalle(
     excerpt: excerptFrom(cuerpo),
     seoTitle: row.seoTitle,
     seoDescription: row.seoDescription,
-    galeria,
+    coverUrl: storyCover(row.slug, row.multimedia[0]?.url),
+    galeria: storyGallery(row.slug, fromDb),
   };
 }
 

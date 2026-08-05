@@ -9,7 +9,7 @@ const MapExplorer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full items-center justify-center bg-brand-ink text-white/70">
+      <div className="flex h-full items-center justify-center bg-brand-surface text-brand-ink/60">
         Cargando mapa…
       </div>
     ),

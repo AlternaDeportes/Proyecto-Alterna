@@ -41,7 +41,7 @@ export function ContactMessages({ items: initial }: ContactMessagesProps) {
   }
 
   if (!items.length) {
-    return <p className="mt-3 text-sm text-white/55">Todavía no hay mensajes de contacto.</p>;
+    return <p className="mt-3 text-sm text-brand-ink/55">Todavía no hay mensajes de contacto.</p>;
   }
 
   return (
@@ -52,24 +52,24 @@ export function ContactMessages({ items: initial }: ContactMessagesProps) {
           key={m.id}
           className={`rounded-xl border px-4 py-4 ${
             m.leido
-              ? "border-white/10 bg-white/[0.03] opacity-70"
-              : "border-brand-secondary/30 bg-brand-secondary/10"
+              ? "border-brand-ink/10 bg-brand-ink/[0.02] opacity-70"
+              : "border-brand-primary/25 bg-brand-primary/5"
           }`}
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h3 className="font-semibold text-white">
+              <h3 className="font-semibold text-brand-ink">
                 {m.nombre}{" "}
-                <span className="font-normal text-white/50">· {m.interes}</span>
+                <span className="font-normal text-brand-ink/50">· {m.interes}</span>
               </h3>
               <a
                 href={`mailto:${m.email}`}
-                className="mt-1 block text-xs text-brand-secondary hover:underline"
+                className="mt-1 block text-xs text-brand-primary hover:underline"
               >
                 {m.email}
               </a>
-              <p className="mt-2 whitespace-pre-wrap text-sm text-white/75">{m.mensaje}</p>
-              <p className="mt-2 text-xs text-white/35">
+              <p className="mt-2 whitespace-pre-wrap text-sm text-brand-ink/75">{m.mensaje}</p>
+              <p className="mt-2 text-xs text-brand-ink/35">
                 {new Date(m.createdAt).toLocaleString("es-AR")}
               </p>
             </div>

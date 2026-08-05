@@ -1,6 +1,5 @@
 import { ModeracionEstado } from "@prisma/client";
 import { isDatabaseConfigured } from "@/config/env";
-import { siteConfig } from "@/config/site";
 import { prisma } from "@/lib/prisma";
 import { contactoService } from "@/modules/contacto/services/contacto.service";
 import type {
@@ -13,6 +12,7 @@ import {
   proponerUbicacionSchema,
   sumarseSchema,
 } from "@/modules/comunidad/validations/comunidad.schema";
+import { OTROS_SPORT_SLUG } from "@/config/map-region";
 
 export class ComunidadValidationError extends Error {
   constructor(public fieldErrors: Record<string, string[] | undefined>) {
@@ -83,14 +83,19 @@ export const comunidadService = {
     }
 
     const datos = parsed.data;
+    const deporteSlug = datos.deporteSlug;
+    const deporteOtroNombre =
+      deporteSlug === OTROS_SPORT_SLUG
+        ? (datos.deporteOtroNombre || "").trim()
+        : null;
 
     const [deporte, ciudad, usuario] = await Promise.all([
       prisma.deporte.findFirst({
-        where: { slug: datos.deporteSlug, deletedAt: null },
+        where: { slug: deporteSlug, deletedAt: null },
         select: { id: true },
       }),
       prisma.ciudad.findFirst({
-        where: { slug: siteConfig.defaultCity.slug, deletedAt: null },
+        where: { slug: datos.ciudadSlug, deletedAt: null },
         select: { id: true },
       }),
       prisma.usuario.findFirst({
@@ -117,6 +122,7 @@ export const comunidadService = {
         horarios: datos.horarios,
         contacto: datos.contacto || null,
         historia: datos.historia || null,
+        deporteOtroNombre,
         moderacion: ModeracionEstado.PENDIENTE,
         deporteId: deporte.id,
         ciudadId: ciudad.id,

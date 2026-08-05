@@ -1,4 +1,5 @@
 import { isDatabaseConfigured } from "@/config/env";
+import { sportCover } from "@/config/media";
 import { siteConfig } from "@/config/site";
 import {
   listarDeportesFallback,
@@ -20,12 +21,14 @@ function mapDeporteList(
     destacado: deporte.destacado,
     ubicacionesCount: deporte._count.ubicaciones,
     historiasCount: deporte._count.historias,
+    coverUrl: sportCover(deporte.slug),
   };
 }
 
 function mapDeporteDetalle(
   deporte: NonNullable<Awaited<ReturnType<typeof deporteRepository.findBySlug>>>
 ): DeporteDetalle {
+  const fromMedia = deporte.multimedia[0]?.url;
   return {
     id: deporte.id,
     slug: deporte.slug,
@@ -44,6 +47,7 @@ function mapDeporteDetalle(
     seoDescription: deporte.seoDescription,
     historias: deporte.historias,
     ubicaciones: deporte.ubicaciones,
+    coverUrl: sportCover(deporte.slug, fromMedia),
   };
 }
 

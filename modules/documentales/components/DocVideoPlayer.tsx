@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { toYoutubeEmbed } from "@/modules/documentales/services/documental.service";
 
@@ -7,17 +8,30 @@ interface DocVideoPlayerProps {
   titulo: string;
   videoUrl: string | null;
   proximo: boolean;
+  coverUrl?: string | null;
 }
 
-export function DocVideoPlayer({ titulo, videoUrl, proximo }: DocVideoPlayerProps) {
+export function DocVideoPlayer({
+  titulo,
+  videoUrl,
+  proximo,
+  coverUrl,
+}: DocVideoPlayerProps) {
   if (proximo || !videoUrl) {
     return (
-      <div className="overflow-hidden rounded-organic border border-dashed border-white/20 bg-white/[0.03]">
-        <div className="flex aspect-video flex-col items-center justify-center gap-3 bg-gradient-to-br from-brand-primary/40 to-brand-ink p-6 text-center">
-          <Badge variant="accent">En producción</Badge>
-          <p className="max-w-md text-sm text-white/70">
-            El video de «{titulo}» se publica pronto. Mientras tanto seguinos en YouTube.
-          </p>
+      <div className="ds-frame ds-frame--ink relative overflow-hidden">
+        <div className="relative aspect-video">
+          {coverUrl ? (
+            <Image src={coverUrl} alt="" fill className="object-cover opacity-50" aria-hidden />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary-deep to-brand-ink" />
+          )}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-brand-ink/50 p-6 text-center">
+            <Badge variant="accent">En producción</Badge>
+            <p className="max-w-md text-sm text-white/75">
+              El video de «{titulo}» se publica pronto. Mientras tanto seguinos en YouTube.
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -27,7 +41,7 @@ export function DocVideoPlayer({ titulo, videoUrl, proximo }: DocVideoPlayerProp
 
   if (embed) {
     return (
-      <div className="overflow-hidden rounded-organic border border-white/10">
+      <div className="ds-frame ds-frame--primary overflow-hidden">
         <div className="aspect-video">
           <iframe
             src={embed}
@@ -42,7 +56,7 @@ export function DocVideoPlayer({ titulo, videoUrl, proximo }: DocVideoPlayerProp
   }
 
   return (
-    <div className="overflow-hidden rounded-organic border border-white/10">
+    <div className="ds-frame ds-frame--ink overflow-hidden">
       <video controls preload="metadata" className="aspect-video w-full bg-black" src={videoUrl}>
         Tu navegador no soporta video HTML5.
       </video>

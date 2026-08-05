@@ -4,15 +4,13 @@
  *
  * Semántica de color (manual):
  * - primary  #2A5FF4 — exploración, confianza, acción
- * - secondary #AFEB00 — energía, comunidad, vitalidad (usar con intención)
+ * - secondary #AFEB00 — energía, comunidad, vitalidad
  * - accent   #FFA300 — calidez, descubrimiento
  * - ink      #1D1D1B — soporte oscuro / base documental
- * - surface  #FFFFFF — soporte claro / editorial
+ * - surface  #FFFFFF — contraste tipográfico y secciones editoriales
  *
- * Deportes (manual p.23):
- * - verde  — equilibrio, resistencia, naturaleza (Ultimate)
- * - naranja — creatividad, vitalidad (Newcom)
- * - azul   — concentración, disciplina, calma (Wingfoil)
+ * Ritmo: los tres cromáticos deben convivir en cada recorrido
+ * (eyebrows, CTAs, franjas, iconografía). El blanco refuerza contraste sobre ink.
  */
 
 export const designTokens = {
@@ -74,12 +72,17 @@ export const designTokens = {
     soft: "0 20px 50px rgba(29, 29, 27, 0.08)",
     lift: "0 24px 48px rgba(29, 29, 27, 0.18)",
     glowPrimary: "0 12px 40px rgba(42, 95, 244, 0.28)",
+    glowSecondary: "0 12px 40px rgba(175, 235, 0, 0.22)",
+    glowAccent: "0 12px 40px rgba(255, 163, 0, 0.25)",
   },
   motion: {
     fast: "150ms",
     base: "300ms",
     slow: "600ms",
     reveal: "700ms",
+    pageEnter: "500ms",
+    mediaHover: "900ms",
+    kenBurns: "28s",
     blob: { drift: "18s", driftReverse: "22s", pulse: "14s" },
     easing: "cubic-bezier(0.22, 1, 0.36, 1)",
   },

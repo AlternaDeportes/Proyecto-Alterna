@@ -3,6 +3,7 @@ import type {
   DocumentalEpisodioListItem,
   DocumentalShow,
 } from "@/modules/documentales/types";
+import { documentalCover } from "@/config/media";
 
 const SHOW = {
   id: "doc-alterna",
@@ -10,7 +11,7 @@ const SHOW = {
   titulo: "ALTERNA — Deportes por descubrir",
   sinopsis:
     "Serie documental sobre deportes alternativos y amateurs en Santa Fe. Trailer y episodios para profundizar en las historias humanas detrás de cada disciplina.",
-  coverUrl: null as string | null,
+  coverUrl: documentalCover("alterna-documental"),
   publishedAt: "2026-07-01T12:00:00.000Z",
 };
 
@@ -23,6 +24,7 @@ const EPISODIOS: DocumentalEpisodioDetalle[] = [
     numero: 0,
     duracionSeg: 90,
     videoUrl: null,
+    coverUrl: documentalCover("trailer"),
     publishedAt: null,
     proximo: true,
     etiqueta: "Comenzá acá",
@@ -41,6 +43,7 @@ const EPISODIOS: DocumentalEpisodioDetalle[] = [
     numero: 1,
     duracionSeg: 18 * 60,
     videoUrl: null,
+    coverUrl: documentalCover("episodio-01-ultimate"),
     publishedAt: null,
     proximo: true,
     etiqueta: "Historia 1",
@@ -59,6 +62,7 @@ const EPISODIOS: DocumentalEpisodioDetalle[] = [
     numero: 2,
     duracionSeg: 22 * 60,
     videoUrl: null,
+    coverUrl: documentalCover("episodio-02-newcom-wingfoil"),
     publishedAt: null,
     proximo: true,
     etiqueta: "Historia 2",

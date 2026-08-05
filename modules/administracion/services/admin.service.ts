@@ -99,7 +99,7 @@ export const adminService = {
       contacto: u.contacto,
       historia: u.historia,
       moderacion: u.moderacion,
-      deporteNombre: u.deporte.nombre,
+      deporteNombre: u.deporteOtroNombre?.trim() || u.deporte.nombre,
       deporteSlug: u.deporte.slug,
       ciudadNombre: u.ciudad.nombre,
       creadorNombre: u.creadoPor?.nombre ?? null,

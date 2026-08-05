@@ -6,6 +6,11 @@ import {
 } from "@prisma/client";
 import { cuerpoHistoriaPorSlug } from "../modules/historias/data/historias-fallback";
 import { designTokens } from "../config/design-tokens";
+import {
+  MAP_CIUDADES,
+  OTROS_SPORT_COLOR,
+  OTROS_SPORT_SLUG,
+} from "../config/map-region";
 
 const prisma = new PrismaClient();
 
@@ -23,18 +28,24 @@ async function main() {
   );
   console.log(`   ✓ ${roles.length} roles`);
 
-  const ciudad = await prisma.ciudad.upsert({
-    where: { slug: "santa-fe" },
-    update: {},
-    create: {
-      nombre: "Santa Fe",
-      region: "Santa Fe",
-      pais: "Argentina",
-      slug: "santa-fe",
-      lat: -31.6333,
-      lng: -60.7,
-    },
-  });
+  const ciudades = [];
+  for (const c of MAP_CIUDADES) {
+    const ciudad = await prisma.ciudad.upsert({
+      where: { slug: c.slug },
+      update: { nombre: c.nombre, region: c.region, lat: c.lat, lng: c.lng },
+      create: {
+        nombre: c.nombre,
+        region: c.region,
+        pais: "Argentina",
+        slug: c.slug,
+        lat: c.lat,
+        lng: c.lng,
+      },
+    });
+    ciudades.push(ciudad);
+  }
+  const ciudadSantaFe = ciudades.find((c) => c.slug === "santa-fe")!;
+  console.log(`   ✓ ${ciudades.length} ciudades (región)`);
 
   const categoria = await prisma.categoria.upsert({
     where: { slug: "alternativos" },
@@ -47,7 +58,7 @@ async function main() {
       slug: "ultimate-frisbee",
       nombre: "Ultimate Frisbee",
       descripcion:
-        "Fútbol con disco: corre, saltá y pasá en equipo. Sin árbitros — el fair play lo arman los jugadores.",
+        "Un disco en el aire y un equipo que se arbitra solo. En el parque se juega limpio porque el otro también es de los tuyos.",
       historia:
         "En Santa Fe, los grupos de Ultimate crecen por recomendación entre amigos, plazas y parques.",
       dificultad: Dificultad.INTERMEDIO,
@@ -61,7 +72,7 @@ async function main() {
       slug: "newcom",
       nombre: "Newcom",
       descripcion:
-        "Vóley adaptado con red baja y reglas propias. Comunidad fuerte, partidos intensos y mucha autogestión.",
+        "Como el vóley, pero con otra cadencia y una red más baja. En el club se arma una familia que vuelve cada semana.",
       historia:
         "Muy arraigado en clubes santafesinos con participación intergeneracional.",
       dificultad: Dificultad.PRINCIPIANTE,
@@ -75,7 +86,7 @@ async function main() {
       slug: "wingfoil",
       nombre: "Wingfoil",
       descripcion:
-        "Tabla + ala sobre el agua. Libertad, viento y aprendizaje progresivo junto al río y la laguna.",
+        "Tabla, ala y el agua del río. Aprender a leer el viento es también encontrar tu lugar lejos de la orilla.",
       historia:
         "Práctica en crecimiento sobre el Paraná y lagunas de la región.",
       dificultad: Dificultad.AVANZADO,
@@ -98,7 +109,7 @@ async function main() {
       },
       create: {
         ...d,
-        ciudadId: ciudad.id,
+        ciudadId: ciudadSantaFe.id,
         categoriaId: categoria.id,
         publishedAt: new Date(),
         seoTitle: `${d.nombre} en Santa Fe | ALTERNA`,
@@ -107,7 +118,34 @@ async function main() {
     });
     deportes.push(deporte);
   }
-  console.log(`   ✓ ${deportes.length} deportes`);
+
+  const deporteOtros = await prisma.deporte.upsert({
+    where: { slug: OTROS_SPORT_SLUG },
+    update: {
+      nombre: "Otros deportes",
+      descripcion:
+        "Prácticas fuera de foco: cualquier deporte amateur o alternativo de la región.",
+      colorPrimario: OTROS_SPORT_COLOR,
+      destacado: false,
+    },
+    create: {
+      slug: OTROS_SPORT_SLUG,
+      nombre: "Otros deportes",
+      descripcion:
+        "Prácticas fuera de foco: cualquier deporte amateur o alternativo de la región.",
+      historia: "El mapa de ALTERNA también suma deportes que no son el foco documental.",
+      dificultad: Dificultad.PRINCIPIANTE,
+      colorPrimario: OTROS_SPORT_COLOR,
+      destacado: false,
+      ciudadId: ciudadSantaFe.id,
+      categoriaId: categoria.id,
+      publishedAt: new Date(),
+      seoTitle: "Otros deportes en la región | ALTERNA",
+      seoDescription: "Deportes fuera de foco en Santa Fe y alrededores.",
+    },
+  });
+  deportes.push(deporteOtros);
+  console.log(`   ✓ ${deportes.length} deportes (incl. otros)`);
 
   const ubicacionesData = [
     {
@@ -120,6 +158,8 @@ async function main() {
       contacto: "@ultimate.sf",
       historia: "Entrenan con foco en juego limpio y mixto.",
       deporteSlug: "ultimate-frisbee",
+      ciudadSlug: "santa-fe",
+      deporteOtroNombre: null as string | null,
     },
     {
       slugKey: "regatas-newcom",
@@ -131,6 +171,8 @@ async function main() {
       contacto: "@newcom.sf",
       historia: "Grupo abierto con fuerte espíritu comunitario.",
       deporteSlug: "newcom",
+      ciudadSlug: "santa-fe",
+      deporteOtroNombre: null,
     },
     {
       slugKey: "laguna-setubal-wingfoil",
@@ -142,6 +184,8 @@ async function main() {
       contacto: "wingfoil.sf@gmail.com",
       historia: "Iniciación progresiva en aguas de la región.",
       deporteSlug: "wingfoil",
+      ciudadSlug: "santa-fe",
+      deporteOtroNombre: null,
     },
     {
       slugKey: "parque-garay-ultimate",
@@ -153,6 +197,8 @@ async function main() {
       contacto: "@ultimate.garay",
       historia: "Entrenamientos recreativos para sumarse desde cero.",
       deporteSlug: "ultimate-frisbee",
+      ciudadSlug: "santa-fe",
+      deporteOtroNombre: null,
     },
     {
       slugKey: "zuviría-newcom",
@@ -164,12 +210,41 @@ async function main() {
       contacto: "@newcom.zuviria",
       historia: "Participación intergeneracional y torneos barriales.",
       deporteSlug: "newcom",
+      ciudadSlug: "santa-fe",
+      deporteOtroNombre: null,
+    },
+    {
+      slugKey: "santo-tome-skate",
+      nombre: "Plaza San Martín",
+      direccion: "Centro",
+      lat: -31.6628,
+      lng: -60.762,
+      horarios: "Sáb 10:00",
+      contacto: null,
+      historia: "Grupo abierto de skate y roller en el casco urbano.",
+      deporteSlug: OTROS_SPORT_SLUG,
+      ciudadSlug: "santo-tome",
+      deporteOtroNombre: "Skate",
+    },
+    {
+      slugKey: "parana-kayak",
+      nombre: "Costanera Paraná",
+      direccion: "Av. Laurencena",
+      lat: -31.72,
+      lng: -60.528,
+      horarios: "Dom 9:00",
+      contacto: null,
+      historia: "Salidas recreativas de kayak en el río.",
+      deporteSlug: OTROS_SPORT_SLUG,
+      ciudadSlug: "parana",
+      deporteOtroNombre: "Kayak",
     },
   ] as const;
 
   for (const u of ubicacionesData) {
     const deporte = deportes.find((d) => d.slug === u.deporteSlug);
-    if (!deporte) continue;
+    const ciudadUbi = ciudades.find((c) => c.slug === u.ciudadSlug);
+    if (!deporte || !ciudadUbi) continue;
 
     const existente = await prisma.ubicacion.findFirst({
       where: {
@@ -189,9 +264,20 @@ async function main() {
           horarios: u.horarios,
           contacto: u.contacto,
           historia: u.historia,
+          deporteOtroNombre: u.deporteOtroNombre,
           moderacion: ModeracionEstado.APROBADO,
           deporteId: deporte.id,
-          ciudadId: ciudad.id,
+          ciudadId: ciudadUbi.id,
+        },
+      });
+    } else {
+      await prisma.ubicacion.update({
+        where: { id: existente.id },
+        data: {
+          ciudadId: ciudadUbi.id,
+          deporteOtroNombre: u.deporteOtroNombre,
+          lat: u.lat,
+          lng: u.lng,
         },
       });
     }

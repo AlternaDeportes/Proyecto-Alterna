@@ -14,11 +14,13 @@ const sectionVariants = cva("ds-section", {
     },
     border: {
       none: "",
-      top: "border-t border-white/10",
-      bottom: "border-b border-white/10",
-      y: "border-y border-white/10",
+      top: "border-t border-brand-ink/10",
+      bottom: "border-b border-brand-ink/10",
+      y: "border-y border-brand-ink/10",
       topPaper: "border-t border-brand-ink/10",
       bottomPaper: "border-b border-brand-ink/10",
+      topInk: "border-t border-white/10",
+      bottomInk: "border-b border-white/10",
     },
     density: {
       default: "",

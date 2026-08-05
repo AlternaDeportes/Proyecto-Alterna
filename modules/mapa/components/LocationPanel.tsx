@@ -1,10 +1,11 @@
 "use client";
 
 import { ButtonLink } from "@/components/ui/button";
+import { colorDeporteMapa } from "@/config/map-region";
 import { distanciaKm } from "@/lib/geo";
 import { cn } from "@/lib/utils";
 import { LocationComments } from "@/modules/comunidad/components/LocationComments";
-import type { MapUbicacion } from "@/modules/mapa/types";
+import { etiquetaDeporte, type MapUbicacion } from "@/modules/mapa/types";
 
 interface LocationPanelProps {
   ubicaciones: MapUbicacion[];
@@ -52,7 +53,8 @@ export function LocationPanel({
       <div className="overflow-y-auto px-3 py-2" role="list">
         {!ubicaciones.length ? (
           <p className="px-2 py-4 text-sm text-brand-ink/60">
-            No hay actividades en este rango. Probá ampliar el radio o cambiar el filtro.
+            No hay actividades en este rango. Probá ampliar el radio, cambiar el filtro o
+            pasar a «Explorar región».
           </p>
         ) : (
           ubicaciones.map((u) => {
@@ -73,15 +75,20 @@ export function LocationPanel({
               >
                 <span
                   className="mr-1.5 inline-block h-2 w-2 rounded-full align-middle"
-                  style={{ backgroundColor: u.deporte.colorPrimario }}
+                  style={{
+                    backgroundColor: colorDeporteMapa(
+                      u.deporte.slug,
+                      u.deporte.colorPrimario
+                    ),
+                  }}
                   aria-hidden
                 />
-                <strong className="text-sm text-brand-ink">{u.deporte.nombre}</strong>
+                <strong className="text-sm text-brand-ink">{etiquetaDeporte(u)}</strong>
                 <br />
                 <span className="text-sm text-brand-ink/75">{u.nombre}</span>
                 <br />
                 <small className="text-xs text-brand-ink/50">
-                  {u.horarios} · {dist} km
+                  {u.ciudad.nombre} · {u.horarios} · {dist} km
                 </small>
               </button>
             );
@@ -93,10 +100,11 @@ export function LocationPanel({
         {seleccionada ? (
           <div>
             <h3 className="font-display text-sm font-bold uppercase text-brand-ink">
-              {seleccionada.deporte.nombre} · {seleccionada.nombre}
+              {etiquetaDeporte(seleccionada)} · {seleccionada.nombre}
             </h3>
             <p className="mt-1 text-xs text-brand-ink/60">
-              {seleccionada.horarios} · {seleccionada.direccion}
+              {seleccionada.ciudad.nombre} · {seleccionada.horarios} ·{" "}
+              {seleccionada.direccion}
             </p>
             {seleccionada.historia && (
               <p className="mt-2 text-sm text-brand-ink/75">{seleccionada.historia}</p>
@@ -125,3 +133,4 @@ export function LocationPanel({
     </aside>
   );
 }
+

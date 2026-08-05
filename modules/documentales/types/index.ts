@@ -6,6 +6,7 @@ export interface DocumentalEpisodioListItem {
   numero: number;
   duracionSeg: number | null;
   videoUrl: string | null;
+  coverUrl: string | null;
   publishedAt: string | null;
   proximo: boolean;
   etiqueta?: string;

@@ -3,7 +3,6 @@ import { sinEliminados } from "@/modules/database/types";
 import type { ModeracionEstado } from "@prisma/client";
 
 export interface FiltrosUbicacion {
-  ciudadSlug?: string;
   deporteSlug?: string;
   moderacion?: ModeracionEstado;
 }
@@ -16,9 +15,6 @@ export const ubicacionRepository = {
         moderacion: filtros.moderacion ?? "APROBADO",
         ...(filtros.deporteSlug
           ? { deporte: { slug: filtros.deporteSlug, ...sinEliminados } }
-          : {}),
-        ...(filtros.ciudadSlug
-          ? { ciudad: { slug: filtros.ciudadSlug, ...sinEliminados } }
           : {}),
       },
       include: {
@@ -35,6 +31,7 @@ export const ubicacionRepository = {
       where: { id, ...sinEliminados },
       include: {
         deporte: true,
+        ciudad: { select: { nombre: true, slug: true } },
         comentarios: {
           where: sinEliminados,
           include: { usuario: { select: { nombre: true } } },
@@ -45,3 +42,4 @@ export const ubicacionRepository = {
     });
   },
 };
+

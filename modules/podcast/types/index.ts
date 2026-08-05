@@ -17,6 +17,7 @@ export interface PodcastEpisodioListItem {
   numero: number;
   duracionSeg: number | null;
   audioUrl: string | null;
+  coverUrl: string | null;
   publishedAt: string | null;
   /** true si aún no hay audio publicado */
   proximo: boolean;

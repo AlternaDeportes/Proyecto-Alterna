@@ -1,10 +1,12 @@
+import { MediaImage } from "@/components/ui/media-image";
+
 interface StoryGalleryProps {
-  items: { id: string; alt: string; label: string }[];
+  items: { id: string; src: string; alt: string; label: string }[];
   accentColor: string;
   titulo: string;
 }
 
-/** Galería placeholder hasta Cloudinary / fotos reales del documental */
+/** Galería editorial con marcos de marca */
 export function StoryGallery({ items, accentColor, titulo }: StoryGalleryProps) {
   if (!items.length) return null;
 
@@ -17,24 +19,25 @@ export function StoryGallery({ items, accentColor, titulo }: StoryGalleryProps) 
         Galería
       </h2>
       <p className="mt-1 text-sm text-white/55">
-        Imágenes del documental en producción. Pronto retratos y escenas reales.
+        Retratos y escenas del universo {titulo}.
       </p>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {items.map((item, index) => (
-          <figure
-            key={item.id}
-            className="relative aspect-[4/3] overflow-hidden rounded-organic border border-white/10"
-            style={{
-              background: `linear-gradient(${135 + index * 40}deg, ${accentColor}55 0%, var(--color-brand-ink) 70%)`,
-            }}
-          >
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/90 to-transparent p-4">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        {items.map((item) => (
+          <figure key={item.id} className="relative">
+            <MediaImage
+              src={item.src}
+              alt={item.alt}
+              accentColor={accentColor}
+              tone="ink"
+              ratio="video"
+              sizes="(max-width: 640px) 100vw, 50vw"
+              placeholderLabel={item.label}
+            />
+            <figcaption className="mt-2 flex items-baseline justify-between gap-2 px-1">
               <span className="text-xs font-semibold uppercase tracking-wider text-white/80">
                 {item.label}
               </span>
-              <span className="mt-1 block text-sm text-white/60">
-                {titulo} — {item.alt}
-              </span>
+              <span className="text-xs text-white/45">{item.alt}</span>
             </figcaption>
           </figure>
         ))}

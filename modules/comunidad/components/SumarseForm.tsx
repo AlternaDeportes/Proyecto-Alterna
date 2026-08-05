@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { MOTIVOS_SUMARSE } from "@/modules/comunidad/validations/comunidad.schema";
 
 const fieldClass =
-  "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/30";
+  "w-full rounded-xl border border-brand-ink/15 bg-white px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/25";
 
 export function SumarseForm() {
   const { data: session } = useSession();
@@ -53,16 +53,16 @@ export function SumarseForm() {
   }
 
   return (
-    <Card id="sumarse" className="scroll-mt-24 border-white/10 bg-white/[0.04] p-6 sm:p-8">
-      <h2 className="font-display text-lg font-bold uppercase tracking-wide text-white">
+    <Card id="sumarse" surface="paper" className="scroll-mt-24 p-6 sm:p-8">
+      <h2 className="font-display text-lg font-bold uppercase tracking-wide text-brand-ink">
         Sumate a la comunidad
       </h2>
-      <p className="mt-1 text-sm text-white/60">
+      <p className="mt-1 text-sm text-brand-ink/60">
         Contanos cómo querés participar. No hace falta estar logueado para este mensaje.
       </p>
 
       <form className="mt-6 grid gap-4" onSubmit={handleSubmit} noValidate>
-        <label className="grid gap-1.5 text-sm font-semibold text-white/90">
+        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
           Nombre
           <input
             name="nombre"
@@ -73,7 +73,7 @@ export function SumarseForm() {
             autoComplete="name"
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-white/90">
+        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
           Email
           <input
             name="email"
@@ -84,35 +84,35 @@ export function SumarseForm() {
             autoComplete="email"
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-white/90">
+        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
           Motivo
           <select name="motivo" required defaultValue="" className={fieldClass}>
             <option value="" disabled>
               Seleccioná
             </option>
             {MOTIVOS_SUMARSE.map((m) => (
-              <option key={m} value={m} className="bg-brand-ink">
+              <option key={m} value={m}>
                 {m}
               </option>
             ))}
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-white/90">
+        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
           Deporte (opcional)
           <select name="deporteSlug" defaultValue="" className={fieldClass}>
             <option value="">Ninguno en particular</option>
-            <option value="ultimate-frisbee" className="bg-brand-ink">
+            <option value="ultimate-frisbee">
               Ultimate Frisbee
             </option>
-            <option value="newcom" className="bg-brand-ink">
+            <option value="newcom">
               Newcom
             </option>
-            <option value="wingfoil" className="bg-brand-ink">
+            <option value="wingfoil">
               Wingfoil
             </option>
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-white/90">
+        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
           Mensaje
           <textarea
             name="mensaje"
@@ -129,12 +129,12 @@ export function SumarseForm() {
         </label>
 
         {error ? (
-          <p className="text-sm text-red-300" role="alert">
+          <p className="text-sm text-red-600" role="alert">
             {error}
           </p>
         ) : null}
         {exito ? (
-          <p className="text-sm font-semibold text-brand-secondary" role="status">
+          <p className="text-sm font-semibold text-brand-primary" role="status">
             ¡Gracias! Te vamos a contactar pronto.
           </p>
         ) : null}

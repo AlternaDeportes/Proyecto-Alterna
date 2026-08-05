@@ -18,11 +18,11 @@ export function EpisodePlayer({
 }: EpisodePlayerProps) {
   if (proximo || !audioUrl) {
     return (
-      <div className="rounded-organic border border-dashed border-white/20 bg-white/[0.03] p-6">
+      <div className="rounded-organic border border-dashed border-brand-ink/20 bg-brand-ink/[0.03] p-6">
         <Badge variant="accent" className="mb-3">
           En producción
         </Badge>
-        <p className="text-sm text-white/70">
+        <p className="text-sm text-brand-ink/70">
           El audio de «{titulo}» se publicará pronto. Mientras tanto podés recorrer los
           capítulos previstos y seguirnos en Spotify.
         </p>
@@ -31,9 +31,9 @@ export function EpisodePlayer({
             {capitulos.map((cap, i) => (
               <li
                 key={cap.titulo}
-                className="flex items-baseline gap-3 text-sm text-white/65"
+                className="flex items-baseline gap-3 text-sm text-brand-ink/70"
               >
-                <span className="font-display text-xs font-bold text-brand-secondary">
+                <span className="font-display text-xs font-bold text-brand-primary">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {cap.titulo}
@@ -46,23 +46,26 @@ export function EpisodePlayer({
   }
 
   return (
-    <div className="rounded-organic border border-white/10 bg-white/[0.04] p-5">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/45">
+    <div className="rounded-organic border border-brand-ink/10 bg-brand-surface p-5 shadow-soft">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-ink/45">
         Reproductor
       </p>
       <audio controls preload="metadata" className="w-full" src={audioUrl}>
         Tu navegador no soporta audio HTML5.
       </audio>
       {capitulos.length ? (
-        <ol className="mt-5 space-y-2 border-t border-white/10 pt-4">
+        <ol className="mt-5 space-y-2 border-t border-brand-ink/10 pt-4">
           {capitulos.map((cap, i) => (
-            <li key={cap.titulo} className="flex items-baseline gap-3 text-sm text-white/65">
-              <span className="font-display text-xs font-bold text-brand-secondary">
+            <li
+              key={cap.titulo}
+              className="flex items-baseline gap-3 text-sm text-brand-ink/70"
+            >
+              <span className="font-display text-xs font-bold text-brand-primary">
                 {String(i + 1).padStart(2, "0")}
               </span>
               {cap.titulo}
               {typeof cap.inicioSeg === "number" ? (
-                <span className="text-xs text-white/40">
+                <span className="text-xs text-brand-ink/40">
                   {Math.floor(cap.inicioSeg / 60)}:
                   {String(cap.inicioSeg % 60).padStart(2, "0")}
                 </span>

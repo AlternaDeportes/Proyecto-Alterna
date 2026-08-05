@@ -1,6 +1,6 @@
 import { RolNombre } from "@prisma/client";
 import { isDatabaseConfigured } from "@/config/env";
-import { getAdminEmails } from "@/lib/auth-guards";
+import { getAdminEmails, getModeratorEmails } from "@/lib/auth-guards";
 import { prisma } from "@/lib/prisma";
 
 interface UpsertAuthUserInput {
@@ -9,17 +9,34 @@ interface UpsertAuthUserInput {
   avatarUrl?: string | null;
 }
 
+function resolveRolId(input: {
+  email: string;
+  rolUserId: string;
+  rolAdminId?: string;
+  rolModeratorId?: string;
+}): string {
+  const email = input.email.toLowerCase();
+  if (getAdminEmails().includes(email) && input.rolAdminId) {
+    return input.rolAdminId;
+  }
+  if (getModeratorEmails().includes(email) && input.rolModeratorId) {
+    return input.rolModeratorId;
+  }
+  return input.rolUserId;
+}
+
 /**
  * Sincroniza el usuario OAuth con la tabla `usuarios`.
- * Si el email está en ADMIN_EMAILS, asigna rol ADMIN.
+ * Roles especiales vía env: ADMIN_EMAILS / MODERATOR_EMAILS.
  */
 export async function upsertUsuarioDesdeOAuth(input: UpsertAuthUserInput) {
   if (!isDatabaseConfigured()) return null;
 
   try {
-    const [rolUser, rolAdmin] = await Promise.all([
+    const [rolUser, rolAdmin, rolModerator] = await Promise.all([
       prisma.rol.findUnique({ where: { nombre: RolNombre.USER } }),
       prisma.rol.findUnique({ where: { nombre: RolNombre.ADMIN } }),
+      prisma.rol.findUnique({ where: { nombre: RolNombre.MODERATOR } }),
     ]);
 
     if (!rolUser) {
@@ -27,8 +44,12 @@ export async function upsertUsuarioDesdeOAuth(input: UpsertAuthUserInput) {
       return null;
     }
 
-    const esAdmin = getAdminEmails().includes(input.email.toLowerCase());
-    const rolId = esAdmin && rolAdmin ? rolAdmin.id : rolUser.id;
+    const rolId = resolveRolId({
+      email: input.email,
+      rolUserId: rolUser.id,
+      rolAdminId: rolAdmin?.id,
+      rolModeratorId: rolModerator?.id,
+    });
 
     const existente = await prisma.usuario.findUnique({
       where: { email: input.email },
@@ -43,7 +64,7 @@ export async function upsertUsuarioDesdeOAuth(input: UpsertAuthUserInput) {
           avatarUrl: input.avatarUrl ?? existente.avatarUrl,
           emailVerificado: true,
           deletedAt: null,
-          ...(esAdmin && rolAdmin ? { rolId: rolAdmin.id } : {}),
+          rolId,
         },
         include: { rol: true },
       });
@@ -64,3 +85,4 @@ export async function upsertUsuarioDesdeOAuth(input: UpsertAuthUserInput) {
     return null;
   }
 }
+

@@ -15,19 +15,20 @@ export async function SportPodcast({ deporteSlug }: SportPodcastProps) {
     <section aria-labelledby="podcast-deporte">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
+          <p className="ds-eyebrow mb-3">Voces</p>
           <h2
             id="podcast-deporte"
-            className="font-display text-2xl font-black uppercase text-white sm:text-3xl"
+            className="ds-display text-2xl text-brand-ink sm:text-3xl"
           >
             Podcast
           </h2>
-          <p className="mt-2 text-white/65">
+          <p className="mt-2 text-brand-ink/65">
             Episodios relacionados con esta disciplina.
           </p>
         </div>
         <Link
           href="/podcasts"
-          className="text-sm font-semibold text-brand-secondary hover:underline"
+          className="rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
         >
           Ver todos →
         </Link>

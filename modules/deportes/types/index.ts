@@ -10,6 +10,8 @@ export interface DeporteListItem {
   destacado: boolean;
   ubicacionesCount: number;
   historiasCount: number;
+  /** Portada — catálogo local o Cloudinary */
+  coverUrl: string | null;
 }
 
 export interface DeporteHistoriaItem {

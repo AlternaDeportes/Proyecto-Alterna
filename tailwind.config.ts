@@ -61,6 +61,8 @@ const config: Config = {
         soft: designTokens.shadow.soft,
         lift: designTokens.shadow.lift,
         "glow-primary": designTokens.shadow.glowPrimary,
+        "glow-secondary": designTokens.shadow.glowSecondary,
+        "glow-accent": designTokens.shadow.glowAccent,
       },
       transitionDuration: {
         fast: designTokens.motion.fast,
@@ -94,12 +96,17 @@ const config: Config = {
           from: { opacity: "0", transform: "translateY(1.5rem)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "ken-burns": {
+          "0%": { transform: "scale(1) translate(0, 0)" },
+          "100%": { transform: "scale(1.08) translate(-1.5%, -1%)" },
+        },
       },
       animation: {
         "blob-drift": `blob-drift ${designTokens.motion.blob.drift} ease-in-out infinite`,
         "blob-drift-reverse": `blob-drift-reverse ${designTokens.motion.blob.driftReverse} ease-in-out infinite`,
         "blob-pulse": `blob-pulse ${designTokens.motion.blob.pulse} ease-in-out infinite`,
         "reveal-up": `reveal-up ${designTokens.motion.reveal} var(--ease-brand, cubic-bezier(0.22, 1, 0.36, 1)) both`,
+        "ken-burns": "ken-burns 28s ease-in-out alternate infinite",
       },
     },
   },

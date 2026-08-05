@@ -1,5 +1,6 @@
 import type { MapUbicacion } from "@/modules/mapa/types";
 import { designTokens } from "@/config/design-tokens";
+import { OTROS_SPORT_COLOR, OTROS_SPORT_SLUG } from "@/config/map-region";
 
 export const UBICACIONES_FALLBACK: MapUbicacion[] = [
   {
@@ -11,7 +12,13 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Lun y jue 20:00",
     contacto: "@ultimate.sf",
     historia: "Entrenan con foco en juego limpio y mixto.",
-    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: designTokens.sports.ultimate },
+    deporteOtroNombre: null,
+    deporte: {
+      nombre: "Ultimate Frisbee",
+      slug: "ultimate-frisbee",
+      colorPrimario: designTokens.sports.ultimate,
+    },
+    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
     comentariosCount: 1,
   },
   {
@@ -23,7 +30,13 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Mar y vie 18:30",
     contacto: "@newcom.sf",
     historia: "Grupo abierto con fuerte espíritu comunitario.",
-    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: designTokens.sports.newcom },
+    deporteOtroNombre: null,
+    deporte: {
+      nombre: "Newcom",
+      slug: "newcom",
+      colorPrimario: designTokens.sports.newcom,
+    },
+    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
     comentariosCount: 1,
   },
   {
@@ -35,7 +48,13 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Sáb y dom 10:00",
     contacto: "wingfoil.sf@gmail.com",
     historia: "Iniciación progresiva en aguas de la región.",
-    deporte: { nombre: "Wingfoil", slug: "wingfoil", colorPrimario: designTokens.sports.wingfoil },
+    deporteOtroNombre: null,
+    deporte: {
+      nombre: "Wingfoil",
+      slug: "wingfoil",
+      colorPrimario: designTokens.sports.wingfoil,
+    },
+    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
     comentariosCount: 1,
   },
   {
@@ -47,7 +66,13 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Mié 19:00",
     contacto: "@ultimate.garay",
     historia: "Entrenamientos recreativos para sumarse desde cero.",
-    deporte: { nombre: "Ultimate Frisbee", slug: "ultimate-frisbee", colorPrimario: designTokens.sports.ultimate },
+    deporteOtroNombre: null,
+    deporte: {
+      nombre: "Ultimate Frisbee",
+      slug: "ultimate-frisbee",
+      colorPrimario: designTokens.sports.ultimate,
+    },
+    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
     comentariosCount: 0,
   },
   {
@@ -59,7 +84,50 @@ export const UBICACIONES_FALLBACK: MapUbicacion[] = [
     horarios: "Lun, mié y vie 17:00",
     contacto: "@newcom.zuviria",
     historia: "Participación intergeneracional y torneos barriales.",
-    deporte: { nombre: "Newcom", slug: "newcom", colorPrimario: designTokens.sports.newcom },
+    deporteOtroNombre: null,
+    deporte: {
+      nombre: "Newcom",
+      slug: "newcom",
+      colorPrimario: designTokens.sports.newcom,
+    },
+    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
+    comentariosCount: 0,
+  },
+  {
+    id: "fb-u6",
+    nombre: "Plaza San Martín",
+    direccion: "Centro",
+    lat: -31.6628,
+    lng: -60.762,
+    horarios: "Sáb 10:00",
+    contacto: null,
+    historia: "Grupo abierto de skate y roller en el casco urbano.",
+    deporteOtroNombre: "Skate",
+    deporte: {
+      nombre: "Otros deportes",
+      slug: OTROS_SPORT_SLUG,
+      colorPrimario: OTROS_SPORT_COLOR,
+    },
+    ciudad: { nombre: "Santo Tomé", slug: "santo-tome" },
+    comentariosCount: 0,
+  },
+  {
+    id: "fb-u7",
+    nombre: "Costanera Paraná",
+    direccion: "Av. Laurencena",
+    lat: -31.72,
+    lng: -60.528,
+    horarios: "Dom 9:00",
+    contacto: null,
+    historia: "Salidas recreativas de kayak en el río.",
+    deporteOtroNombre: "Kayak",
+    deporte: {
+      nombre: "Otros deportes",
+      slug: OTROS_SPORT_SLUG,
+      colorPrimario: OTROS_SPORT_COLOR,
+    },
+    ciudad: { nombre: "Paraná", slug: "parana" },
     comentariosCount: 0,
   },
 ];
+

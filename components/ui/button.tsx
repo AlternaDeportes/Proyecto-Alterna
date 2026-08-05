@@ -16,16 +16,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-brand-primary text-white shadow-glow-primary hover:-translate-y-0.5 hover:bg-brand-primary/90",
+          "bg-brand-primary text-white shadow-glow-primary hover:bg-brand-primary/90 motion-safe:hover:-translate-y-0.5",
         secondary:
-          "bg-brand-secondary text-brand-ink hover:-translate-y-0.5 hover:bg-brand-secondary/90",
+          "bg-brand-secondary text-brand-ink shadow-glow-secondary hover:bg-brand-secondary/90 motion-safe:hover:-translate-y-0.5",
         accent:
-          "bg-brand-accent text-brand-ink hover:-translate-y-0.5 hover:bg-brand-accent/90",
+          "bg-brand-accent text-brand-ink shadow-glow-accent hover:bg-brand-accent/90 motion-safe:hover:-translate-y-0.5",
+        /** Contorno sobre papel (fondo blanco) */
         outline:
-          "border-2 border-white/35 bg-transparent text-white hover:-translate-y-0.5 hover:bg-white/10",
+          "border-2 border-brand-ink/25 bg-transparent text-brand-ink hover:border-brand-ink hover:bg-brand-ink hover:text-white motion-safe:hover:-translate-y-0.5",
+        /** Contorno sobre ink / foto / hero */
+        outlineLight:
+          "border-2 border-white bg-transparent text-white hover:bg-white hover:text-brand-ink motion-safe:hover:-translate-y-0.5",
         outlineDark:
-          "border-2 border-brand-ink/15 bg-transparent text-brand-ink hover:border-brand-primary hover:text-brand-primary",
-        ghost: "text-white/85 hover:bg-white/10 hover:text-white",
+          "border-2 border-brand-ink/20 bg-transparent text-brand-ink hover:border-brand-primary hover:text-brand-primary",
+        ghost: "text-brand-ink/80 hover:bg-brand-ink/5 hover:text-brand-ink",
+        ghostLight: "text-white hover:bg-white/10",
       },
       size: {
         sm: "h-9 px-4 text-xs",

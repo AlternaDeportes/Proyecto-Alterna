@@ -67,3 +67,11 @@ export function getAdminEmails(): string[] {
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
 }
+
+/** Emails con rol MODERATOR al ingresar (coma-separados en env). */
+export function getModeratorEmails(): string[] {
+  return (process.env.MODERATOR_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}

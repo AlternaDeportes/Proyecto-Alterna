@@ -13,12 +13,12 @@ export interface HistoriaListItem {
   excerpt: string;
   deporte: HistoriaDeporteRef;
   publishedAt: string | null;
+  coverUrl: string | null;
 }
 
 export interface HistoriaDetalle extends HistoriaListItem {
   cuerpo: string;
   seoTitle: string | null;
   seoDescription: string | null;
-  /** Placeholders de galería hasta Cloudinary */
-  galeria: { id: string; alt: string; label: string }[];
+  galeria: { id: string; src: string; alt: string; label: string }[];
 }

@@ -24,8 +24,8 @@ export const metadata: Metadata = buildRootMetadata();
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: designTokens.colors.ink },
-    { media: "(prefers-color-scheme: light)", color: designTokens.colors.ink },
+    { media: "(prefers-color-scheme: light)", color: designTokens.colors.surface },
+    { media: "(prefers-color-scheme: dark)", color: designTokens.colors.surface },
   ],
   width: "device-width",
   initialScale: 1,
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-AR"
-      className={`dark ${fontDisplay.variable} ${fontBody.variable}`}
+      className={`${fontDisplay.variable} ${fontBody.variable}`}
     >
       <body className="min-h-dvh">
         <JsonLdScript id="ld-organization" data={organizationJsonLd()} />

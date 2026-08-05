@@ -1,6 +1,7 @@
 import type { Dificultad } from "@prisma/client";
 import type { DeporteDetalle, DeporteListItem } from "@/modules/deportes/types";
 import { designTokens } from "@/config/design-tokens";
+import { sportCover } from "@/config/media";
 
 /** Datos estáticos cuando DATABASE_URL no está configurada */
 export const DEPORTES_FALLBACK: DeporteDetalle[] = [
@@ -9,7 +10,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "ultimate-frisbee",
     nombre: "Ultimate Frisbee",
     descripcion:
-      "Fútbol con disco: corre, saltá y pasá en equipo. Sin árbitros — el fair play lo arman los jugadores.",
+      "Un disco en el aire y un equipo que se arbitra solo. En el parque se juega limpio porque el otro también es de los tuyos.",
     historia:
       "En Santa Fe, los grupos de Ultimate crecen por recomendación entre amigos, plazas y parques.",
     dificultad: "INTERMEDIO" as Dificultad,
@@ -20,6 +21,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     destacado: true,
     ubicacionesCount: 2,
     historiasCount: 2,
+    coverUrl: sportCover("ultimate-frisbee"),
     seoTitle: "Ultimate Frisbee en Santa Fe | ALTERNA",
     seoDescription: "Comunidad, entrenamiento y espíritu deportivo sin árbitros.",
     historias: [
@@ -56,7 +58,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "newcom",
     nombre: "Newcom",
     descripcion:
-      "Vóley adaptado con red baja y reglas propias. Comunidad fuerte, partidos intensos y mucha autogestión.",
+      "Como el vóley, pero con otra cadencia y una red más baja. En el club se arma una familia que vuelve cada semana.",
     historia: "Muy arraigado en clubes santafesinos con participación intergeneracional.",
     dificultad: "PRINCIPIANTE" as Dificultad,
     jugadoresMin: 6,
@@ -66,6 +68,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     destacado: true,
     ubicacionesCount: 2,
     historiasCount: 1,
+    coverUrl: sportCover("newcom"),
     seoTitle: "Newcom en Santa Fe | ALTERNA",
     seoDescription: "Vóley adaptado con fuerte espíritu comunitario.",
     historias: [
@@ -96,7 +99,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "wingfoil",
     nombre: "Wingfoil",
     descripcion:
-      "Tabla + ala sobre el agua. Libertad, viento y aprendizaje progresivo junto al río y la laguna.",
+      "Tabla, ala y el agua del río. Aprender a leer el viento es también encontrar tu lugar lejos de la orilla.",
     historia: "Práctica en crecimiento sobre el Paraná y lagunas de la región.",
     dificultad: "AVANZADO" as Dificultad,
     jugadoresMin: 1,
@@ -106,6 +109,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     destacado: true,
     ubicacionesCount: 1,
     historiasCount: 1,
+    coverUrl: sportCover("wingfoil"),
     seoTitle: "Wingfoil en Santa Fe | ALTERNA",
     seoDescription: "Libertad, viento y aprendizaje sobre el agua.",
     historias: [

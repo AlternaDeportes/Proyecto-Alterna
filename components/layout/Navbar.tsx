@@ -12,6 +12,9 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const onHome = pathname === "/";
+  /** Sobre el hero oscuro: tipografía clara. En el resto (papel): ink. */
+  const overDark = onHome && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -28,13 +31,17 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-header transition-all duration-base ease-brand",
-        scrolled
-          ? "border-b border-white/10 bg-brand-ink/95 shadow-lift backdrop-blur-md"
-          : "bg-gradient-to-b from-brand-ink/80 to-transparent"
+        overDark
+          ? "bg-gradient-to-b from-brand-ink/80 to-transparent"
+          : "border-b border-brand-ink/10 bg-brand-surface/95 shadow-soft backdrop-blur-md"
       )}
     >
       <div className="ds-container flex h-16 items-center justify-between gap-4">
-        <BrandLogo variant="blanco" size="sm" priority />
+        <BrandLogo
+          variant={overDark ? "blanco" : "azul"}
+          size="sm"
+          priority
+        />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
           {siteConfig.navigation.map((item) => {
@@ -49,9 +56,13 @@ export function Navbar() {
                 className={cn(
                   "rounded-full px-3 py-2 text-sm font-medium transition-colors duration-fast",
                   "focus-ring",
-                  active
-                    ? "bg-white/10 text-white"
-                    : "text-white/75 hover:bg-white/5 hover:text-white"
+                  overDark
+                    ? active
+                      ? "bg-white text-brand-ink"
+                      : "text-white/85 hover:bg-white/10 hover:text-white"
+                    : active
+                      ? "bg-brand-primary text-white"
+                      : "text-brand-ink/70 hover:bg-brand-ink/5 hover:text-brand-ink"
                 )}
                 aria-current={active ? "page" : undefined}
               >
@@ -64,7 +75,12 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white focus-ring lg:hidden"
+          className={cn(
+            "inline-flex h-10 w-10 items-center justify-center rounded-full border focus-ring lg:hidden",
+            overDark
+              ? "border-white/30 text-white"
+              : "border-brand-ink/20 text-brand-ink"
+          )}
           aria-expanded={open}
           aria-controls="menu-mobile"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
@@ -94,7 +110,7 @@ export function Navbar() {
       <div
         id="menu-mobile"
         className={cn(
-          "border-t border-white/10 bg-brand-ink/98 lg:hidden",
+          "border-t border-brand-ink/10 bg-brand-surface lg:hidden",
           open ? "block" : "hidden"
         )}
       >
@@ -110,7 +126,9 @@ export function Navbar() {
                 href={item.href}
                 className={cn(
                   "rounded-soft px-4 py-3 text-base font-medium focus-ring",
-                  active ? "bg-white/10 text-white" : "text-white/90 hover:bg-white/5"
+                  active
+                    ? "bg-brand-primary text-white"
+                    : "text-brand-ink hover:bg-brand-ink/5"
                 )}
                 aria-current={active ? "page" : undefined}
               >

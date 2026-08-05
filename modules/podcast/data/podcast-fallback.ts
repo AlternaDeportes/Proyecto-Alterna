@@ -4,6 +4,7 @@ import type {
   PodcastShow,
 } from "@/modules/podcast/types";
 import { designTokens } from "@/config/design-tokens";
+import { podcastCover } from "@/config/media";
 
 const SHOW = {
   id: "pod-alterna",
@@ -11,7 +12,7 @@ const SHOW = {
   titulo: "ALTERNA Podcast",
   descripcion:
     "Charlas con entrenadores, jugadoras y referentes para ampliar la historia más allá de la imagen. Voces en primera persona desde Santa Fe.",
-  coverUrl: null as string | null,
+  coverUrl: podcastCover("alterna-podcast"),
   publishedAt: "2026-07-01T12:00:00.000Z",
 };
 
@@ -25,6 +26,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     numero: 1,
     duracionSeg: 28 * 60,
     audioUrl: null,
+    coverUrl: podcastCover("entrenar-en-comunidad"),
     publishedAt: null,
     proximo: true,
     deportes: [
@@ -50,6 +52,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     numero: 2,
     duracionSeg: 32 * 60,
     audioUrl: null,
+    coverUrl: podcastCover("jugar-fuera-del-foco"),
     publishedAt: null,
     proximo: true,
     deportes: [
@@ -75,6 +78,7 @@ const EPISODIOS: PodcastEpisodioDetalle[] = [
     numero: 3,
     duracionSeg: 26 * 60,
     audioUrl: null,
+    coverUrl: podcastCover("viento-y-rio"),
     publishedAt: null,
     proximo: true,
     deportes: [

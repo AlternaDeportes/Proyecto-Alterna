@@ -1,4 +1,5 @@
 import { isDatabaseConfigured } from "@/config/env";
+import { podcastCover } from "@/config/media";
 import {
   listarEpisodioSlugsFallback,
   listarEpisodiosFallback,
@@ -27,6 +28,7 @@ function mapEpisodioList(
     numero: row.numero,
     duracionSeg: row.duracionSeg,
     audioUrl: row.audioUrl,
+    coverUrl: podcastCover(row.slug),
     publishedAt: row.publishedAt?.toISOString() ?? null,
     proximo: !row.audioUrl || !row.publishedAt,
     deportes: row.deportes.map((d) => d.deporte),
@@ -50,7 +52,7 @@ function mapShow(
     slug: row.slug,
     titulo: row.titulo,
     descripcion: row.descripcion,
-    coverUrl: row.coverUrl,
+    coverUrl: podcastCover(row.slug, row.coverUrl),
     publishedAt: row.publishedAt?.toISOString() ?? null,
     episodios: row.episodios.map(mapEpisodioList),
   };
