@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ColorStripe } from "@/components/brand/ColorStripe";
-import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { MapPageClient } from "@/modules/mapa/components/MapPageClient";
 import { ubicacionService } from "@/modules/mapa/services/ubicacion.service";
