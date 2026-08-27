@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { sendPageView } from "@/modules/analytics/tracker";
 import {
   hasAnalyticsConsent,
   readConsent,
@@ -8,11 +10,13 @@ import {
 } from "@/modules/legal/consent";
 
 /**
- * Placeholder de analytics post-consentimiento.
- * Cuando haya Plausible/GA, inyectar el script solo si `analytics === true`.
+ * Analytics first-party post-consentimiento.
+ * Mide páginas vistas anónimas (sin IP ni user id) y queda listo para Plausible/GA.
  */
 export function AnalyticsGate() {
+  const pathname = usePathname();
   const [consent, setConsent] = useState<CookieConsent | null>(null);
+  const lastPath = useRef<string | null>(null);
 
   useEffect(() => {
     setConsent(readConsent());
@@ -28,13 +32,10 @@ export function AnalyticsGate() {
 
   useEffect(() => {
     if (!hasAnalyticsConsent(consent)) return;
-
-    // Hook listo para provider real (Plausible / GA).
-    // No cargamos scripts de terceros hasta configurar IDs.
-    if (process.env.NODE_ENV === "development") {
-      console.info("[analytics] Consentimiento analítico activo (sin script aún).");
-    }
-  }, [consent]);
+    if (!pathname || lastPath.current === pathname) return;
+    lastPath.current = pathname;
+    void sendPageView(pathname, document.referrer);
+  }, [consent, pathname]);
 
   return null;
 }

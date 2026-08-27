@@ -35,13 +35,14 @@ export function HeroIntro() {
         id="hero-titulo"
         className="ds-display max-w-4xl text-display-md text-white sm:text-display-lg lg:text-display-xl"
       >
-        {siteConfig.tagline}
+        Deportes amateurs en Santa Fe
       </h1>
 
       <ColorStripe className="mt-6 max-w-[10rem] rounded-full" />
 
-      <p className="mt-6 max-w-md text-balance text-base leading-relaxed text-white sm:text-lg">
-        Gente de acá que entrena, juega y arma comunidad lejos del ruido.
+      <p className="mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg">
+        ALTERNA sigue a quienes juegan ultimate, newcom y wingfoil: entrenamientos,
+        lugares y comunidades.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -49,7 +50,7 @@ export function HeroIntro() {
           Explorá el mapa
         </ButtonLink>
         <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-          Ver el documental
+          Documental (en producción)
         </ButtonLink>
         <ButtonLink href="/deportes" variant="accent" size="lg">
           Deportes

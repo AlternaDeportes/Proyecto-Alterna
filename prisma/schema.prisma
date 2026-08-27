@@ -222,8 +222,10 @@ model Ubicacion {
 }
 
 model Comentario {
-  id      String @id @default(cuid())
-  texto   String @db.Text
+  id         String           @id @default(cuid())
+  texto      String           @db.Text
+  /** Default APROBADO para no ocultar comentarios ya publicados; los nuevos se crean PENDIENTE. */
+  moderacion ModeracionEstado @default(APROBADO)
 
   ubicacionId String    @map("ubicacion_id")
   ubicacion   Ubicacion @relation(fields: [ubicacionId], references: [id], onDelete: Cascade)
@@ -235,6 +237,7 @@ model Comentario {
 
   @@index([ubicacionId])
   @@index([usuarioId])
+  @@index([moderacion])
   @@map("comentarios")
 }
 
@@ -436,4 +439,21 @@ model AuditLog {
   @@index([usuarioId])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+// ─── Analytics first-party (solo con consentimiento) ─────────────────────────
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  referrer  String?
+  sessionId String   @map("session_id")
+  device    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@index([path, createdAt])
+  @@index([sessionId, createdAt])
+  @@map("page_views")
 }

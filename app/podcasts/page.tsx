@@ -1,29 +1,28 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { Section } from "@/components/ui/section";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { EpisodeCard } from "@/modules/podcast/components/EpisodeCard";
 import { podcastService } from "@/modules/podcast/services/podcast.service";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Podcast",
-  description: `Podcast ${siteConfig.name}: charlas con referentes de deportes alternativos en ${siteConfig.defaultCity.name}.`,
+  description: `Podcast ${siteConfig.name}: en producción. Voces de deportes alternativos en ${siteConfig.defaultCity.name}.`,
   path: "/podcasts",
 });
 
 export default async function PodcastsPage() {
   const show = await podcastService.obtenerShow();
+  const hayEpisodios = show.episodios.length > 0;
 
   return (
     <main id="contenido-principal">
       <ColorStripe />
       <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-24">
-        <Container className="grid items-end gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <Container>
           <Reveal>
             <p className="ds-eyebrow ds-eyebrow--primary mb-4">Voces en primera persona</p>
             <h1 className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md">
@@ -32,6 +31,11 @@ export default async function PodcastsPage() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink/70">
               {show.descripcion}
             </p>
+            {!hayEpisodios ? (
+              <p className="mt-6 inline-flex rounded-sm bg-brand-primary/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary">
+                En producción
+              </p>
+            ) : null}
             <div className="mt-8 flex flex-wrap gap-4">
               <ButtonLink
                 href={siteConfig.social.spotify}
@@ -40,42 +44,43 @@ export default async function PodcastsPage() {
                 variant="secondary"
                 size="lg"
               >
-                Abrir en Spotify
+                Seguir en Spotify
               </ButtonLink>
-              <ButtonLink href="/documentales" variant="outline" size="lg">
-                Ver documental
+              <ButtonLink href="/comunidad" variant="outline" size="lg">
+                Comunidad
               </ButtonLink>
             </div>
           </Reveal>
-          {show.coverUrl ? (
-            <Reveal delay={80}>
-              <div className="ds-frame ds-frame--primary relative mx-auto aspect-square max-w-xs overflow-hidden shadow-lift lg:max-w-sm">
-                <Image
-                  src={show.coverUrl}
-                  alt=""
-                  fill
-                  priority
-                  sizes="320px"
-                  className="object-cover"
-                />
-              </div>
-            </Reveal>
-          ) : null}
         </Container>
       </section>
 
-      <Section aria-label="Episodios" density="tight">
+      <section className="py-16 sm:py-20" aria-label="Episodios">
         <Container>
-          <h2 className="ds-display text-2xl text-brand-ink">Episodios</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {show.episodios.map((ep, i) => (
-              <Reveal key={ep.id} delay={i * 50}>
-                <EpisodeCard episodio={ep} destacada={i === 0} />
-              </Reveal>
-            ))}
-          </div>
+          {hayEpisodios ? (
+            <>
+              <h2 className="ds-display text-2xl text-brand-ink">Episodios</h2>
+              <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {show.episodios.map((ep, i) => (
+                  <Reveal key={ep.id} delay={i * 50}>
+                    <EpisodeCard episodio={ep} destacada={i === 0} />
+                  </Reveal>
+                ))}
+              </div>
+            </>
+          ) : (
+            <Reveal>
+              <div className="max-w-xl border border-brand-ink/10 bg-white p-8 sm:p-10">
+                <h2 className="ds-display text-2xl text-brand-ink">Todavía no hay episodios</h2>
+                <p className="mt-4 text-brand-ink/70">
+                  Estamos produciendo el podcast. Cuando haya audio publicado, va a aparecer
+                  acá. Mientras tanto podés seguir el perfil en Spotify o sumarte a la
+                  comunidad.
+                </p>
+              </div>
+            </Reveal>
+          )}
         </Container>
-      </Section>
+      </section>
     </main>
   );
 }

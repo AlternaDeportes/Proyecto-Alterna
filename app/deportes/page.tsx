@@ -38,8 +38,9 @@ export default async function DeportesPage() {
               Deportes por descubrir
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Disciplinas poco mediáticas, muy vivas en {siteConfig.defaultCity.name}. Elegí
-              una puerta — o cruzá las tres.
+              Ultimate Frisbee, Newcom y Wingfoil: las tres disciplinas del proyecto
+              ALTERNA en {siteConfig.defaultCity.name}. Cada una tiene historias, territorio
+              y piezas audiovisuales propias.
             </p>
           </Reveal>
         </Container>

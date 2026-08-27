@@ -9,6 +9,7 @@ interface ComentarioItem {
   id: string;
   texto: string;
   createdAt: string;
+  moderacion?: string;
   usuario: { nombre: string };
 }
 
@@ -22,6 +23,7 @@ export function LocationComments({ ubicacionId }: LocationCommentsProps) {
   const [texto, setTexto] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [enviando, setEnviando] = useState(false);
+  const [pendiente, setPendiente] = useState(false);
 
   const cargar = useCallback(async () => {
     try {
@@ -42,6 +44,7 @@ export function LocationComments({ ubicacionId }: LocationCommentsProps) {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
+    setPendiente(false);
     setEnviando(true);
     try {
       const res = await fetch("/api/comunidad/comentarios", {
@@ -54,7 +57,9 @@ export function LocationComments({ ubicacionId }: LocationCommentsProps) {
         setError(payload.message ?? "No se pudo publicar.");
         return;
       }
-      if (payload.data) {
+      if (payload.data?.moderacion === "PENDIENTE") {
+        setPendiente(true);
+      } else if (payload.data) {
         setComentarios((prev) => [payload.data!, ...prev]);
       }
       setTexto("");
@@ -98,6 +103,11 @@ export function LocationComments({ ubicacionId }: LocationCommentsProps) {
           {error ? (
             <p className="text-xs text-red-600" role="alert">
               {error}
+            </p>
+          ) : null}
+          {pendiente ? (
+            <p className="text-xs text-brand-ink/60">
+              Gracias. Tu comentario queda en revisión y se publica si el equipo lo aprueba.
             </p>
           ) : null}
           <Button type="submit" size="sm" variant="primary" disabled={enviando} className="w-full">

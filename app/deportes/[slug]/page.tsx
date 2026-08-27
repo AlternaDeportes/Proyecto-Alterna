@@ -7,6 +7,7 @@ import { MediaImage } from "@/components/ui/media-image";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { sportGallery } from "@/config/media";
 import { breadcrumbJsonLd, sportJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { SportHero } from "@/modules/deportes/components/SportHero";
@@ -50,6 +51,10 @@ export default async function DeporteDetallePage({ params }: PageProps) {
   if (!deporte) {
     notFound();
   }
+
+  const galeria = sportGallery(deporte.slug);
+  const principal = galeria[0]?.src ?? deporte.coverUrl;
+  const secundarias = galeria.slice(1);
 
   return (
     <main id="contenido-principal">
@@ -104,35 +109,48 @@ export default async function DeporteDetallePage({ params }: PageProps) {
           <Reveal delay={80}>
             <div className="mt-8 grid gap-4 md:grid-cols-[1.4fr_0.6fr]">
               <MediaImage
-                src={deporte.coverUrl}
-                alt={deporte.nombre}
+                src={principal}
+                alt={galeria[0]?.alt ?? deporte.nombre}
                 accentColor={deporte.colorPrimario}
                 tone="ink"
                 ratio="video"
                 sizes="(max-width: 768px) 100vw, 60vw"
                 frameClassName="min-h-[280px]"
               />
-              <div
-                className="ds-frame ds-frame--ink relative flex min-h-[280px] flex-col justify-end overflow-hidden p-6"
-                style={{
-                  background: `linear-gradient(160deg, ${deporte.colorPrimario}88, var(--color-brand-ink))`,
-                }}
-              >
-                {deporte.coverUrl ? (
-                  <Image
-                    src={deporte.coverUrl}
-                    alt=""
-                    fill
-                    className="object-cover opacity-30 mix-blend-luminosity"
-                    aria-hidden
-                  />
-                ) : null}
-                <p className="relative z-raised text-sm font-semibold uppercase tracking-wider text-white/70">
-                  Color de la disciplina
-                </p>
-                <p className="relative z-raised mt-2 font-display text-3xl font-black uppercase text-white">
-                  {deporte.nombre}
-                </p>
+              <div className="grid gap-4">
+                {secundarias.length ? (
+                  secundarias.map((foto) => (
+                    <div
+                      key={`${foto.src}-${foto.label}`}
+                      className="ds-frame ds-frame--ink relative min-h-[130px] overflow-hidden"
+                    >
+                      <Image
+                        src={foto.src}
+                        alt={foto.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 30vw"
+                      />
+                      <p className="absolute bottom-3 left-3 z-raised text-[10px] font-bold uppercase tracking-wider text-white drop-shadow">
+                        {foto.label}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <div
+                    className="ds-frame ds-frame--ink relative flex min-h-[280px] flex-col justify-end overflow-hidden p-6"
+                    style={{
+                      background: `linear-gradient(160deg, ${deporte.colorPrimario}88, var(--color-brand-ink))`,
+                    }}
+                  >
+                    <p className="relative z-raised text-sm font-semibold uppercase tracking-wider text-white/70">
+                      Color de la disciplina
+                    </p>
+                    <p className="relative z-raised mt-2 font-display text-3xl font-black uppercase text-white">
+                      {deporte.nombre}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </Reveal>

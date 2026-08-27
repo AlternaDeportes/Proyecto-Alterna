@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -7,14 +7,11 @@ import { ColorStripe } from "@/components/brand/ColorStripe";
 import { documentalService } from "@/modules/documentales/services/documental.service";
 
 /**
- * Capítulo audiovisual — un trailer dominante, no grilla de episodios.
+ * Capítulo audiovisual — estado real (en producción o trailer publicado).
  */
 export async function AudiovisualChapter() {
   const show = await documentalService.obtenerShow();
-  const trailer =
-    show.episodios.find((e) => e.numero === 0) ?? show.episodios[0] ?? null;
-
-  if (!trailer) return null;
+  const trailer = show.episodios.find((e) => e.numero === 0) ?? show.episodios[0] ?? null;
 
   return (
     <section
@@ -23,35 +20,21 @@ export async function AudiovisualChapter() {
     >
       <ColorStripe className="absolute inset-x-0 top-0" />
       <Container className="relative z-raised">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <Reveal>
-            <Link
-              href={`/documentales/${trailer.slug}`}
-              className="group relative block rounded-frame focus-ring"
-            >
-              <div className="ds-frame ds-frame--accent relative aspect-video overflow-hidden bg-brand-primary-deep shadow-lift">
-                {trailer.coverUrl || show.coverUrl ? (
-                  <Image
-                    src={(trailer.coverUrl ?? show.coverUrl)!}
-                    alt={trailer.titulo}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                    className="ds-media-zoom object-cover"
-                    priority={false}
-                  />
-                ) : null}
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-brand-ink/80 via-transparent to-transparent"
-                  aria-hidden
-                />
-                <span className="absolute bottom-5 left-5 inline-flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-brand-ink shadow-glow-accent transition-transform duration-base group-hover:scale-105">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M8 5.5v13l11-6.5L8 5.5z" />
-                  </svg>
-                  <span className="sr-only">Ver {trailer.titulo}</span>
-                </span>
-              </div>
-            </Link>
+            <div className="ds-frame ds-frame--accent relative flex aspect-video flex-col items-center justify-center overflow-hidden bg-brand-ink px-8 text-center shadow-lift">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-secondary">
+                {trailer ? "Disponible" : "En producción"}
+              </p>
+              <p className="mt-4 font-display text-2xl font-black uppercase text-white sm:text-3xl">
+                {trailer ? trailer.titulo : "Documental y teaser"}
+              </p>
+              <p className="mt-3 max-w-sm text-sm text-white/70">
+                {trailer
+                  ? "Mirá el material publicado."
+                  : "Estamos filmando y editando. Todavía no hay trailer ni episodios online."}
+              </p>
+            </div>
           </Reveal>
 
           <Reveal delay={100}>
@@ -64,18 +47,27 @@ export async function AudiovisualChapter() {
             <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/70">
               {show.sinopsis}
             </p>
-            <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-brand-ink/50">
-              {trailer.etiqueta ?? "Trailer"} · {trailer.titulo}
-            </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <ButtonLink href={`/documentales/${trailer.slug}`} variant="accent" size="lg">
-                Empezar por el trailer
-              </ButtonLink>
+              {trailer ? (
+                <ButtonLink href={`/documentales/${trailer.slug}`} variant="accent" size="lg">
+                  Ver capítulo
+                </ButtonLink>
+              ) : (
+                <ButtonLink
+                  href={siteConfig.social.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="accent"
+                  size="lg"
+                >
+                  Seguir en YouTube
+                </ButtonLink>
+              )}
               <Link
-                href="/podcasts"
+                href="/documentales"
                 className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-primary hover:text-brand-ink focus-ring"
               >
-                También en podcast →
+                Más sobre el documental →
               </Link>
             </div>
           </Reveal>

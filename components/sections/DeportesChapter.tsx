@@ -35,7 +35,8 @@ export async function DeportesChapter() {
             Tres puertas a otro deporte
           </h2>
           <p className="mt-4 max-w-lg text-brand-ink/70">
-            Elegí una disciplina. Cada una tiene territorio, comunidad e historias propias.
+            Ultimate, Newcom y Wingfoil: las tres puertas del proyecto. Cada una tiene
+            territorio, comunidad e historias propias.
           </p>
         </Reveal>
       </Container>

@@ -124,28 +124,30 @@ async function main() {
     update: {
       nombre: "Otros deportes",
       descripcion:
-        "Prácticas fuera de foco: cualquier deporte amateur o alternativo de la región.",
+        "Solo para puntos del mapa: prácticas fuera de Ultimate, Newcom y Wingfoil.",
       colorPrimario: OTROS_SPORT_COLOR,
       destacado: false,
+      // Sin ficha editorial (/deportes/otros); solo categoría de mapa.
+      publishedAt: null,
     },
     create: {
       slug: OTROS_SPORT_SLUG,
       nombre: "Otros deportes",
       descripcion:
-        "Prácticas fuera de foco: cualquier deporte amateur o alternativo de la región.",
-      historia: "El mapa de ALTERNA también suma deportes que no son el foco documental.",
+        "Solo para puntos del mapa: prácticas fuera de Ultimate, Newcom y Wingfoil.",
+      historia: null,
       dificultad: Dificultad.PRINCIPIANTE,
       colorPrimario: OTROS_SPORT_COLOR,
       destacado: false,
       ciudadId: ciudadSantaFe.id,
       categoriaId: categoria.id,
-      publishedAt: new Date(),
-      seoTitle: "Otros deportes en la región | ALTERNA",
-      seoDescription: "Deportes fuera de foco en Santa Fe y alrededores.",
+      publishedAt: null,
+      seoTitle: null,
+      seoDescription: null,
     },
   });
   deportes.push(deporteOtros);
-  console.log(`   ✓ ${deportes.length} deportes (incl. otros)`);
+  console.log(`   ✓ ${deportes.length} deportes (otros = solo mapa)`);
 
   const ubicacionesData = [
     {

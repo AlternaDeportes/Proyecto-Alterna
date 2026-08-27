@@ -39,73 +39,117 @@ async function audit(
   });
 }
 
+function mapUbicacion(u: {
+  id: string;
+  nombre: string;
+  direccion: string;
+  lat: number;
+  lng: number;
+  horarios: string;
+  contacto: string | null;
+  historia: string | null;
+  moderacion: ModeracionEstado;
+  deporteOtroNombre: string | null;
+  createdAt: Date;
+  deporte: { nombre: string; slug: string };
+  ciudad: { nombre: string };
+  creadoPor: { nombre: string; email: string } | null;
+}) {
+  return {
+    id: u.id,
+    nombre: u.nombre,
+    direccion: u.direccion,
+    lat: u.lat,
+    lng: u.lng,
+    horarios: u.horarios,
+    contacto: u.contacto,
+    historia: u.historia,
+    moderacion: u.moderacion,
+    deporteNombre: u.deporteOtroNombre?.trim() || u.deporte.nombre,
+    deporteSlug: u.deporte.slug,
+    ciudadNombre: u.ciudad.nombre,
+    creadorNombre: u.creadoPor?.nombre ?? null,
+    creadorEmail: u.creadoPor?.email ?? null,
+    createdAt: u.createdAt.toISOString(),
+  };
+}
+
 export const adminService = {
   async obtenerResumen() {
     const [
       pendientes,
+      comentariosPendientes,
+      comentarios,
       mensajesNoLeidos,
       deportes,
       historias,
       ubicacionesAprobadas,
+      ubicacionesRechazadas,
       usuarios,
+      favoritos,
+      eventos,
       episodiosPodcast,
       episodiosDoc,
     ] = await Promise.all([
       prisma.ubicacion.count({
         where: { deletedAt: null, moderacion: ModeracionEstado.PENDIENTE },
       }),
+      prisma.comentario.count({
+        where: { deletedAt: null, moderacion: ModeracionEstado.PENDIENTE },
+      }),
+      prisma.comentario.count({ where: { deletedAt: null } }),
       prisma.contactoMensaje.count({ where: { leido: false } }),
       prisma.deporte.count({ where: { deletedAt: null } }),
       prisma.historia.count({ where: { deletedAt: null } }),
       prisma.ubicacion.count({
         where: { deletedAt: null, moderacion: ModeracionEstado.APROBADO },
       }),
+      prisma.ubicacion.count({
+        where: { deletedAt: null, moderacion: ModeracionEstado.RECHAZADO },
+      }),
       prisma.usuario.count({ where: { deletedAt: null } }),
+      prisma.favorito.count(),
+      prisma.evento.count({ where: { deletedAt: null } }),
       prisma.podcastEpisodio.count({ where: { deletedAt: null } }),
       prisma.documentalEpisodio.count({ where: { deletedAt: null } }),
     ]);
 
     return {
       pendientes,
+      comentariosPendientes,
+      comentarios,
       mensajesNoLeidos,
       deportes,
       historias,
       ubicacionesAprobadas,
+      ubicacionesRechazadas,
       usuarios,
+      favoritos,
+      eventos,
       episodiosPodcast,
       episodiosDoc,
     };
   },
 
-  async listarUbicacionesPendientes() {
+  async listarUbicaciones(estado?: ModeracionEstado) {
     const rows = await prisma.ubicacion.findMany({
-      where: { deletedAt: null, moderacion: ModeracionEstado.PENDIENTE },
+      where: {
+        deletedAt: null,
+        ...(estado ? { moderacion: estado } : {}),
+      },
       orderBy: { createdAt: "desc" },
-      take: 50,
+      take: 80,
       include: {
         deporte: { select: { nombre: true, slug: true } },
         ciudad: { select: { nombre: true } },
         creadoPor: { select: { nombre: true, email: true } },
       },
     });
+    return rows.map(mapUbicacion);
+  },
 
-    return rows.map((u) => ({
-      id: u.id,
-      nombre: u.nombre,
-      direccion: u.direccion,
-      lat: u.lat,
-      lng: u.lng,
-      horarios: u.horarios,
-      contacto: u.contacto,
-      historia: u.historia,
-      moderacion: u.moderacion,
-      deporteNombre: u.deporteOtroNombre?.trim() || u.deporte.nombre,
-      deporteSlug: u.deporte.slug,
-      ciudadNombre: u.ciudad.nombre,
-      creadorNombre: u.creadoPor?.nombre ?? null,
-      creadorEmail: u.creadoPor?.email ?? null,
-      createdAt: u.createdAt.toISOString(),
-    }));
+  async listarUbicacionesPendientes() {
+    return this.listarUbicaciones(ModeracionEstado.PENDIENTE);
   },
 
   async moderarUbicacion(ubicacionId: string, input: unknown, staffId: string) {
@@ -134,6 +178,77 @@ export const adminService = {
     });
 
     await audit(staffId, "ACTUALIZAR", "ubicacion", ubicacionId, {
+      moderacion: estado,
+    });
+
+    return updated;
+  },
+
+  async listarComentarios(estado?: ModeracionEstado) {
+    const rows = await prisma.comentario.findMany({
+      where: {
+        deletedAt: null,
+        ...(estado ? { moderacion: estado } : {}),
+      },
+      orderBy: { createdAt: "desc" },
+      take: 80,
+      select: {
+        id: true,
+        texto: true,
+        moderacion: true,
+        createdAt: true,
+        ubicacionId: true,
+        ubicacion: {
+          select: {
+            nombre: true,
+            deporte: { select: { nombre: true } },
+            deporteOtroNombre: true,
+          },
+        },
+        usuario: { select: { nombre: true, email: true } },
+      },
+    });
+
+    return rows.map((c) => ({
+      id: c.id,
+      texto: c.texto,
+      moderacion: c.moderacion,
+      createdAt: c.createdAt.toISOString(),
+      ubicacionId: c.ubicacionId,
+      ubicacionNombre: c.ubicacion.nombre,
+      deporteNombre:
+        c.ubicacion.deporteOtroNombre?.trim() || c.ubicacion.deporte.nombre,
+      autorNombre: c.usuario.nombre,
+      autorEmail: c.usuario.email,
+    }));
+  },
+
+  async moderarComentario(comentarioId: string, input: unknown, staffId: string) {
+    const parsed = moderarSchema.safeParse(input);
+    if (!parsed.success) {
+      throw new AdminValidationError(parsed.error.flatten().fieldErrors);
+    }
+
+    const estado =
+      parsed.data.accion === "aprobar"
+        ? ModeracionEstado.APROBADO
+        : ModeracionEstado.RECHAZADO;
+
+    const existente = await prisma.comentario.findFirst({
+      where: { id: comentarioId, deletedAt: null },
+      select: { id: true },
+    });
+    if (!existente) {
+      throw new AdminValidationError({ accion: ["Comentario no encontrado."] });
+    }
+
+    const updated = await prisma.comentario.update({
+      where: { id: comentarioId },
+      data: { moderacion: estado },
+      select: { id: true, moderacion: true },
+    });
+
+    await audit(staffId, "ACTUALIZAR", "comentario", comentarioId, {
       moderacion: estado,
     });
 
@@ -186,5 +301,166 @@ export const adminService = {
     });
 
     return updated;
+  },
+
+  async listarUsuarios() {
+    const rows = await prisma.usuario.findMany({
+      where: { deletedAt: null },
+      orderBy: { createdAt: "desc" },
+      take: 80,
+      select: {
+        id: true,
+        nombre: true,
+        email: true,
+        createdAt: true,
+        rol: { select: { nombre: true } },
+        _count: {
+          select: { comentarios: true, ubicaciones: true, favoritos: true },
+        },
+      },
+    });
+
+    return rows.map((u) => ({
+      id: u.id,
+      nombre: u.nombre,
+      email: u.email,
+      rol: u.rol.nombre,
+      createdAt: u.createdAt.toISOString(),
+      comentarios: u._count.comentarios,
+      aportes: u._count.ubicaciones,
+      favoritos: u._count.favoritos,
+    }));
+  },
+
+  async listarContenido() {
+    const [deportes, historias, podcasts, docs, eventos] = await Promise.all([
+      prisma.deporte.findMany({
+        where: { deletedAt: null },
+        orderBy: { nombre: "asc" },
+        select: {
+          id: true,
+          slug: true,
+          nombre: true,
+          destacado: true,
+          publishedAt: true,
+        },
+      }),
+      prisma.historia.findMany({
+        where: { deletedAt: null },
+        orderBy: { createdAt: "desc" },
+        take: 20,
+        select: {
+          id: true,
+          slug: true,
+          titulo: true,
+          destacada: true,
+          publishedAt: true,
+        },
+      }),
+      prisma.podcastEpisodio.findMany({
+        where: { deletedAt: null },
+        orderBy: { numero: "asc" },
+        take: 20,
+        select: {
+          id: true,
+          slug: true,
+          titulo: true,
+          numero: true,
+          publishedAt: true,
+        },
+      }),
+      prisma.documentalEpisodio.findMany({
+        where: { deletedAt: null },
+        orderBy: { numero: "asc" },
+        take: 20,
+        select: {
+          id: true,
+          slug: true,
+          titulo: true,
+          numero: true,
+          publishedAt: true,
+        },
+      }),
+      prisma.evento.findMany({
+        where: { deletedAt: null },
+        orderBy: { fechaInicio: "desc" },
+        take: 10,
+        select: {
+          id: true,
+          slug: true,
+          titulo: true,
+          fechaInicio: true,
+          publishedAt: true,
+        },
+      }),
+    ]);
+
+    return [
+      ...deportes.map((d) => ({
+        tipo: "deporte" as const,
+        id: d.id,
+        titulo: d.nombre,
+        href: `/deportes/${d.slug}`,
+        meta: d.destacado ? "Destacado" : "Catálogo",
+        publishedAt: d.publishedAt?.toISOString() ?? null,
+      })),
+      ...historias.map((h) => ({
+        tipo: "historia" as const,
+        id: h.id,
+        titulo: h.titulo,
+        href: `/historias/${h.slug}`,
+        meta: h.destacada ? "Destacada" : "Historia",
+        publishedAt: h.publishedAt?.toISOString() ?? null,
+      })),
+      ...podcasts.map((p) => ({
+        tipo: "podcast" as const,
+        id: p.id,
+        titulo: p.titulo,
+        href: `/podcasts/${p.slug}`,
+        meta: `Ep. ${p.numero}`,
+        publishedAt: p.publishedAt?.toISOString() ?? null,
+      })),
+      ...docs.map((d) => ({
+        tipo: "documental" as const,
+        id: d.id,
+        titulo: d.titulo,
+        href: `/documentales/${d.slug}`,
+        meta: `Ep. ${d.numero}`,
+        publishedAt: d.publishedAt?.toISOString() ?? null,
+      })),
+      ...eventos.map((e) => ({
+        tipo: "evento" as const,
+        id: e.id,
+        titulo: e.titulo,
+        href: "/comunidad",
+        meta: e.fechaInicio.toLocaleDateString("es-AR"),
+        publishedAt: e.publishedAt?.toISOString() ?? null,
+      })),
+    ];
+  },
+
+  async listarAuditoria() {
+    const rows = await prisma.auditLog.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 40,
+      select: {
+        id: true,
+        accion: true,
+        entidad: true,
+        entidadId: true,
+        createdAt: true,
+        usuario: { select: { nombre: true, email: true } },
+      },
+    });
+
+    return rows.map((r) => ({
+      id: r.id,
+      accion: r.accion,
+      entidad: r.entidad,
+      entidadId: r.entidadId,
+      usuarioNombre: r.usuario?.nombre ?? null,
+      usuarioEmail: r.usuario?.email ?? null,
+      createdAt: r.createdAt.toISOString(),
+    }));
   },
 };

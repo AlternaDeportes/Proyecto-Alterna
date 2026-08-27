@@ -65,7 +65,7 @@ export const FILTROS_DEPORTE: {
   },
   {
     slug: OTROS_SPORT_SLUG,
-    label: "Otros",
+    label: "Otros (mapa)",
     color: OTROS_SPORT_COLOR,
   },
 ];

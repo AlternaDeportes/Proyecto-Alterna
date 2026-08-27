@@ -59,7 +59,7 @@ export function UserMenu({ className, compact }: UserMenuProps) {
         />
       ) : null}
       {esStaff ? (
-        <ButtonLink href="/panel-admin" variant="ghost" size="sm" className="hidden lg:inline-flex">
+        <ButtonLink href="/panel-admin" variant="ghost" size="sm">
           Admin
         </ButtonLink>
       ) : null}

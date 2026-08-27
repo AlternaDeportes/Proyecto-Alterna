@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { Reveal } from "@/components/ui/reveal";
 import { EpisodeCard } from "@/modules/podcast/components/EpisodeCard";
 import { podcastService } from "@/modules/podcast/services/podcast.service";
-import { Reveal } from "@/components/ui/reveal";
 
 interface SportPodcastProps {
   deporteSlug: string;
@@ -9,7 +10,6 @@ interface SportPodcastProps {
 
 export async function SportPodcast({ deporteSlug }: SportPodcastProps) {
   const episodios = await podcastService.listarEpisodios(deporteSlug);
-  if (!episodios.length) return null;
 
   return (
     <section aria-labelledby="podcast-deporte">
@@ -22,24 +22,38 @@ export async function SportPodcast({ deporteSlug }: SportPodcastProps) {
           >
             Podcast
           </h2>
-          <p className="mt-2 text-brand-ink/65">
-            Episodios relacionados con esta disciplina.
+          <p className="mt-2 max-w-lg text-brand-ink/65">
+            {episodios.length
+              ? "Episodios relacionados con esta disciplina."
+              : "El podcast está en producción. Cuando haya episodios publicados van a aparecer acá."}
           </p>
         </div>
-        <Link
-          href="/podcasts"
-          className="rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
-        >
-          Ver todos →
-        </Link>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/podcasts"
+            className="rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
+          >
+            Ir al podcast →
+          </Link>
+          <a
+            href={siteConfig.social.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-sm text-sm font-semibold text-brand-ink/55 hover:text-brand-ink focus-ring"
+          >
+            Spotify
+          </a>
+        </div>
       </div>
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
-        {episodios.map((ep, i) => (
-          <Reveal key={ep.id} delay={i * 50}>
-            <EpisodeCard episodio={ep} />
-          </Reveal>
-        ))}
-      </div>
+      {episodios.length ? (
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {episodios.map((ep, i) => (
+            <Reveal key={ep.id} delay={i * 50}>
+              <EpisodeCard episodio={ep} />
+            </Reveal>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }

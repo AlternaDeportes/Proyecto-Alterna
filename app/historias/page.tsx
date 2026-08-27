@@ -11,7 +11,7 @@ import { historiaService } from "@/modules/historias/services/historia.service";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Historias",
-  description: `Voces reales del documental ${siteConfig.name}: protagonistas de deportes alternativos en ${siteConfig.defaultCity.name}.`,
+  description: `Voces del proyecto ${siteConfig.name}: protagonistas de Ultimate, Newcom y Wingfoil en ${siteConfig.defaultCity.name}.`,
   path: "/historias",
 });
 
@@ -37,8 +37,9 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
               Historias
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Personas reales del documental. Sus voces sostienen cada plataforma de{" "}
-              <span className="font-semibold text-brand-ink">{siteConfig.name}</span>.
+              Personas de Ultimate, Newcom y Wingfoil en{" "}
+              {siteConfig.defaultCity.name}. Las piezas audiovisuales del proyecto siguen
+              en producción; acá ya podés conocer el territorio y las comunidades.
             </p>
           </Reveal>
         </Container>

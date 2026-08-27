@@ -1,5 +1,4 @@
 import { isDatabaseConfigured } from "@/config/env";
-import { podcastCover } from "@/config/media";
 import {
   listarEpisodioSlugsFallback,
   listarEpisodiosFallback,
@@ -17,6 +16,12 @@ type EpisodioRow = NonNullable<
   Awaited<ReturnType<typeof podcastRepository.findEpisodioBySlug>>
 >;
 
+function estaPublicado(
+  row: Pick<EpisodioRow, "audioUrl" | "publishedAt">
+): boolean {
+  return Boolean(row.audioUrl && row.publishedAt);
+}
+
 function mapEpisodioList(
   row: EpisodioRow | Awaited<ReturnType<typeof podcastRepository.findEpisodiosByDeporte>>[number]
 ): PodcastEpisodioListItem {
@@ -28,18 +33,17 @@ function mapEpisodioList(
     numero: row.numero,
     duracionSeg: row.duracionSeg,
     audioUrl: row.audioUrl,
-    coverUrl: podcastCover(row.slug),
+    coverUrl: null,
     publishedAt: row.publishedAt?.toISOString() ?? null,
-    proximo: !row.audioUrl || !row.publishedAt,
+    proximo: !estaPublicado(row),
     deportes: row.deportes.map((d) => d.deporte),
   };
 }
 
 function mapEpisodioDetalle(row: EpisodioRow): PodcastEpisodioDetalle {
-  const fallback = obtenerEpisodioFallback(row.slug);
   return {
     ...mapEpisodioList(row),
-    capitulos: fallback?.capitulos ?? [],
+    capitulos: [],
     podcast: row.podcast,
   };
 }
@@ -47,14 +51,15 @@ function mapEpisodioDetalle(row: EpisodioRow): PodcastEpisodioDetalle {
 function mapShow(
   row: NonNullable<Awaited<ReturnType<typeof podcastRepository.findFirstShow>>>
 ): PodcastShow {
+  const publicados = row.episodios.filter(estaPublicado);
   return {
     id: row.id,
     slug: row.slug,
     titulo: row.titulo,
     descripcion: row.descripcion,
-    coverUrl: podcastCover(row.slug, row.coverUrl),
+    coverUrl: row.coverUrl ?? null,
     publishedAt: row.publishedAt?.toISOString() ?? null,
-    episodios: row.episodios.map(mapEpisodioList),
+    episodios: publicados.map(mapEpisodioList),
   };
 }
 
@@ -80,7 +85,7 @@ export const podcastService = {
     try {
       if (deporteSlug) {
         const rows = await podcastRepository.findEpisodiosByDeporte(deporteSlug);
-        return rows.map(mapEpisodioList);
+        return rows.filter(estaPublicado).map(mapEpisodioList);
       }
       const show = await podcastService.obtenerShow();
       return show.episodios;
@@ -96,7 +101,8 @@ export const podcastService = {
 
     try {
       const row = await podcastRepository.findEpisodioBySlug(slug);
-      return row ? mapEpisodioDetalle(row) : obtenerEpisodioFallback(slug);
+      if (!row || !estaPublicado(row)) return null;
+      return mapEpisodioDetalle(row);
     } catch {
       return obtenerEpisodioFallback(slug);
     }
@@ -109,7 +115,9 @@ export const podcastService = {
 
     try {
       const rows = await podcastRepository.findAllEpisodioSlugs();
-      return rows.map((r) => r.slug);
+      // findAllEpisodioSlugs may return all — filter via show
+      const show = await podcastService.obtenerShow();
+      return show.episodios.map((e) => e.slug);
     } catch {
       return listarEpisodioSlugsFallback();
     }

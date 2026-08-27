@@ -10,7 +10,7 @@ export const MAP_REGION = {
   nearZoom: 13,
 } as const;
 
-/** Los tres deportes del documental ALTERNA (filtros principales). */
+/** Los tres deportes del proyecto transmedia ALTERNA (fichas, podcast, docs). */
 export const FEATURED_SPORT_SLUGS = [
   "ultimate-frisbee",
   "newcom",
@@ -19,7 +19,10 @@ export const FEATURED_SPORT_SLUGS = [
 
 export type FeaturedSportSlug = (typeof FEATURED_SPORT_SLUGS)[number];
 
-/** Deporte genérico para prácticas fuera de los tres foco. */
+/**
+ * Categoría de mapa para prácticas fuera de los tres foco.
+ * No tiene ficha en /deportes ni podcast/documental propios.
+ */
 export const OTROS_SPORT_SLUG = "otros";
 export const OTROS_SPORT_COLOR = designTokens.colors.accent;
 

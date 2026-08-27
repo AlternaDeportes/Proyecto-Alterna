@@ -15,7 +15,7 @@ export default function CookiesPage() {
       badge="Legal"
       title="Cookies"
       summary="Qué cookies usamos, cuáles son opcionales y cómo cambiar tu preferencia."
-      updatedAt="16 de julio de 2026"
+      updatedAt="25 de agosto de 2026"
       sections={[
         {
           title: "Qué son",
@@ -37,7 +37,7 @@ export default function CookiesPage() {
           title: "Cookies analíticas (opcionales)",
           paragraphs: [
             "Solo se activan si elegís “Aceptar todas”. Sirven para entender visitas agregadas (páginas más vistas, dispositivos) y mejorar el sitio.",
-            "Hoy el sitio está preparado para analytics post-consentimiento; el script de terceros se cargará cuando configuremos el proveedor (p. ej. Plausible o GA).",
+            "Hoy medimos esas visitas de forma propia (sin identificarte): ruta, tipo de dispositivo y una sesión anónima. El equipo las ve en /panel-admin → Métricas. Si más adelante sumamos Plausible o Google Analytics, el script de terceros también se carga solo con este consentimiento.",
           ],
         },
         {

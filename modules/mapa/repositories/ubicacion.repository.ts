@@ -20,7 +20,13 @@ export const ubicacionRepository = {
       include: {
         deporte: { select: { nombre: true, slug: true, colorPrimario: true } },
         ciudad: { select: { nombre: true, slug: true } },
-        _count: { select: { comentarios: true } },
+        _count: {
+          select: {
+            comentarios: {
+              where: { deletedAt: null, moderacion: "APROBADO" },
+            },
+          },
+        },
       },
       orderBy: { nombre: "asc" },
     });
@@ -33,7 +39,7 @@ export const ubicacionRepository = {
         deporte: true,
         ciudad: { select: { nombre: true, slug: true } },
         comentarios: {
-          where: sinEliminados,
+          where: { ...sinEliminados, moderacion: "APROBADO" },
           include: { usuario: { select: { nombre: true } } },
           orderBy: { createdAt: "desc" },
           take: 20,
@@ -42,4 +48,4 @@ export const ubicacionRepository = {
     });
   },
 };
-
+

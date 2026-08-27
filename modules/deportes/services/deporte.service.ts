@@ -1,4 +1,5 @@
 import { isDatabaseConfigured } from "@/config/env";
+import { esDeporteDestacado } from "@/config/map-region";
 import { sportCover } from "@/config/media";
 import { siteConfig } from "@/config/site";
 import {
@@ -8,6 +9,11 @@ import {
 import { deporteRepository } from "@/modules/deportes/repositories/deporte.repository";
 import type { DeporteDetalle, DeporteListItem } from "@/modules/deportes/types";
 import { deporteSlugSchema } from "@/modules/deportes/validations/deporte.schema";
+
+/** Solo Ultimate, Newcom y Wingfoil tienen apartados (historias, podcast, docs). */
+function soloDeportesProyecto<T extends { slug: string }>(items: T[]): T[] {
+  return items.filter((d) => esDeporteDestacado(d.slug));
+}
 
 function mapDeporteList(
   deporte: Awaited<ReturnType<typeof deporteRepository.findAllPublicados>>[number]
@@ -59,7 +65,7 @@ export const deporteService = {
 
     try {
       const deportes = await deporteRepository.findAllPublicados(ciudadSlug);
-      return deportes.map(mapDeporteList);
+      return soloDeportesProyecto(deportes.map(mapDeporteList));
     } catch {
       return listarDeportesFallback();
     }
@@ -68,6 +74,8 @@ export const deporteService = {
   async obtenerPorSlug(slug: string): Promise<DeporteDetalle | null> {
     const parsed = deporteSlugSchema.safeParse(slug);
     if (!parsed.success) return null;
+    // "otros" solo existe en el mapa (proponer puntos), sin ficha editorial.
+    if (!esDeporteDestacado(parsed.data)) return null;
 
     if (!isDatabaseConfigured()) {
       return obtenerDeporteFallback(parsed.data);
@@ -88,7 +96,7 @@ export const deporteService = {
 
     try {
       const rows = await deporteRepository.findAllSlugs();
-      return rows.map((r) => r.slug);
+      return soloDeportesProyecto(rows).map((r) => r.slug);
     } catch {
       return listarDeportesFallback().map((d) => d.slug);
     }

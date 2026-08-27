@@ -2,66 +2,117 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { HERO_POSTER, HERO_VIDEO_MP4, HERO_VIDEO_WEBM } from "@/config/media";
+import {
+  HERO_FADE_MS,
+  HERO_POSTER,
+  HERO_SLIDE_MS,
+  buildHeroPlaylist,
+  sportFromHeroSrc,
+} from "@/config/media";
 import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
+import { usePrefersReducedMotion } from "@/lib/motion/use-prefers-reduced-motion";
+import { cn } from "@/lib/utils";
 
 /**
- * Fondo del hero: video + poster con parallax y ken-burns.
+ * Fondo del hero: 9 fotos (3 por deporte).
+ * Crossfade largo + Ken Burns en el contenedor (no se reinicia al cambiar ni al loop).
  */
 export function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoOk, setVideoOk] = useState(false);
+  const reduced = usePrefersReducedMotion();
+  const playlistRef = useRef<string[]>([]);
+  const indexRef = useRef(0);
+  const frontRef = useRef<0 | 1>(0);
+  const [layers, setLayers] = useState<[string, string]>([HERO_POSTER, HERO_POSTER]);
+  const [front, setFront] = useState<0 | 1>(0);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const markOk = () => setVideoOk(true);
-    const markFail = () => setVideoOk(false);
-
-    video.addEventListener("playing", markOk);
-    video.addEventListener("error", markFail);
-
-    const attempt = video.play();
-    if (attempt?.catch) {
-      attempt.catch(markFail);
-    }
-
-    return () => {
-      video.removeEventListener("playing", markOk);
-      video.removeEventListener("error", markFail);
-    };
+    const list = buildHeroPlaylist();
+    playlistRef.current = list;
+    indexRef.current = 0;
+    const first = list[0] ?? HERO_POSTER;
+    setLayers([first, first]);
+    setFront(0);
+    frontRef.current = 0;
+    preloadHeroImage(list[1]);
   }, []);
+
+  useEffect(() => {
+    if (reduced || playlistRef.current.length < 2) return;
+
+    const id = window.setInterval(() => {
+      const list = playlistRef.current;
+      if (indexRef.current >= list.length - 2) {
+        const last = list[list.length - 1] ?? list[indexRef.current];
+        playlistRef.current = list.concat(
+          buildHeroPlaylist(sportFromHeroSrc(last ?? HERO_POSTER))
+        );
+      }
+
+      indexRef.current += 1;
+      const next = playlistRef.current[indexRef.current] ?? HERO_POSTER;
+      const incoming = (1 - frontRef.current) as 0 | 1;
+
+      setLayers((prev) => {
+        const nextLayers: [string, string] = [prev[0], prev[1]];
+        nextLayers[incoming] = next;
+        return nextLayers;
+      });
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          frontRef.current = incoming;
+          setFront(incoming);
+        });
+      });
+
+      preloadHeroImage(playlistRef.current[indexRef.current + 1]);
+    }, HERO_SLIDE_MS);
+
+    return () => window.clearInterval(id);
+  }, [reduced]);
 
   return (
     <ParallaxLayer className="absolute inset-0" factor={0.28}>
-      <div className="absolute inset-0">
-        <Image
-          src={HERO_POSTER}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover motion-safe:animate-ken-burns"
-          aria-hidden
-        />
-
-        <video
-          ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
-          style={{ opacity: videoOk ? 1 : 0 }}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={HERO_POSTER}
-          aria-hidden
-        >
-          <source src={HERO_VIDEO_WEBM} type="video/webm" />
-          <source src={HERO_VIDEO_MP4} type="video/mp4" />
-        </video>
+      <div className="absolute inset-0 motion-safe:animate-ken-burns">
+        <HeroLayer src={layers[0]} visible={front === 0} priority />
+        <HeroLayer src={layers[1]} visible={front === 1} />
       </div>
     </ParallaxLayer>
   );
+}
+
+function HeroLayer({
+  src,
+  visible,
+  priority,
+}: {
+  src: string;
+  visible: boolean;
+  priority?: boolean;
+}) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      fill
+      priority={priority}
+      sizes="100vw"
+      className={cn(
+        "object-cover will-change-[opacity]",
+        visible ? "opacity-100" : "opacity-0"
+      )}
+      style={{
+        transitionProperty: "opacity",
+        transitionDuration: `${HERO_FADE_MS}ms`,
+        transitionTimingFunction: "ease-in-out",
+      }}
+      aria-hidden
+    />
+  );
+}
+
+function preloadHeroImage(src: string | undefined) {
+  if (!src || typeof window === "undefined") return;
+  const img = new window.Image();
+  img.src = src;
 }

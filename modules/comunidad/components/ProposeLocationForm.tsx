@@ -39,8 +39,9 @@ export function ProposeLocationForm() {
         </h2>
         <p className="mt-2 text-sm text-brand-ink/65">
           Para proponer un lugar de práctica necesitás iniciar sesión con Google. El punto
-          queda pendiente de aprobación. Podés sumar cualquier deporte fuera de foco en
-          Santa Fe y alrededores (hasta {MAP_REGION.radiusKm} km).
+          queda pendiente de aprobación. Ultimate, Newcom y Wingfoil son el proyecto; otros
+          deportes solo suman como punto en el mapa (Santa Fe y alrededores, hasta{" "}
+          {MAP_REGION.radiusKm} km).
         </p>
         <Link
           href="/ingresar?callbackUrl=/comunidad%23sumar-punto"
@@ -106,8 +107,9 @@ export function ProposeLocationForm() {
       <ul className="mt-4 list-disc space-y-1 pl-5 text-xs text-brand-ink/55">
         <li>El lugar tiene que ser real y verificable (nombre + dirección).</li>
         <li>
-          Aceptamos deportes fuera de foco: Ultimate, Newcom, Wingfoil u otros de cualquier
-          estilo.
+          El proyecto transmedia es Ultimate, Newcom y Wingfoil. Podés sumar{" "}
+          <strong className="font-semibold text-brand-ink/70">otro deporte</strong> solo
+          como punto en el mapa (sin podcast, documental ni ficha propia).
         </li>
         <li>
           Solo dentro de ~{MAP_REGION.radiusKm} km de Santa Fe (Paraná, Santo Tomé, etc.).
@@ -156,7 +158,7 @@ export function ProposeLocationForm() {
             <option value="ultimate-frisbee">Ultimate Frisbee</option>
             <option value="newcom">Newcom</option>
             <option value="wingfoil">Wingfoil</option>
-            <option value={OTROS_SPORT_SLUG}>Otro deporte</option>
+            <option value={OTROS_SPORT_SLUG}>Otro deporte (solo mapa)</option>
           </select>
         </label>
         {deporteSlug === OTROS_SPORT_SLUG ? (
@@ -236,4 +238,4 @@ export function ProposeLocationForm() {
     </Card>
   );
 }
-
+

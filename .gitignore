@@ -42,3 +42,6 @@ Thumbs.db
 
 # Documentos del proyecto académico (no van al deploy)
 *.docx
+
+# Media cruda descargada de Drive (staging local, no deploy)
+/_media_drive/

@@ -1,5 +1,4 @@
 import { isDatabaseConfigured } from "@/config/env";
-import { documentalCover } from "@/config/media";
 import {
   listarEpisodioDocSlugsFallback,
   obtenerDocumentalFallback,
@@ -16,11 +15,10 @@ type EpisodioRow = NonNullable<
   Awaited<ReturnType<typeof documentalRepository.findEpisodioBySlug>>
 >;
 
-function etiquetaFromNumero(numero: number): string | undefined {
-  if (numero === 0) return "Comenzá acá";
-  if (numero === 1) return "Historia 1";
-  if (numero === 2) return "Historia 2";
-  return undefined;
+function estaPublicado(
+  row: Pick<EpisodioRow, "videoUrl" | "publishedAt">
+): boolean {
+  return Boolean(row.videoUrl && row.publishedAt);
 }
 
 function mapEpisodioList(
@@ -28,7 +26,6 @@ function mapEpisodioList(
     Awaited<ReturnType<typeof documentalRepository.findFirstShow>>
   >["episodios"][number]
 ): DocumentalEpisodioListItem {
-  const fallback = obtenerEpisodioDocFallback(row.slug);
   return {
     id: row.id,
     slug: row.slug,
@@ -37,10 +34,10 @@ function mapEpisodioList(
     numero: row.numero,
     duracionSeg: row.duracionSeg,
     videoUrl: row.videoUrl,
-    coverUrl: documentalCover(row.slug, fallback?.coverUrl),
+    coverUrl: null,
     publishedAt: row.publishedAt?.toISOString() ?? null,
-    proximo: !row.videoUrl || !row.publishedAt,
-    etiqueta: fallback?.etiqueta ?? etiquetaFromNumero(row.numero),
+    proximo: !estaPublicado(row),
+    etiqueta: row.numero === 0 ? "Trailer" : undefined,
   };
 }
 
@@ -54,14 +51,15 @@ function mapEpisodioDetalle(row: EpisodioRow): DocumentalEpisodioDetalle {
 function mapShow(
   row: NonNullable<Awaited<ReturnType<typeof documentalRepository.findFirstShow>>>
 ): DocumentalShow {
+  const publicados = row.episodios.filter(estaPublicado);
   return {
     id: row.id,
     slug: row.slug,
     titulo: row.titulo,
     sinopsis: row.sinopsis,
-    coverUrl: documentalCover(row.slug, row.coverUrl),
+    coverUrl: row.coverUrl ?? null,
     publishedAt: row.publishedAt?.toISOString() ?? null,
-    episodios: row.episodios.map(mapEpisodioList),
+    episodios: publicados.map(mapEpisodioList),
   };
 }
 
@@ -86,7 +84,8 @@ export const documentalService = {
 
     try {
       const row = await documentalRepository.findEpisodioBySlug(slug);
-      return row ? mapEpisodioDetalle(row) : obtenerEpisodioDocFallback(slug);
+      if (!row || !estaPublicado(row)) return null;
+      return mapEpisodioDetalle(row);
     } catch {
       return obtenerEpisodioDocFallback(slug);
     }
@@ -98,8 +97,8 @@ export const documentalService = {
     }
 
     try {
-      const rows = await documentalRepository.findAllEpisodioSlugs();
-      return rows.map((r) => r.slug);
+      const show = await documentalService.obtenerShow();
+      return show.episodios.map((e) => e.slug);
     } catch {
       return listarEpisodioDocSlugsFallback();
     }

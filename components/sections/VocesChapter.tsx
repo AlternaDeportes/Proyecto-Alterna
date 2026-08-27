@@ -34,8 +34,8 @@ export async function VocesChapter() {
                 Quiénes hacen vivo el juego
               </h2>
               <p className="mt-4 max-w-md text-brand-ink/70">
-                Jugadoras, entrenadores y referentes de Santa Fe. Entrá a cada historia y
-                escuchá cómo se vive el deporte desde adentro.
+                Jugadoras, entrenadores y referentes de Santa Fe. Las fotos son de las
+                prácticas reales; las historias siguen en producción junto al documental.
               </p>
             </div>
             <Link

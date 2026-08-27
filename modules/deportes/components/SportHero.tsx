@@ -63,7 +63,7 @@ export function SportHero({ deporte }: SportHeroProps) {
             Dónde practicarlo
           </ButtonLink>
           <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-            Ver documental
+            Documental (en producción)
           </ButtonLink>
           <ButtonLink href="/historias" variant="accent" size="lg">
             Historias

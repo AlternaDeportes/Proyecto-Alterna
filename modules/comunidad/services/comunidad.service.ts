@@ -172,11 +172,13 @@ export const comunidadService = {
         texto: parsed.data.texto,
         ubicacionId: ubicacion.id,
         usuarioId: usuario.id,
+        moderacion: ModeracionEstado.PENDIENTE,
       },
       select: {
         id: true,
         texto: true,
         createdAt: true,
+        moderacion: true,
         usuario: { select: { nombre: true } },
       },
     });
@@ -189,7 +191,11 @@ export const comunidadService = {
 
     try {
       return prisma.comentario.findMany({
-        where: { ubicacionId, deletedAt: null },
+        where: {
+          ubicacionId,
+          deletedAt: null,
+          moderacion: ModeracionEstado.APROBADO,
+        },
         orderBy: { createdAt: "desc" },
         take: 30,
         select: {
