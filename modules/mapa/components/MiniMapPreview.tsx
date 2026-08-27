@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 
 import { designTokens } from "@/config/design-tokens";
 import { colorDeporteMapa, MAP_REGION } from "@/config/map-region";
+import { MAP_TILES } from "@/config/map-tiles";
 import type { MapUbicacion } from "@/modules/mapa/types";
 import { crearIconoDeporte } from "@/modules/mapa/utils/map-icons";
 
@@ -35,7 +36,11 @@ export function MiniMapPreview({ ubicaciones }: MiniMapPreviewProps) {
       touchZoom={false}
       aria-hidden
     >
-      <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+      <TileLayer
+        attribution={MAP_TILES.attribution}
+        url={MAP_TILES.url}
+        maxZoom={MAP_TILES.maxZoom}
+      />
       <Circle
         center={center}
         radius={MAP_REGION.radiusKm * 1000}
@@ -59,4 +64,4 @@ export function MiniMapPreview({ ubicaciones }: MiniMapPreviewProps) {
     </MapContainer>
   );
 }
-
+

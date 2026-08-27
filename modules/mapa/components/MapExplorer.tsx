@@ -25,6 +25,7 @@ import "leaflet/dist/leaflet.css";
 
 
 import { colorDeporteMapa, MAP_REGION } from "@/config/map-region";
+import { MAP_TILES } from "@/config/map-tiles";
 
 import { designTokens } from "@/config/design-tokens";
 
@@ -295,11 +296,9 @@ export function MapExplorer({ ubicaciones, deporteInicial }: MapExplorerProps) {
           <MapController center={mapCenter} zoom={zoom} />
 
           <TileLayer
-
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; CARTO'
-
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-
+            attribution={MAP_TILES.attribution}
+            url={MAP_TILES.url}
+            maxZoom={MAP_TILES.maxZoom}
           />
 
           <Circle
