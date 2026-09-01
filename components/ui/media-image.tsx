@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_QUALITY } from "@/config/media";
 import { cn } from "@/lib/utils";
 import { PhotoFrame, type PhotoFrameProps } from "@/components/ui/photo-frame";
 import { MediaPlaceholder } from "@/components/ui/media-placeholder";
@@ -50,6 +51,7 @@ export function MediaImage({
           fill
           priority={priority}
           sizes={sizes}
+          quality={IMAGE_QUALITY}
           className={cn("object-cover ds-media-zoom", imageClassName)}
         />
       ) : (

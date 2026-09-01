@@ -128,6 +128,7 @@ export default async function DeporteDetallePage({ params }: PageProps) {
                         src={foto.src}
                         alt={foto.alt}
                         fill
+                        quality={88}
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 30vw"
                       />

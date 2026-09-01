@@ -21,6 +21,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
+              quality={88}
               className="object-cover"
             />
           ) : (

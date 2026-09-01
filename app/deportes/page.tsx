@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
 import { ColorStripe } from "@/components/brand/ColorStripe";
@@ -10,6 +9,7 @@ import { brandToneAt, resolveSportIcon } from "@/config/brand-assets";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { cn } from "@/lib/utils";
 import { deporteService } from "@/modules/deportes/services/deporte.service";
+import { SportCoverMedia } from "@/modules/deportes/components/SportCoverMedia";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Deportes",
@@ -46,32 +46,21 @@ export default async function DeportesPage() {
         </Container>
       </section>
 
-      <div className="grid md:grid-cols-3">
+      <Container className="pb-4">
+        <div className="grid gap-3 sm:gap-4 md:grid-cols-3">
         {deportes.map((deporte, i) => {
           const tone = brandToneAt(i);
           return (
-            <Reveal key={deporte.id} delay={i * 80}>
+            <Reveal key={deporte.id} delay={i * 80} className="h-full">
               <Link
                 href={`/deportes/${deporte.slug}`}
-                className="group relative block min-h-[72dvh] overflow-hidden focus-ring md:min-h-[85dvh]"
+                className="group relative block h-full min-h-[58dvh] overflow-hidden rounded-frame focus-ring md:min-h-[68dvh]"
               >
-                {deporte.coverUrl ? (
-                  <Image
-                    src={deporte.coverUrl}
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="ds-media-zoom object-cover"
-                    priority={i === 0}
-                  />
-                ) : (
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(160deg, ${deporte.colorPrimario}, var(--color-brand-ink))`,
-                    }}
-                  />
-                )}
+                <SportCoverMedia
+                  image={deporte.coverUrl}
+                  colorPrimario={deporte.colorPrimario}
+                  priority={i === 0}
+                />
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/40 to-transparent"
                   aria-hidden
@@ -115,7 +104,8 @@ export default async function DeportesPage() {
             </Reveal>
           );
         })}
-      </div>
+        </div>
+      </Container>
 
       <section className="border-t border-brand-ink/10 py-12">
         <Container>

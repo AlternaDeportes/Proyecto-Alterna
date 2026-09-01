@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
 import { ColorStripe } from "@/components/brand/ColorStripe";
@@ -6,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { brandToneAt, resolveSportIcon } from "@/config/brand-assets";
 import { deporteService } from "@/modules/deportes/services/deporte.service";
+import { SportCoverMedia } from "@/modules/deportes/components/SportCoverMedia";
 import { cn } from "@/lib/utils";
 
 const toneClass = {
@@ -26,46 +26,34 @@ export async function DeportesChapter() {
   return (
     <section className="bg-brand-surface" aria-labelledby="deportes-capitulo">
       <ColorStripe />
-      <Container className="py-16 sm:py-20">
+      <Container className="pt-16 pb-8 sm:pt-20">
         <Reveal>
           <h2
             id="deportes-capitulo"
             className="ds-display max-w-2xl text-display-sm text-brand-ink sm:text-display-md"
           >
-            Tres puertas a otro deporte
+            Tres deportes, tres formas de jugar
           </h2>
           <p className="mt-4 max-w-lg text-brand-ink/70">
-            Ultimate, Newcom y Wingfoil: las tres puertas del proyecto. Cada una tiene
-            territorio, comunidad e historias propias.
+            Cómo se juega cada uno en Santa Fe.
           </p>
         </Reveal>
       </Container>
 
-      <div className="grid md:grid-cols-3">
-        {destacados.map((deporte, i) => {
-          const tone = brandToneAt(i);
-          return (
-            <Reveal key={deporte.id} delay={i * 90}>
-              <Link
-                href={`/deportes/${deporte.slug}`}
-                className="group relative block min-h-[70dvh] overflow-hidden focus-ring md:min-h-[80dvh]"
-              >
-                {deporte.coverUrl ? (
-                  <Image
-                    src={deporte.coverUrl}
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="ds-media-zoom object-cover"
-                  />
-                ) : (
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(160deg, ${deporte.colorPrimario}, var(--color-brand-ink))`,
-                    }}
-                  />
-                )}
+      <Container className="pb-4">
+        <div className="grid gap-3 sm:gap-4 md:grid-cols-3">
+          {destacados.map((deporte, i) => {
+            const tone = brandToneAt(i);
+            return (
+              <Reveal key={deporte.id} delay={i * 90} className="h-full">
+                <Link
+                  href={`/deportes/${deporte.slug}`}
+                  className="group relative block h-full min-h-[58dvh] overflow-hidden rounded-frame focus-ring md:min-h-[68dvh]"
+                >
+                <SportCoverMedia
+                  image={deporte.coverUrl}
+                  colorPrimario={deporte.colorPrimario}
+                />
                 <div
                   className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/35 to-transparent"
                   aria-hidden
@@ -93,7 +81,7 @@ export async function DeportesChapter() {
                   <h3 className="mt-2 font-display text-2xl font-black uppercase text-white sm:text-3xl">
                     {deporte.nombre}
                   </h3>
-                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/75 opacity-90 transition-opacity group-hover:opacity-100">
+                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/75 opacity-90 transition-opacity group-hover:opacity-100">
                     {deporte.descripcion}
                   </p>
                   <span
@@ -109,7 +97,8 @@ export async function DeportesChapter() {
             </Reveal>
           );
         })}
-      </div>
+        </div>
+      </Container>
 
       <Container className="py-10">
         <Link

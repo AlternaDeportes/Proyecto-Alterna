@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { ColorStripe } from "@/components/brand/ColorStripe";
-import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { documentaryCovers, IMAGE_QUALITY } from "@/config/media";
+import { isTeaserLive, siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { DocEpisodeCard } from "@/modules/documentales/components/DocEpisodeCard";
 import { documentalService } from "@/modules/documentales/services/documental.service";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Documental",
-  description: `Documental ${siteConfig.name}: en producción. Ultimate, Newcom y Wingfoil en ${siteConfig.defaultCity.name}.`,
+  description: `Documental ${siteConfig.name}. Teaser: ${siteConfig.teaser.label}. Ultimate, Newcom y Wingfoil en ${siteConfig.defaultCity.name}.`,
   path: "/documentales",
 });
 
 export default async function DocumentalesPage() {
   const show = await documentalService.obtenerShow();
   const hayEpisodios = show.episodios.length > 0;
+  const live = isTeaserLive();
 
   return (
     <main id="contenido-principal">
@@ -32,11 +36,13 @@ export default async function DocumentalesPage() {
               {show.titulo}
             </p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/70">
-              {show.sinopsis}
+              {live
+                ? "El teaser ya está en YouTube. La serie sigue a quienes juegan ultimate, newcom y wingfoil en Santa Fe."
+                : `El teaser se estrena el ${siteConfig.teaser.label} en Argentina.`}
             </p>
             {!hayEpisodios ? (
-              <p className="mt-6 inline-flex rounded-sm bg-brand-accent/20 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-ink">
-                En producción
+              <p className="mt-6 inline-flex rounded-sm bg-brand-secondary px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-ink">
+                {live ? "Teaser en YouTube" : `Teaser · ${siteConfig.teaser.shortLabel}`}
               </p>
             ) : null}
             <div className="mt-8 flex flex-wrap gap-4">
@@ -47,7 +53,7 @@ export default async function DocumentalesPage() {
                 variant="accent"
                 size="lg"
               >
-                Seguir en YouTube
+                {live ? "Ver el teaser" : "Seguir en YouTube"}
               </ButtonLink>
               <ButtonLink href="/deportes" variant="outline" size="lg">
                 Ver los deportes
@@ -72,15 +78,40 @@ export default async function DocumentalesPage() {
             </>
           ) : (
             <Reveal>
-              <div className="max-w-xl border border-brand-ink/10 bg-white p-8 sm:p-10">
-                <h2 className="ds-display text-2xl text-brand-ink">
-                  Trailer y capítulos en producción
-                </h2>
-                <p className="mt-4 text-brand-ink/70">
-                  Todavía no hay video publicado. Cuando el teaser o los episodios estén
-                  listos, van a aparecer acá. Podés seguir el canal de YouTube para enterarte.
-                </p>
-              </div>
+              <Link
+                href={siteConfig.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block max-w-3xl overflow-hidden rounded-frame bg-brand-ink focus-ring"
+              >
+                <div className="relative aspect-video">
+                  <Image
+                    src={documentaryCovers.trailer}
+                    alt="Teaser ALTERNA — Ultimate en Santa Fe"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 48rem"
+                    quality={IMAGE_QUALITY}
+                    className="object-cover transition-transform duration-700 ease-brand group-hover:scale-[1.03]"
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/20 to-transparent"
+                    aria-hidden
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-secondary">
+                      {live ? "Disponible en YouTube" : "Estreno"}
+                    </p>
+                    <h2 className="mt-2 font-display text-2xl font-black uppercase text-white sm:text-3xl">
+                      Teaser
+                    </h2>
+                    <p className="mt-2 max-w-md text-sm text-white/80">
+                      {live
+                        ? "Mirá el primer vistazo al documental."
+                        : siteConfig.teaser.label}
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </Reveal>
           )}
         </Container>

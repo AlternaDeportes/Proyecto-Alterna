@@ -97,10 +97,11 @@ function HeroLayer({
       fill
       priority={priority}
       sizes="100vw"
-      className={cn(
+        className={cn(
         "object-cover will-change-[opacity]",
         visible ? "opacity-100" : "opacity-0"
       )}
+      quality={88}
       style={{
         transitionProperty: "opacity",
         transitionDuration: `${HERO_FADE_MS}ms`,

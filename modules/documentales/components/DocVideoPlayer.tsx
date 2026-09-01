@@ -22,7 +22,7 @@ export function DocVideoPlayer({
       <div className="ds-frame ds-frame--ink relative overflow-hidden">
         <div className="relative aspect-video">
           {coverUrl ? (
-            <Image src={coverUrl} alt="" fill className="object-cover opacity-50" aria-hidden />
+            <Image src={coverUrl} alt="" fill quality={88} className="object-cover opacity-50" aria-hidden />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary-deep to-brand-ink" />
           )}

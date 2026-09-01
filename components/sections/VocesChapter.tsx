@@ -34,8 +34,7 @@ export async function VocesChapter() {
                 Quiénes hacen vivo el juego
               </h2>
               <p className="mt-4 max-w-md text-brand-ink/70">
-                Jugadoras, entrenadores y referentes de Santa Fe. Las fotos son de las
-                prácticas reales; las historias siguen en producción junto al documental.
+                A quienes juegan, entrenan y sostienen estas comunidades en Santa Fe.
               </p>
             </div>
             <Link
@@ -61,6 +60,7 @@ export async function VocesChapter() {
                       alt={historia.titulo}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
+                      quality={88}
                       className="ds-media-zoom object-cover"
                     />
                   ) : (

@@ -107,12 +107,18 @@ export const HERO_SLIDE_MS = 5000;
 /** Duración del crossfade entre fotos (ms). */
 export const HERO_FADE_MS = 2000;
 
+export const IMAGE_QUALITY = 88;
+
 export const sportCovers: Record<string, string | undefined> = {
   "ultimate-frisbee": "/media/deportes/ultimate-frisbee.webp",
-  // Sin foto usable de Newcom por ahora (se quitó el still de banco).
-  newcom: undefined,
+  newcom: "/media/deportes/newcom.webp",
   wingfoil: "/media/deportes/wingfoil.webp",
 };
+
+/** Portada del teaser / bloque documental (foto de Drive). */
+export const documentaryCovers = {
+  trailer: "/media/documentales/trailer.webp",
+} as const;
 
 /** Galería por deporte (fotos reales) — sección detalle. */
 export const sportGalleries: Record<
@@ -136,7 +142,23 @@ export const sportGalleries: Record<
       label: "Partido",
     },
   ],
-  newcom: [],
+  newcom: [
+    {
+      src: "/media/deportes/newcom.webp",
+      alt: "Newcom — partido en el club",
+      label: "Partido",
+    },
+    {
+      src: "/media/deportes/newcom-02.webp",
+      alt: "Newcom — jugadoras en cancha",
+      label: "Juego",
+    },
+    {
+      src: "/media/deportes/newcom-03.webp",
+      alt: "Newcom — entrenamiento",
+      label: "Entrenamiento",
+    },
+  ],
   wingfoil: [
     {
       src: "/media/deportes/wingfoil.webp",
@@ -194,8 +216,19 @@ export const storyMedia: Record<
     ],
   },
   "monica-lovecchio": {
-    // Sin still de Newcom usable; la UI usa color/placeholder.
-    gallery: [],
+    cover: "/media/deportes/newcom-02.webp",
+    gallery: [
+      {
+        src: "/media/deportes/newcom-02.webp",
+        alt: "Newcom — jugadoras en cancha",
+        label: "Juego",
+      },
+      {
+        src: "/media/deportes/newcom.webp",
+        alt: "Newcom — partido",
+        label: "Partido",
+      },
+    ],
   },
   "lucio-cinaglia": {
     cover: "/media/historias/lucio-cinaglia.webp",

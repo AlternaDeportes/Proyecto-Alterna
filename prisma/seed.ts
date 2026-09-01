@@ -58,7 +58,7 @@ async function main() {
       slug: "ultimate-frisbee",
       nombre: "Ultimate Frisbee",
       descripcion:
-        "Un disco en el aire y un equipo que se arbitra solo. En el parque se juega limpio porque el otro también es de los tuyos.",
+        "7 vs 7 con disco, en césped y sin árbitro. Anotás agarrando en la zona de gol.",
       historia:
         "En Santa Fe, los grupos de Ultimate crecen por recomendación entre amigos, plazas y parques.",
       dificultad: Dificultad.INTERMEDIO,
@@ -72,7 +72,7 @@ async function main() {
       slug: "newcom",
       nombre: "Newcom",
       descripcion:
-        "Como el vóley, pero con otra cadencia y una red más baja. En el club se arma una familia que vuelve cada semana.",
+        "Como el vóley, pero la pelota se agarra y se lanza. Red más baja; se juega en clubes.",
       historia:
         "Muy arraigado en clubes santafesinos con participación intergeneracional.",
       dificultad: Dificultad.PRINCIPIANTE,
@@ -86,7 +86,7 @@ async function main() {
       slug: "wingfoil",
       nombre: "Wingfoil",
       descripcion:
-        "Tabla, ala y el agua del río. Aprender a leer el viento es también encontrar tu lugar lejos de la orilla.",
+        "Tabla, foil y un ala inflable. El viento te lleva sobre el río o la laguna.",
       historia:
         "Práctica en crecimiento sobre el Paraná y lagunas de la región.",
       dificultad: Dificultad.AVANZADO,
@@ -432,14 +432,14 @@ async function main() {
     update: {
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. Trailer y episodios para profundizar en las historias humanas detrás de cada disciplina.",
+        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser se estrena el 2 de septiembre a las 19 h.",
       publishedAt: new Date(),
     },
     create: {
       slug: "alterna-documental",
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. Trailer y episodios para profundizar en las historias humanas detrás de cada disciplina.",
+        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser se estrena el 2 de septiembre a las 19 h.",
       publishedAt: new Date(),
     },
   });
@@ -448,7 +448,7 @@ async function main() {
     {
       slug: "trailer",
       titulo: "Primer vistazo",
-      sinopsis: "Presentación del universo narrativo de ALTERNA. Empezá por acá.",
+      sinopsis: "Estreno 2 de septiembre · 19 h. Primer vistazo al documental ALTERNA.",
       numero: 0,
       duracionSeg: 90,
     },

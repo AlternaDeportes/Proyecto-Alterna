@@ -29,6 +29,14 @@ export function HeroIntro() {
         ready ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
       )}
     >
+      <a
+        href="#audiovisual-capitulo"
+        className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-secondary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink shadow-glow-secondary transition-transform duration-300 hover:scale-[1.03] focus-ring sm:text-xs"
+      >
+        Teaser · {siteConfig.teaser.label}
+        <span aria-hidden>→</span>
+      </a>
+
       <p className="ds-eyebrow ds-eyebrow--secondary mb-5">{siteConfig.defaultCity.name}</p>
 
       <h1
@@ -46,11 +54,11 @@ export function HeroIntro() {
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <ButtonLink href="/mapa" variant="secondary" size="lg">
-          Explorá el mapa
+        <ButtonLink href="#audiovisual-capitulo" variant="secondary" size="lg">
+          Teaser · {siteConfig.teaser.shortLabel}
         </ButtonLink>
-        <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-          Documental (en producción)
+        <ButtonLink href="/mapa" variant="outlineLight" size="lg">
+          Explorá el mapa
         </ButtonLink>
         <ButtonLink href="/deportes" variant="accent" size="lg">
           Deportes

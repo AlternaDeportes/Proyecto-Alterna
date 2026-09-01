@@ -12,7 +12,7 @@ const SHOW: DocumentalShow = {
   slug: "alterna-documental",
   titulo: "ALTERNA — Deportes por descubrir",
   sinopsis:
-    "Serie documental sobre Ultimate Frisbee, Newcom y Wingfoil en Santa Fe. Trailer y capítulos en producción.",
+    "Serie documental sobre Ultimate Frisbee, Newcom y Wingfoil en Santa Fe. El teaser se estrena el 2 de septiembre a las 19 h.",
   coverUrl: null,
   publishedAt: null,
   episodios: [],

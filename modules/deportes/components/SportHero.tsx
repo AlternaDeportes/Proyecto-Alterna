@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { BlobBackground } from "@/components/ui/blob-background";
 import { Container } from "@/components/ui/container";
 import { resolveSportIcon } from "@/config/brand-assets";
+import { siteConfig } from "@/config/site";
 import type { DeporteDetalle } from "@/modules/deportes/types";
 import { DIFICULTAD_LABEL } from "@/modules/deportes/types";
 import { FavoriteButton } from "@/modules/usuarios/components/FavoriteButton";
@@ -27,6 +28,7 @@ export function SportHero({ deporte }: SportHeroProps) {
           fill
           priority
           sizes="100vw"
+          quality={88}
           className="object-cover opacity-40"
           aria-hidden
         />
@@ -63,7 +65,7 @@ export function SportHero({ deporte }: SportHeroProps) {
             Dónde practicarlo
           </ButtonLink>
           <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-            Documental (en producción)
+            Teaser · {siteConfig.teaser.shortLabel}
           </ButtonLink>
           <ButtonLink href="/historias" variant="accent" size="lg">
             Historias

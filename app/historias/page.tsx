@@ -64,6 +64,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                           alt={historia.titulo}
                           fill
                           sizes="(max-width: 640px) 100vw, 50vw"
+                          quality={88}
                           className="ds-media-zoom object-cover"
                           priority={i < 2}
                         />
