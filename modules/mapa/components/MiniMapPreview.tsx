@@ -25,7 +25,7 @@ export function MiniMapPreview({ ubicaciones }: MiniMapPreviewProps) {
     <MapContainer
       center={center}
       zoom={11}
-      className="h-full w-full"
+      className="alterna-map h-full w-full"
       zoomControl={false}
       attributionControl={false}
       dragging={false}
@@ -40,6 +40,7 @@ export function MiniMapPreview({ ubicaciones }: MiniMapPreviewProps) {
         attribution={MAP_TILES.attribution}
         url={MAP_TILES.url}
         maxZoom={MAP_TILES.maxZoom}
+        subdomains={MAP_TILES.subdomains}
       />
       <Circle
         center={center}
@@ -48,7 +49,7 @@ export function MiniMapPreview({ ubicaciones }: MiniMapPreviewProps) {
           color: designTokens.colors.primary,
           weight: 1,
           fillColor: designTokens.colors.primary,
-          fillOpacity: 0.06,
+          fillOpacity: 0.04,
         }}
       />
       {puntos.map((u) => (

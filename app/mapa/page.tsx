@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { Container } from "@/components/ui/container";
+import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { deporteService } from "@/modules/deportes/services/deporte.service";
 import { MapPageClient } from "@/modules/mapa/components/MapPageClient";
 import { ubicacionService } from "@/modules/mapa/services/ubicacion.service";
 
@@ -15,24 +18,37 @@ interface MapaPageProps {
 }
 
 /**
- * Mapa con aire en los 4 costados — no full-bleed.
- * El marco contiene filtros + canvas + panel.
+ * Territorio: mapa a la izquierda y ficha de deporte a la derecha.
  */
 export default async function MapaPage({ searchParams }: MapaPageProps) {
   const { deporte } = await searchParams;
-  const ubicaciones = await ubicacionService.listar({
-    deporteSlug: deporte,
-  });
+  const [ubicaciones, deportes] = await Promise.all([
+    ubicacionService.listar(),
+    deporteService.listar(),
+  ]);
 
   return (
-    <main
-      id="contenido-principal"
-      className="bg-brand-surface px-3 pb-4 pt-20 sm:px-5 sm:pb-6 sm:pt-24 lg:px-8"
-    >
-      <ColorStripe className="mb-3 rounded-full sm:mb-4" />
-      <div className="mx-auto h-[calc(100dvh-6.5rem)] max-w-content overflow-hidden rounded-frame border border-brand-ink/10 bg-brand-surface shadow-lift sm:h-[calc(100dvh-7.25rem)]">
-        <MapPageClient ubicaciones={ubicaciones} deporteInicial={deporte} />
-      </div>
+    <main id="contenido-principal" className="bg-brand-surface">
+      <ColorStripe />
+      <section className="border-b border-brand-ink/10 pt-28 pb-10 sm:pt-32 sm:pb-12">
+        <Container>
+          <p className="ds-eyebrow ds-eyebrow--primary mb-4">Territorio</p>
+          <h1 className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md">
+            Encontrá tu deporte
+          </h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/70">
+            Clubes de Newcom, Ultimate y Wingfoil en {siteConfig.defaultCity.name},
+            Santo Tomé y Monte Vera. Elegí un deporte a la derecha o tocá un punto
+            en el mapa.
+          </p>
+        </Container>
+      </section>
+
+      <section className="pb-16 sm:pb-20" aria-label="Mapa y deportes">
+        <Container>
+          <MapPageClient ubicaciones={ubicaciones} deportes={deportes} deporteInicial={deporte} />
+        </Container>
+      </section>
     </main>
   );
 }

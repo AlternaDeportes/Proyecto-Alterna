@@ -11,6 +11,7 @@ import {
   OTROS_SPORT_COLOR,
   OTROS_SPORT_SLUG,
 } from "../config/map-region";
+import { UBICACIONES_CATALOGO } from "../modules/mapa/data/ubicaciones-catalogo";
 
 const prisma = new PrismaClient();
 
@@ -149,99 +150,12 @@ async function main() {
   deportes.push(deporteOtros);
   console.log(`   ✓ ${deportes.length} deportes (otros = solo mapa)`);
 
-  const ubicacionesData = [
-    {
-      slugKey: "parque-federal-ultimate",
-      nombre: "Parque Federal",
-      direccion: "Salvador del Carril 2200",
-      lat: -31.6176,
-      lng: -60.6992,
-      horarios: "Lun y jue 20:00",
-      contacto: "@ultimate.sf",
-      historia: "Entrenan con foco en juego limpio y mixto.",
-      deporteSlug: "ultimate-frisbee",
-      ciudadSlug: "santa-fe",
-      deporteOtroNombre: null as string | null,
-    },
-    {
-      slugKey: "regatas-newcom",
-      nombre: "Club Regatas Santa Fe",
-      direccion: "Av. Alem 3288",
-      lat: -31.6406,
-      lng: -60.7001,
-      horarios: "Mar y vie 18:30",
-      contacto: "@newcom.sf",
-      historia: "Grupo abierto con fuerte espíritu comunitario.",
-      deporteSlug: "newcom",
-      ciudadSlug: "santa-fe",
-      deporteOtroNombre: null,
-    },
-    {
-      slugKey: "laguna-setubal-wingfoil",
-      nombre: "Laguna Setúbal",
-      direccion: "Costanera Este",
-      lat: -31.6253,
-      lng: -60.6618,
-      horarios: "Sáb y dom 10:00",
-      contacto: "wingfoil.sf@gmail.com",
-      historia: "Iniciación progresiva en aguas de la región.",
-      deporteSlug: "wingfoil",
-      ciudadSlug: "santa-fe",
-      deporteOtroNombre: null,
-    },
-    {
-      slugKey: "parque-garay-ultimate",
-      nombre: "Parque Garay",
-      direccion: "Av. Perón 3600",
-      lat: -31.6547,
-      lng: -60.7118,
-      horarios: "Mié 19:00",
-      contacto: "@ultimate.garay",
-      historia: "Entrenamientos recreativos para sumarse desde cero.",
-      deporteSlug: "ultimate-frisbee",
-      ciudadSlug: "santa-fe",
-      deporteOtroNombre: null,
-    },
-    {
-      slugKey: "zuviría-newcom",
-      nombre: "C.I.C. Facundo Zuviría",
-      direccion: "Facundo Zuviría 8000",
-      lat: -31.5848,
-      lng: -60.6904,
-      horarios: "Lun, mié y vie 17:00",
-      contacto: "@newcom.zuviria",
-      historia: "Participación intergeneracional y torneos barriales.",
-      deporteSlug: "newcom",
-      ciudadSlug: "santa-fe",
-      deporteOtroNombre: null,
-    },
-    {
-      slugKey: "santo-tome-skate",
-      nombre: "Plaza San Martín",
-      direccion: "Centro",
-      lat: -31.6628,
-      lng: -60.762,
-      horarios: "Sáb 10:00",
-      contacto: null,
-      historia: "Grupo abierto de skate y roller en el casco urbano.",
-      deporteSlug: OTROS_SPORT_SLUG,
-      ciudadSlug: "santo-tome",
-      deporteOtroNombre: "Skate",
-    },
-    {
-      slugKey: "parana-kayak",
-      nombre: "Costanera Paraná",
-      direccion: "Av. Laurencena",
-      lat: -31.72,
-      lng: -60.528,
-      horarios: "Dom 9:00",
-      contacto: null,
-      historia: "Salidas recreativas de kayak en el río.",
-      deporteSlug: OTROS_SPORT_SLUG,
-      ciudadSlug: "parana",
-      deporteOtroNombre: "Kayak",
-    },
-  ] as const;
+  const ubicacionesData = UBICACIONES_CATALOGO;
+
+  await prisma.ubicacion.updateMany({
+    where: { creadoPorId: null, deletedAt: null },
+    data: { deletedAt: new Date() },
+  });
 
   for (const u of ubicacionesData) {
     const deporte = deportes.find((d) => d.slug === u.deporteSlug);
@@ -276,10 +190,16 @@ async function main() {
       await prisma.ubicacion.update({
         where: { id: existente.id },
         data: {
+          direccion: u.direccion,
           ciudadId: ciudadUbi.id,
           deporteOtroNombre: u.deporteOtroNombre,
           lat: u.lat,
           lng: u.lng,
+          horarios: u.horarios,
+          contacto: u.contacto,
+          historia: u.historia,
+          deletedAt: null,
+          moderacion: ModeracionEstado.APROBADO,
         },
       });
     }
@@ -432,14 +352,16 @@ async function main() {
     update: {
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser se estrena el 2 de septiembre a las 19 h.",
+        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser ya está disponible en YouTube.",
+      coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },
     create: {
       slug: "alterna-documental",
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser se estrena el 2 de septiembre a las 19 h.",
+        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser ya está disponible en YouTube.",
+      coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },
   });
@@ -447,10 +369,12 @@ async function main() {
   const episodiosDoc = [
     {
       slug: "trailer",
-      titulo: "Primer vistazo",
-      sinopsis: "Estreno 2 de septiembre · 19 h. Primer vistazo al documental ALTERNA.",
+      titulo: "Teaser",
+      sinopsis: "Primer vistazo al documental ALTERNA. Ya disponible en YouTube.",
       numero: 0,
       duracionSeg: 90,
+      videoUrl: "https://youtu.be/EVA-VO6IL14",
+      publishedAt: new Date("2026-09-16T00:00:00-03:00"),
     },
     {
       slug: "episodio-01-ultimate",
@@ -471,6 +395,8 @@ async function main() {
   ] as const;
 
   for (const ep of episodiosDoc) {
+    const videoUrl = "videoUrl" in ep ? ep.videoUrl : undefined;
+    const publishedAt = "publishedAt" in ep ? ep.publishedAt : undefined;
     await prisma.documentalEpisodio.upsert({
       where: { slug: ep.slug },
       update: {
@@ -479,6 +405,7 @@ async function main() {
         numero: ep.numero,
         duracionSeg: ep.duracionSeg,
         documentalId: documental.id,
+        ...(videoUrl ? { videoUrl, publishedAt } : {}),
       },
       create: {
         slug: ep.slug,
@@ -487,6 +414,8 @@ async function main() {
         numero: ep.numero,
         duracionSeg: ep.duracionSeg,
         documentalId: documental.id,
+        videoUrl,
+        publishedAt,
       },
     });
   }

@@ -112,7 +112,7 @@ export default async function DocumentalEpisodioPage({ params }: PageProps) {
               Todos los capítulos
             </ButtonLink>
             <ButtonLink
-              href={siteConfig.social.youtube}
+              href={episodio.videoUrl ?? siteConfig.social.youtube}
               target="_blank"
               rel="noopener noreferrer"
               variant="secondary"

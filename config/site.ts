@@ -26,11 +26,13 @@ export const siteConfig = {
     spotify:
       "https://open.spotify.com/user/31vfbgez4p7unw33yrhfo75cmjzm?si=ebd4e28019fa46da",
   },
-  /** Teaser documental — horario Argentina (UTC−3). */
+  /** Teaser documental — publicado en YouTube. */
   teaser: {
-    premiereAt: "2026-09-02T19:00:00-03:00",
-    label: "2 de septiembre · 19 h",
-    shortLabel: "2 sep · 19 h",
+    youtubeId: "EVA-VO6IL14",
+    published: true,
+    title: 'Teaser: Proyecto "Alterna"',
+    label: "Ya disponible",
+    shortLabel: "En YouTube",
   },
   /**
    * Nav primaria — máx. 6 ítems (manual: comunicación simple).
@@ -52,13 +54,23 @@ export const siteConfig = {
 
 export type SiteConfig = typeof siteConfig;
 
-export function isTeaserLive(now = Date.now()): boolean {
-  return now >= Date.parse(siteConfig.teaser.premiereAt);
+export function isTeaserLive(): boolean {
+  return siteConfig.teaser.published;
+}
+
+export function teaserWatchUrl(): string {
+  return `https://youtu.be/${siteConfig.teaser.youtubeId}`;
+}
+
+export function teaserEmbedUrl(autoplay = false): string {
+  const params = new URLSearchParams({ rel: "0", modestbranding: "1" });
+  if (autoplay) params.set("autoplay", "1");
+  return `https://www.youtube-nocookie.com/embed/${siteConfig.teaser.youtubeId}?${params.toString()}`;
 }
 
 /** Enlaces de redes con etiqueta para UI */
 export const socialLinks = [
-  { key: "youtube" as const, label: "YouTube", hint: "Teaser 2 sep · 19 h" },
+  { key: "youtube" as const, label: "YouTube", hint: "Teaser disponible" },
   { key: "instagram" as const, label: "Instagram", hint: "Comunidad" },
   { key: "spotify" as const, label: "Spotify", hint: "Podcast (en producción)" },
 ] as const;
@@ -68,4 +80,3 @@ export const footerNavigation = [
   ...siteConfig.navigation,
   ...siteConfig.secondaryNav,
 ] as const;
-

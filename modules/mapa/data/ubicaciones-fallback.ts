@@ -1,133 +1,48 @@
 import type { MapUbicacion } from "@/modules/mapa/types";
 import { designTokens } from "@/config/design-tokens";
-import { OTROS_SPORT_COLOR, OTROS_SPORT_SLUG } from "@/config/map-region";
+import { MAP_CIUDADES, OTROS_SPORT_COLOR, OTROS_SPORT_SLUG } from "@/config/map-region";
+import { UBICACIONES_CATALOGO } from "@/modules/mapa/data/ubicaciones-catalogo";
 
-export const UBICACIONES_FALLBACK: MapUbicacion[] = [
-  {
-    id: "fb-u1",
-    nombre: "Parque Federal",
-    direccion: "Salvador del Carril 2200",
-    lat: -31.6176,
-    lng: -60.6992,
-    horarios: "Lun y jue 20:00",
-    contacto: "@ultimate.sf",
-    historia: "Entrenan con foco en juego limpio y mixto.",
-    deporteOtroNombre: null,
-    deporte: {
-      nombre: "Ultimate Frisbee",
-      slug: "ultimate-frisbee",
-      colorPrimario: designTokens.sports.ultimate,
-    },
-    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
-    comentariosCount: 1,
+const DEPORTE_META: Record<string, { nombre: string; colorPrimario: string }> = {
+  "ultimate-frisbee": {
+    nombre: "Ultimate Frisbee",
+    colorPrimario: designTokens.sports.ultimate,
   },
-  {
-    id: "fb-u2",
-    nombre: "Club Regatas Santa Fe",
-    direccion: "Av. Alem 3288",
-    lat: -31.6406,
-    lng: -60.7001,
-    horarios: "Mar y vie 18:30",
-    contacto: "@newcom.sf",
-    historia: "Grupo abierto con fuerte espíritu comunitario.",
-    deporteOtroNombre: null,
-    deporte: {
-      nombre: "Newcom",
-      slug: "newcom",
-      colorPrimario: designTokens.sports.newcom,
-    },
-    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
-    comentariosCount: 1,
+  newcom: {
+    nombre: "Newcom",
+    colorPrimario: designTokens.sports.newcom,
   },
-  {
-    id: "fb-u3",
-    nombre: "Laguna Setúbal",
-    direccion: "Costanera Este",
-    lat: -31.6253,
-    lng: -60.6618,
-    horarios: "Sáb y dom 10:00",
-    contacto: "wingfoil.sf@gmail.com",
-    historia: "Iniciación progresiva en aguas de la región.",
-    deporteOtroNombre: null,
-    deporte: {
-      nombre: "Wingfoil",
-      slug: "wingfoil",
-      colorPrimario: designTokens.sports.wingfoil,
-    },
-    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
-    comentariosCount: 1,
+  wingfoil: {
+    nombre: "Wingfoil",
+    colorPrimario: designTokens.sports.wingfoil,
   },
-  {
-    id: "fb-u4",
-    nombre: "Parque Garay",
-    direccion: "Av. Perón 3600",
-    lat: -31.6547,
-    lng: -60.7118,
-    horarios: "Mié 19:00",
-    contacto: "@ultimate.garay",
-    historia: "Entrenamientos recreativos para sumarse desde cero.",
-    deporteOtroNombre: null,
+  [OTROS_SPORT_SLUG]: {
+    nombre: "Otros deportes",
+    colorPrimario: OTROS_SPORT_COLOR,
+  },
+};
+
+const ciudadPorSlug = Object.fromEntries(MAP_CIUDADES.map((c) => [c.slug, c]));
+
+export const UBICACIONES_FALLBACK: MapUbicacion[] = UBICACIONES_CATALOGO.map((u) => {
+  const deporte = DEPORTE_META[u.deporteSlug] ?? DEPORTE_META[OTROS_SPORT_SLUG];
+  const ciudad = ciudadPorSlug[u.ciudadSlug] ?? ciudadPorSlug["santa-fe"];
+  return {
+    id: `fb-${u.slugKey}`,
+    nombre: u.nombre,
+    direccion: u.direccion,
+    lat: u.lat,
+    lng: u.lng,
+    horarios: u.horarios,
+    contacto: u.contacto,
+    historia: u.historia,
+    deporteOtroNombre: u.deporteOtroNombre,
     deporte: {
-      nombre: "Ultimate Frisbee",
-      slug: "ultimate-frisbee",
-      colorPrimario: designTokens.sports.ultimate,
+      nombre: deporte.nombre,
+      slug: u.deporteSlug,
+      colorPrimario: deporte.colorPrimario,
     },
-    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
+    ciudad: { nombre: ciudad.nombre, slug: ciudad.slug },
     comentariosCount: 0,
-  },
-  {
-    id: "fb-u5",
-    nombre: "C.I.C. Facundo Zuviría",
-    direccion: "Facundo Zuviría 8000",
-    lat: -31.5848,
-    lng: -60.6904,
-    horarios: "Lun, mié y vie 17:00",
-    contacto: "@newcom.zuviria",
-    historia: "Participación intergeneracional y torneos barriales.",
-    deporteOtroNombre: null,
-    deporte: {
-      nombre: "Newcom",
-      slug: "newcom",
-      colorPrimario: designTokens.sports.newcom,
-    },
-    ciudad: { nombre: "Santa Fe", slug: "santa-fe" },
-    comentariosCount: 0,
-  },
-  {
-    id: "fb-u6",
-    nombre: "Plaza San Martín",
-    direccion: "Centro",
-    lat: -31.6628,
-    lng: -60.762,
-    horarios: "Sáb 10:00",
-    contacto: null,
-    historia: "Grupo abierto de skate y roller en el casco urbano.",
-    deporteOtroNombre: "Skate",
-    deporte: {
-      nombre: "Otros deportes",
-      slug: OTROS_SPORT_SLUG,
-      colorPrimario: OTROS_SPORT_COLOR,
-    },
-    ciudad: { nombre: "Santo Tomé", slug: "santo-tome" },
-    comentariosCount: 0,
-  },
-  {
-    id: "fb-u7",
-    nombre: "Costanera Paraná",
-    direccion: "Av. Laurencena",
-    lat: -31.72,
-    lng: -60.528,
-    horarios: "Dom 9:00",
-    contacto: null,
-    historia: "Salidas recreativas de kayak en el río.",
-    deporteOtroNombre: "Kayak",
-    deporte: {
-      nombre: "Otros deportes",
-      slug: OTROS_SPORT_SLUG,
-      colorPrimario: OTROS_SPORT_COLOR,
-    },
-    ciudad: { nombre: "Paraná", slug: "parana" },
-    comentariosCount: 0,
-  },
-];
-
+  };
+});

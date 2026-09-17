@@ -115,9 +115,9 @@ export const sportCovers: Record<string, string | undefined> = {
   wingfoil: "/media/deportes/wingfoil.webp",
 };
 
-/** Portada del teaser / bloque documental (foto de Drive). */
+/** Portada del teaser / bloque documental (cancha de Ultimate). */
 export const documentaryCovers = {
-  trailer: "/media/documentales/trailer.webp",
+  trailer: "/media/documentales/teaser-cover.webp",
 } as const;
 
 /** Galería por deporte (fotos reales) — sección detalle. */

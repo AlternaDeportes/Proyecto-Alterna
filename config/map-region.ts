@@ -52,6 +52,13 @@ export const MAP_CIUDADES = [
     lng: -60.7653,
   },
   {
+    slug: "monte-vera",
+    nombre: "Monte Vera",
+    region: "Santa Fe",
+    lat: -31.5168,
+    lng: -60.6759,
+  },
+  {
     slug: "parana",
     nombre: "Paraná",
     region: "Entre Ríos",
@@ -91,4 +98,4 @@ export function colorDeporteMapa(slug: string, colorPrimario: string): string {
   if (esDeporteDestacado(slug)) return colorPrimario;
   return OTROS_SPORT_COLOR;
 }
-
+

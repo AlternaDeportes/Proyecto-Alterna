@@ -17,3 +17,10 @@ export const iconoUsuario = L.divIcon({
   iconSize: [16, 16],
   iconAnchor: [8, 8],
 });
+
+export const iconoPicker = L.divIcon({
+  className: "",
+  html: `<div style="width:28px;height:28px;border-radius:50%;background:${designTokens.colors.primary};border:3px solid ${designTokens.colors.secondary};box-shadow:0 4px 16px rgba(42,95,244,0.45)"></div>`,
+  iconSize: [28, 28],
+  iconAnchor: [14, 28],
+});

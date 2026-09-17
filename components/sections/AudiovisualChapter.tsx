@@ -5,14 +5,12 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { documentaryCovers, IMAGE_QUALITY } from "@/config/media";
-import { isTeaserLive, siteConfig } from "@/config/site";
+import { teaserWatchUrl } from "@/config/site";
 
 /**
- * Capítulo audiovisual — teaser con fecha de estreno y portada de Drive.
+ * Capítulo audiovisual — teaser publicado y portada del documental.
  */
 export function AudiovisualChapter() {
-  const live = isTeaserLive();
-
   return (
     <section
       id="audiovisual-capitulo"
@@ -24,14 +22,14 @@ export function AudiovisualChapter() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <Reveal>
             <Link
-              href={siteConfig.social.youtube}
+              href={teaserWatchUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="group ds-frame ds-frame--accent relative block aspect-video overflow-hidden bg-brand-ink shadow-lift focus-ring"
             >
               <Image
                 src={documentaryCovers.trailer}
-                alt="Teaser ALTERNA — Ultimate en Santa Fe"
+                alt="Teaser ALTERNA — Ultimate Frisbee en Santa Fe"
                 fill
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 quality={IMAGE_QUALITY}
@@ -51,13 +49,13 @@ export function AudiovisualChapter() {
               </span>
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-secondary">
-                  {live ? "Disponible en YouTube" : "Estreno"}
+                  Disponible en YouTube
                 </p>
                 <p className="mt-2 font-display text-2xl font-black uppercase text-white sm:text-3xl">
                   Teaser
                 </p>
                 <p className="mt-1 text-sm text-white/80">
-                  {live ? "Mirá el primer vistazo al documental." : siteConfig.teaser.label}
+                  Mirá el primer vistazo al documental.
                 </p>
               </div>
             </Link>
@@ -71,19 +69,12 @@ export function AudiovisualChapter() {
               La mirada documental
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/70">
-              {live
-                ? "El teaser ya está en YouTube. La serie sigue a quienes juegan ultimate, newcom y wingfoil en Santa Fe."
-                : `El teaser se estrena el ${siteConfig.teaser.label} en Argentina.`}
+              El teaser ya está en YouTube. La serie sigue a quienes juegan ultimate, newcom y
+              wingfoil en Santa Fe.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <ButtonLink
-                href={siteConfig.social.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="accent"
-                size="lg"
-              >
-                {live ? "Ver el teaser" : "Seguir en YouTube"}
+              <ButtonLink href="#teaser" variant="accent" size="lg">
+                Ver el teaser
               </ButtonLink>
               <Link
                 href="/documentales"

@@ -262,3 +262,69 @@
     animation: none;
   }
 }
+
+/* Mapa ALTERNA — teselas claras, poco ruido, acentos de marca en controles y pines */
+.alterna-map.leaflet-container {
+  background: #eef1f6;
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--color-brand-ink);
+}
+
+.alterna-map .leaflet-tile-pane {
+  filter: grayscale(1) contrast(1.08) brightness(1.1) sepia(0.12) hue-rotate(195deg) saturate(0.4);
+}
+
+.alterna-map .leaflet-control-zoom {
+  border: 0 !important;
+  overflow: hidden;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-soft);
+}
+
+.alterna-map .leaflet-control-zoom a {
+  width: 2.15rem;
+  height: 2.15rem;
+  line-height: 2.15rem;
+  border: 0;
+  background: var(--color-brand-surface);
+  color: var(--color-brand-ink);
+  font-weight: 600;
+}
+
+.alterna-map .leaflet-control-zoom a:hover,
+.alterna-map .leaflet-control-zoom a:focus {
+  background: var(--color-brand-primary);
+  color: #fff;
+}
+
+.alterna-map .leaflet-control-zoom-in {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand-ink) 10%, transparent) !important;
+}
+
+.alterna-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--color-brand-surface) 88%, transparent);
+  color: color-mix(in srgb, var(--color-brand-ink) 45%, transparent);
+  font-size: 10px;
+  margin: 0;
+}
+
+.alterna-map .leaflet-control-attribution a {
+  color: var(--color-brand-primary);
+}
+
+.alterna-map .leaflet-popup-content-wrapper {
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lift);
+  color: var(--color-brand-ink);
+  font-family: inherit;
+}
+
+.alterna-map .leaflet-popup-tip {
+  background: var(--color-brand-surface);
+}
+
+.alterna-map .leaflet-popup-content {
+  margin: 0.85rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}

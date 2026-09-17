@@ -30,7 +30,7 @@ export function HeroIntro() {
       )}
     >
       <a
-        href="#audiovisual-capitulo"
+        href="#teaser"
         className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-secondary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink shadow-glow-secondary transition-transform duration-300 hover:scale-[1.03] focus-ring sm:text-xs"
       >
         Teaser · {siteConfig.teaser.label}
@@ -54,8 +54,8 @@ export function HeroIntro() {
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <ButtonLink href="#audiovisual-capitulo" variant="secondary" size="lg">
-          Teaser · {siteConfig.teaser.shortLabel}
+        <ButtonLink href="#teaser" variant="secondary" size="lg">
+          Volvé al teaser
         </ButtonLink>
         <ButtonLink href="/mapa" variant="outlineLight" size="lg">
           Explorá el mapa

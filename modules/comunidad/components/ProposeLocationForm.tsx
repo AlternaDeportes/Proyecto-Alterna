@@ -6,7 +6,10 @@ import { useMemo, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MAP_CIUDADES, MAP_REGION, OTROS_SPORT_SLUG } from "@/config/map-region";
+import { distanciaKm } from "@/lib/geo";
 import { cn } from "@/lib/utils";
+import { LocationPicker } from "@/modules/mapa/components/LocationPicker";
+import type { MapPunto } from "@/modules/mapa/components/LocationPickerMap";
 
 const fieldClass =
   "w-full rounded-xl border border-brand-ink/15 bg-white px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/40 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/25";
@@ -18,10 +21,13 @@ export function ProposeLocationForm() {
   const [error, setError] = useState<string | null>(null);
   const [ciudadSlug, setCiudadSlug] = useState<string>(MAP_CIUDADES[0].slug);
   const [deporteSlug, setDeporteSlug] = useState("");
+  const [punto, setPunto] = useState<MapPunto | null>(null);
   const ciudad = useMemo(
     () => MAP_CIUDADES.find((c) => c.slug === ciudadSlug) ?? MAP_CIUDADES[0],
     [ciudadSlug]
   );
+  const fueraDeRegion =
+    punto != null && distanciaKm(MAP_REGION.center, punto) > MAP_REGION.radiusKm;
 
   if (status === "loading") {
     return (
@@ -57,6 +63,16 @@ export function ProposeLocationForm() {
     event.preventDefault();
     setError(null);
     setExito(null);
+
+    if (!punto) {
+      setError("Marcá el lugar en el mapa.");
+      return;
+    }
+    if (fueraDeRegion) {
+      setError(`El punto tiene que estar a menos de ${MAP_REGION.radiusKm} km de Santa Fe.`);
+      return;
+    }
+
     setEnviando(true);
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -68,8 +84,8 @@ export function ProposeLocationForm() {
         body: JSON.stringify({
           nombre: data.get("nombre"),
           direccion: data.get("direccion"),
-          lat: data.get("lat"),
-          lng: data.get("lng"),
+          lat: punto.lat,
+          lng: punto.lng,
           horarios: data.get("horarios"),
           contacto: data.get("contacto"),
           historia: data.get("historia"),
@@ -87,6 +103,7 @@ export function ProposeLocationForm() {
       form.reset();
       setCiudadSlug(MAP_CIUDADES[0].slug);
       setDeporteSlug("");
+      setPunto(null);
     } catch {
       setError("Error de conexión.");
     } finally {
@@ -176,30 +193,30 @@ export function ProposeLocationForm() {
         ) : (
           <input type="hidden" name="deporteOtroNombre" value="" />
         )}
-        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
-          Latitud
-          <input
-            name="lat"
-            type="number"
-            step="any"
-            required
-            key={`lat-${ciudad.slug}`}
-            defaultValue={ciudad.lat}
-            className={fieldClass}
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-brand-ink">
-          Longitud
-          <input
-            name="lng"
-            type="number"
-            step="any"
-            required
-            key={`lng-${ciudad.slug}`}
-            defaultValue={ciudad.lng}
-            className={fieldClass}
-          />
-        </label>
+
+        <div className="grid gap-1.5 sm:col-span-2">
+          <p className="text-sm font-semibold text-brand-ink">Ubicación en el mapa</p>
+          <p className="text-xs text-brand-ink/55">
+            Hacé clic o tocá el mapa para marcar el lugar. El círculo azul es el área de
+            Santa Fe y alrededores.
+          </p>
+          <div className="h-64 overflow-hidden rounded-xl border border-brand-ink/15 sm:h-80">
+            <LocationPicker
+              cityCenter={{ lat: ciudad.lat, lng: ciudad.lng }}
+              value={punto}
+              onChange={setPunto}
+            />
+          </div>
+          {punto && !fueraDeRegion ? (
+            <p className="text-xs font-semibold text-brand-primary">Punto marcado.</p>
+          ) : null}
+          {fueraDeRegion ? (
+            <p className="text-xs font-semibold text-red-600" role="alert">
+              Ese punto queda fuera de la región (máx. {MAP_REGION.radiusKm} km).
+            </p>
+          ) : null}
+        </div>
+
         <label className="grid gap-1.5 text-sm font-semibold text-brand-ink sm:col-span-2">
           Horarios
           <input
@@ -238,4 +255,3 @@ export function ProposeLocationForm() {
     </Card>
   );
 }
-

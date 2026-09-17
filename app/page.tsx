@@ -6,6 +6,7 @@ import { ComunidadChapter } from "@/components/sections/ComunidadChapter";
 import { DeportesChapter } from "@/components/sections/DeportesChapter";
 import { ManifiestoSection } from "@/components/sections/ManifiestoSection";
 import { MapaChapter } from "@/components/sections/MapaChapter";
+import { TeaserChapter } from "@/components/sections/TeaserChapter";
 import { VocesChapter } from "@/components/sections/VocesChapter";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -17,11 +18,12 @@ export const metadata: Metadata = buildPageMetadata({
 
 /**
  * Home — arco narrativo documental (Fase C).
- * Hero → Manifiesto → Deportes → Voces → Audiovisual → Mapa → Comunidad
+ * Teaser (destacado temporal) → Hero → Manifiesto → Deportes → Voces → Audiovisual → Mapa → Comunidad
  */
 export default function HomePage() {
   return (
     <main id="contenido-principal">
+      <TeaserChapter />
       <Hero />
       <ManifiestoSection />
       <DeportesChapter />
