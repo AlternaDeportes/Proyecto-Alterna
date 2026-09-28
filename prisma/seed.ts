@@ -59,9 +59,9 @@ async function main() {
       slug: "ultimate-frisbee",
       nombre: "Ultimate Frisbee",
       descripcion:
-        "7 vs 7 con disco, en césped y sin árbitro. Anotás agarrando en la zona de gol.",
+        "Sin árbitro, en equipo y con disco. En Santa Fe hay canchas abiertas: vení a ver o sumate.",
       historia:
-        "En Santa Fe, los grupos de Ultimate crecen por recomendación entre amigos, plazas y parques.",
+        "En Santa Fe el Ultimate crece porque alguien te dice vení. Acá ves quiénes juegan y dónde encontrarlos: el paso siguiente es ir.",
       dificultad: Dificultad.INTERMEDIO,
       jugadoresMin: 7,
       jugadoresMax: 14,
@@ -73,9 +73,9 @@ async function main() {
       slug: "newcom",
       nombre: "Newcom",
       descripcion:
-        "Como el vóley, pero la pelota se agarra y se lanza. Red más baja; se juega en clubes.",
+        "Se agarra, se lanza y se juega en club. Buscá tu equipo en el mapa y preguntá cómo entrar.",
       historia:
-        "Muy arraigado en clubes santafesinos con participación intergeneracional.",
+        "En los clubes santafesinos el Newcom junta generaciones. Si querés entrar, el puente es la gente que ya está ahí: elegí un punto y acercate.",
       dificultad: Dificultad.PRINCIPIANTE,
       jugadoresMin: 6,
       jugadoresMax: 12,
@@ -87,9 +87,9 @@ async function main() {
       slug: "wingfoil",
       nombre: "Wingfoil",
       descripcion:
-        "Tabla, foil y un ala inflable. El viento te lleva sobre el río o la laguna.",
+        "Tabla, ala y el viento del río. El mapa te muestra por dónde arrancar y con quién.",
       historia:
-        "Práctica en crecimiento sobre el Paraná y lagunas de la región.",
+        "Sobre el Paraná y la laguna, el wingfoil se aprende de a poco y en grupo. Si el viento te llama, el mapa te deja en la costa.",
       dificultad: Dificultad.AVANZADO,
       jugadoresMin: 1,
       jugadoresMax: 1,
@@ -106,6 +106,8 @@ async function main() {
       update: {
         nombre: d.nombre,
         descripcion: d.descripcion,
+        historia: d.historia,
+        seoDescription: d.descripcion,
         colorPrimario: d.colorPrimario,
       },
       create: {
@@ -266,14 +268,14 @@ async function main() {
     update: {
       titulo: "ALTERNA Podcast",
       descripcion:
-        "Charlas con entrenadores, jugadoras y referentes para ampliar la historia más allá de la imagen. Voces en primera persona desde Santa Fe.",
+        "Charlas con quienes juegan y entrenan ultimate, newcom y wingfoil en Santa Fe. Escuchá Alternando voces en Spotify.",
       publishedAt: new Date(),
     },
     create: {
       slug: "alterna-podcast",
       titulo: "ALTERNA Podcast",
       descripcion:
-        "Charlas con entrenadores, jugadoras y referentes para ampliar la historia más allá de la imagen. Voces en primera persona desde Santa Fe.",
+        "Charlas con quienes juegan y entrenan ultimate, newcom y wingfoil en Santa Fe. Escuchá Alternando voces en Spotify.",
       publishedAt: new Date(),
     },
   });
@@ -352,7 +354,7 @@ async function main() {
     update: {
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser ya está disponible en YouTube.",
+        "Serie documental sobre deportes alternativos en Santa Fe. Mirá el teaser y después encontrá a esa gente en el mapa.",
       coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },
@@ -360,7 +362,7 @@ async function main() {
       slug: "alterna-documental",
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos y amateurs en Santa Fe. El teaser ya está disponible en YouTube.",
+        "Serie documental sobre deportes alternativos en Santa Fe. Mirá el teaser y después encontrá a esa gente en el mapa.",
       coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },

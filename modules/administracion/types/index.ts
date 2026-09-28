@@ -104,6 +104,18 @@ export interface AdminSerieDia {
   mensajes: number;
 }
 
+export interface AdminUso {
+  reproducciones: number;
+  avances: number;
+  filtrosMapa: number;
+  pinesMapa: number;
+  duracionMediaSeg: number | null;
+  scrollMedio: number | null;
+  rebotePct: number | null;
+  fuentes: { label: string; total: number }[];
+  navegadores: { label: string; total: number }[];
+}
+
 export interface AdminHueco {
   id: string;
   titulo: string;
@@ -119,6 +131,7 @@ export interface AdminMetricas {
   ultimos30: AdminSerieDia[];
   topPaginas: { path: string; vistas: number }[];
   dispositivos: { device: string; total: number }[];
+  uso: AdminUso;
   huecos: AdminHueco[];
 }
 

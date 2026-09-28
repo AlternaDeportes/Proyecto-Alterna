@@ -34,14 +34,15 @@ export async function VocesChapter() {
                 Quiénes hacen vivo el juego
               </h2>
               <p className="mt-4 max-w-md text-brand-ink/70">
-                A quienes juegan, entrenan y sostienen estas comunidades en Santa Fe.
+                Leé a quienes juegan, entrenan y sostienen estas comunidades. Si tu
+                historia también es de acá, escribinos.
               </p>
             </div>
             <Link
               href="/historias"
               className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-accent transition-colors hover:text-brand-ink focus-ring"
             >
-              Todas las historias →
+              Conocé las voces →
             </Link>
           </div>
         </Reveal>

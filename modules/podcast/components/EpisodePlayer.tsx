@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
+import { trackEvent } from "@/modules/analytics/tracker";
 import type { PodcastCapitulo } from "@/modules/podcast/types";
 
 interface EpisodePlayerProps {
@@ -16,6 +18,8 @@ export function EpisodePlayer({
   proximo,
   capitulos,
 }: EpisodePlayerProps) {
+  const marked = useRef<Set<number>>(new Set());
+
   if (proximo || !audioUrl) {
     return (
       <div className="rounded-organic border border-dashed border-brand-ink/20 bg-brand-ink/[0.03] p-6">
@@ -50,7 +54,24 @@ export function EpisodePlayer({
       <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-ink/45">
         Reproductor
       </p>
-      <audio controls preload="metadata" className="w-full" src={audioUrl}>
+      <audio
+        controls
+        preload="metadata"
+        className="w-full"
+        src={audioUrl}
+        onPlay={() => trackEvent("play", titulo)}
+        onTimeUpdate={(event) => {
+          const audio = event.currentTarget;
+          if (!audio.duration || !Number.isFinite(audio.duration)) return;
+          const pct = Math.floor((audio.currentTime / audio.duration) * 100);
+          for (const mark of [25, 50, 75, 100]) {
+            if (pct >= mark && !marked.current.has(mark)) {
+              marked.current.add(mark);
+              trackEvent("progress", titulo, mark);
+            }
+          }
+        }}
+      >
         Tu navegador no soporta audio HTML5.
       </audio>
       {capitulos.length ? (

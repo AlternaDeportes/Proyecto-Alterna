@@ -13,7 +13,7 @@ const SHOW: PodcastShow = {
   slug: "alterna-podcast",
   titulo: "ALTERNA Podcast",
   descripcion:
-    "Charlas con entrenadores, jugadoras y referentes de Ultimate, Newcom y Wingfoil en Santa Fe. El podcast está en producción.",
+    "Charlas con quienes juegan y entrenan ultimate, newcom y wingfoil en Santa Fe. Escuchá Alternando voces en Spotify.",
   coverUrl: null,
   publishedAt: null,
   episodios: [],

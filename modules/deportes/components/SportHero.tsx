@@ -61,13 +61,13 @@ export function SportHero({ deporte }: SportHeroProps) {
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <ButtonLink href="/mapa" variant="primary" size="lg">
-            Dónde practicarlo
+            Encontrá dónde jugar
           </ButtonLink>
           <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-            Ver el teaser
+            Mirá el teaser
           </ButtonLink>
           <ButtonLink href="/historias" variant="accent" size="lg">
-            Historias
+            Conocé las historias
           </ButtonLink>
           <FavoriteButton entidad="deporte" entidadId={deporte.id} />
         </div>

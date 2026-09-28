@@ -128,18 +128,18 @@ export const sportGalleries: Record<
   "ultimate-frisbee": [
     {
       src: "/media/deportes/ultimate-frisbee.webp",
-      alt: "Ultimate Frisbee — práctica en cancha",
-      label: "Práctica",
+      alt: "Ultimate — jugador con el disco, listo para el pase",
+      label: "El disco",
     },
     {
       src: "/media/historias/luchi-farias-g2.webp",
-      alt: "Ultimate — entrenamiento en el parque",
-      label: "Entrenamiento",
+      alt: "Ultimate — Luchi lanza el disco al atardecer",
+      label: "Partido",
     },
     {
       src: "/media/historias/ciclo-dussex-g2.webp",
-      alt: "Ultimate — juego con jersey Ciclo",
-      label: "Partido",
+      alt: "Ultimate — entrenamiento en línea sobre el césped",
+      label: "Entrenamiento",
     },
   ],
   newcom: [
@@ -195,8 +195,8 @@ export const storyMedia: Record<
       },
       {
         src: "/media/historias/luchi-farias-g2.webp",
-        alt: "Ultimate — escena de juego",
-        label: "Juego",
+        alt: "Ultimate — Luchi lanza el disco al atardecer",
+        label: "Partido",
       },
     ],
   },
@@ -210,8 +210,8 @@ export const storyMedia: Record<
       },
       {
         src: "/media/historias/ciclo-dussex-g2.webp",
-        alt: "Ultimate en cancha",
-        label: "Cancha",
+        alt: "Ultimate — entrenamiento en línea sobre el césped",
+        label: "Entrenamiento",
       },
     ],
   },

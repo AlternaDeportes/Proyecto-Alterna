@@ -25,6 +25,7 @@ import {
   type MapaModo,
   type MapUbicacion,
 } from "@/modules/mapa/types";
+import { trackEvent } from "@/modules/analytics/tracker";
 import { crearIconoDeporte, iconoUsuario } from "@/modules/mapa/utils/map-icons";
 
 interface MapExplorerProps {
@@ -128,11 +129,13 @@ export function MapExplorer({
   }, [filtro, visibles]);
 
   const seleccionar = useCallback((u: MapUbicacion) => {
+    trackEvent("map_pin", u.nombre);
     setFiltro(u.deporte.slug as FiltroDeporteSlug);
     setSeleccionada(u);
   }, []);
 
   const cambiarFiltro = useCallback((slug: FiltroDeporteSlug) => {
+    trackEvent("map_filter", slug);
     setFiltro(slug);
     setSeleccionada(null);
   }, []);

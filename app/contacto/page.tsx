@@ -11,7 +11,7 @@ import { ContactForm } from "@/modules/contacto/components/ContactForm";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Contacto",
-  description: `Escribinos, seguinos en redes o colaborá con ${siteConfig.name}. Deportes alternativos en ${siteConfig.defaultCity.name}.`,
+  description: `Escribinos a ${siteConfig.name}: si jugás, si buscás equipo o si querés colaborar. Deportes alternativos en ${siteConfig.defaultCity.name}.`,
   path: "/contacto",
 });
 
@@ -28,7 +28,8 @@ export default function ContactoPage() {
               Contacto
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Formulario, correo o redes: elegí cómo querés acercarte al proyecto.
+              Si jugás, si buscás equipo o si querés colaborar, escribinos. Este es el
+              puente.
             </p>
           </Reveal>
         </Container>

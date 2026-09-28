@@ -15,24 +15,24 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Comunidad",
-  description: `Sumate a ${siteConfig.name}: mapa colaborativo, comentarios y participación en deportes alternativos de ${siteConfig.defaultCity.name}.`,
+  description: `Sumate a ${siteConfig.name}: comentá, proponé un lugar o contanos tu historia. El puente entre quien juega y quien quiere empezar, en ${siteConfig.defaultCity.name}.`,
   path: "/comunidad",
 });
 
 const PASOS = [
   {
     titulo: "Explorá",
-    texto: "Abrí el mapa, filtrá por deporte y encontrá dónde practicar cerca tuyo.",
+    texto: "Abrí el mapa, filtrá por deporte y encontrá la cancha, el club o la costa.",
     icon: "mapaPuente" as const,
   },
   {
     titulo: "Ingresá",
-    texto: "Con Google podés comentar puntos y proponer nuevos lugares de práctica.",
+    texto: "Con tu cuenta podés comentar puntos y proponer lugares nuevos.",
     icon: "comunidadRed" as const,
   },
   {
     titulo: "Participá",
-    texto: "Sumá tu espacio, contanos tu historia o colaborá con el proyecto documental.",
+    texto: "Sumá tu espacio o escribinos tu historia. El puente funciona cuando vos también lo cruzás.",
     icon: "comunidadPersonas" as const,
   },
 ] as const;
@@ -56,12 +56,11 @@ export default async function ComunidadPage() {
             <BrandIcon id="comunidadPersonas" size="lg" className="mb-6" />
             <p className="ds-eyebrow ds-eyebrow--primary mb-4">Participá</p>
             <h1 className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md">
-              El proyecto se sostiene entre todos
+              El puente se arma entre todos
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Sumate al mapa, comentá en los puntos deportivos y formá parte de{" "}
-              <span className="font-semibold text-brand-ink">{siteConfig.name}</span> en{" "}
-              {siteConfig.defaultCity.name}.
+              De un lado, quien juega. Del otro, quien quiere empezar. En el medio, este
+              espacio: comentá un punto, proponé un lugar o contanos tu historia.
             </p>
             <div className="mt-8">
               <JoinCTA autenticado={autenticado} />

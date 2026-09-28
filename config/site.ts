@@ -4,11 +4,13 @@
  */
 export const siteConfig = {
   name: "ALTERNA",
+  /** Nombre que ve Google y la pestaña del navegador. */
+  tabName: "Alterna",
   tagline: "Deportes por descubrir.",
   description:
-    "Narrativa transmedia documental sobre deportes alternativos y amateurs en Santa Fe. Historias reales, comunidades vivas y un mapa para explorar.",
-  /** Dominio de producción — pendiente; SEO usa NEXT_PUBLIC_SITE_URL. */
-  url: "https://alterna.example.com",
+    "ALTERNA es el puente entre quienes juegan ultimate, newcom y wingfoil en Santa Fe y quienes quieren encontrarlos. Mirá las historias, ubicá el lugar y sumate.",
+  /** Dominio canónico de producción (Vercel). */
+  url: "https://proyecto-alterna.vercel.app",
   locale: "es-AR",
   defaultCity: {
     name: "Santa Fe",
@@ -23,8 +25,12 @@ export const siteConfig = {
   social: {
     youtube: "https://www.youtube.com/@alterna.transmedia",
     instagram: "https://www.instagram.com/alterna_sf/",
-    spotify:
-      "https://open.spotify.com/user/31vfbgez4p7unw33yrhfo75cmjzm?si=ebd4e28019fa46da",
+    spotify: "https://open.spotify.com/show/6IW62cfYvSnhQphY6YpF9T",
+  },
+  podcastShow: {
+    title: "Alternando voces",
+    href: "https://open.spotify.com/show/6IW62cfYvSnhQphY6YpF9T",
+    cover: "/media/podcast/alternando-voces.webp",
   },
   /** Teaser documental — publicado en YouTube. */
   teaser: {
@@ -72,7 +78,7 @@ export function teaserEmbedUrl(autoplay = false): string {
 export const socialLinks = [
   { key: "youtube" as const, label: "YouTube", hint: "Teaser disponible" },
   { key: "instagram" as const, label: "Instagram", hint: "Comunidad" },
-  { key: "spotify" as const, label: "Spotify", hint: "Podcast (en producción)" },
+  { key: "spotify" as const, label: "Spotify", hint: "Alternando voces" },
 ] as const;
 
 /** Nav completa para footer (primaria + secundaria) */

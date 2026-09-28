@@ -22,22 +22,23 @@ export function ComunidadChapter() {
             id="comunidad-capitulo"
             className="ds-display max-w-2xl text-display-sm text-brand-ink sm:text-display-md"
           >
-            El proyecto se sostiene entre todos
+            El puente se arma entre todos
           </h2>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-brand-ink/70">
-            Comentá puntos del mapa, proponé lugares de práctica y formá parte de{" "}
-            <span className="font-semibold text-brand-ink">{siteConfig.name}</span> en{" "}
-            {siteConfig.defaultCity.name}.
+            Si jugás, contanos tu lugar. Si querés empezar, el mapa te lleva. Si tenés una
+            historia, escribinos:{" "}
+            <span className="font-semibold text-brand-ink">{siteConfig.name}</span> se
+            sostiene con esa ida y vuelta.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <ButtonLink href="/comunidad" variant="secondary" size="lg">
-              Sumarte
+              Sumate
             </ButtonLink>
             <ButtonLink href="/contacto" variant="outline" size="lg">
-              Escribirnos
+              Escribinos
             </ButtonLink>
             <ButtonLink href="/comunidad#sumar-punto" variant="accent" size="lg">
-              Proponer lugar
+              Proponé un lugar
             </ButtonLink>
           </div>
         </Reveal>

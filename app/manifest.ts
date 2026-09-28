@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${siteConfig.name} — ${siteConfig.tagline}`,
-    short_name: siteConfig.name,
+    short_name: siteConfig.tabName,
     description: siteConfig.description,
     start_url: "/",
     scope: "/",

@@ -10,7 +10,7 @@ export function JoinCTA({ autenticado }: JoinCTAProps) {
   return (
     <div className="flex flex-wrap gap-3">
       <ButtonLink href="/mapa" variant="primary" size="lg">
-        Ir al mapa
+        Encontrá tu lugar
       </ButtonLink>
       {autenticado ? (
         <ButtonLink href="/comunidad#sumar-punto" variant="secondary" size="lg">
@@ -22,7 +22,7 @@ export function JoinCTA({ autenticado }: JoinCTAProps) {
           variant="outline"
           size="lg"
         >
-          Ingresar con Google
+          Ingresar
         </ButtonLink>
       )}
       <ButtonLink href="/contacto" variant="outline" size="lg">

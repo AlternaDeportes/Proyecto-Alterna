@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { BrandPattern } from "@/components/ui/brand-pattern";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -35,13 +36,22 @@ export function ManifiestoSection() {
               cámaras.{" "}
             </span>
             <span className="text-white">
-              {siteConfig.name} da voz a deportes amateurs de {siteConfig.defaultCity.name}
+              {siteConfig.name} es el puente entre esas personas y quien todavía no las
+              conoce.
             </span>
             <span className="text-white/75">
               {" "}
-              — historias auténticas que invitan a descubrir otra forma de vivir el deporte.
+              Si jugás, este espacio es para que te encuentren. Si buscás, empezá por acá.
             </span>
           </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <ButtonLink href="/historias" variant="secondary" size="lg">
+              Conocé a la gente
+            </ButtonLink>
+            <ButtonLink href="/mapa" variant="outlineLight" size="lg">
+              Encontrá un lugar
+            </ButtonLink>
+          </div>
         </Reveal>
       </Container>
     </section>

@@ -11,9 +11,10 @@ import { VocesChapter } from "@/components/sections/VocesChapter";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: siteConfig.tagline,
+  title: siteConfig.tabName,
   description: siteConfig.description,
   path: "/",
+  absolute: true,
 });
 
 /**

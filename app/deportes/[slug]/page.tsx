@@ -54,7 +54,6 @@ export default async function DeporteDetallePage({ params }: PageProps) {
 
   const galeria = sportGallery(deporte.slug);
   const principal = galeria[0]?.src ?? deporte.coverUrl;
-  const secundarias = galeria.slice(1);
 
   return (
     <main id="contenido-principal">
@@ -103,57 +102,55 @@ export default async function DeporteDetallePage({ params }: PageProps) {
               id="mirada-deporte"
               className="ds-display text-2xl text-brand-ink sm:text-3xl"
             >
-              Escena de la disciplina
+              Así se ve
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <div className="mt-8 grid gap-4 md:grid-cols-[1.4fr_0.6fr]">
-              <MediaImage
-                src={principal}
-                alt={galeria[0]?.alt ?? deporte.nombre}
-                accentColor={deporte.colorPrimario}
-                tone="ink"
-                ratio="video"
-                sizes="(max-width: 768px) 100vw, 60vw"
-                frameClassName="min-h-[280px]"
-              />
-              <div className="grid gap-4">
-                {secundarias.length ? (
-                  secundarias.map((foto) => (
-                    <div
-                      key={`${foto.src}-${foto.label}`}
-                      className="ds-frame ds-frame--ink relative min-h-[130px] overflow-hidden"
-                    >
+            <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+              {galeria.length ? (
+                galeria.map((foto, i) => (
+                  <li
+                    key={`${foto.src}-${foto.label}`}
+                    className={i === 0 ? "sm:col-span-2" : undefined}
+                  >
+                    <figure className="ds-frame ds-frame--ink relative aspect-[4/3] overflow-hidden sm:aspect-[3/2]">
                       <Image
                         src={foto.src}
                         alt={foto.alt}
                         fill
                         quality={88}
                         className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 30vw"
+                        sizes={
+                          i === 0
+                            ? "(max-width: 640px) 100vw, 72rem"
+                            : "(max-width: 640px) 100vw, 36rem"
+                        }
+                        priority={i === 0}
                       />
-                      <p className="absolute bottom-3 left-3 z-raised text-[10px] font-bold uppercase tracking-wider text-white drop-shadow">
+                      <div
+                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/80 to-transparent p-3 pt-10 sm:p-4"
+                        aria-hidden
+                      />
+                      <figcaption className="absolute bottom-3 left-3 z-raised text-[10px] font-bold uppercase tracking-wider text-white sm:bottom-4 sm:left-4 sm:text-xs">
                         {foto.label}
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <div
-                    className="ds-frame ds-frame--ink relative flex min-h-[280px] flex-col justify-end overflow-hidden p-6"
-                    style={{
-                      background: `linear-gradient(160deg, ${deporte.colorPrimario}88, var(--color-brand-ink))`,
-                    }}
-                  >
-                    <p className="relative z-raised text-sm font-semibold uppercase tracking-wider text-white/70">
-                      Color de la disciplina
-                    </p>
-                    <p className="relative z-raised mt-2 font-display text-3xl font-black uppercase text-white">
-                      {deporte.nombre}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
+                      </figcaption>
+                    </figure>
+                  </li>
+                ))
+              ) : principal ? (
+                <li className="sm:col-span-2">
+                  <MediaImage
+                    src={principal}
+                    alt={deporte.nombre}
+                    accentColor={deporte.colorPrimario}
+                    tone="ink"
+                    ratio="video"
+                    sizes="100vw"
+                    frameClassName="min-h-0 aspect-[4/3] sm:aspect-video"
+                  />
+                </li>
+              ) : null}
+            </ul>
           </Reveal>
         </Container>
       </Section>
@@ -182,14 +179,14 @@ export default async function DeporteDetallePage({ params }: PageProps) {
             ¿Te copa {deporte.nombre}?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
-            Encontrá dónde practicarlo y sumate a la comunidad.
+            Encontrá a quien ya lo juega y sumate. El mapa es el puente.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href={`/mapa?deporte=${deporte.slug}`} variant="secondary" size="lg">
-              Abrir en el mapa
+              Encontrá el lugar
             </ButtonLink>
             <ButtonLink href="/comunidad" variant="outlineLight" size="lg">
-              Comunidad
+              Sumate
             </ButtonLink>
           </div>
         </Container>

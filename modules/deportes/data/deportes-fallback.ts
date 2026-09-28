@@ -10,9 +10,9 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "ultimate-frisbee",
     nombre: "Ultimate Frisbee",
     descripcion:
-      "7 vs 7 con disco, en césped y sin árbitro. Anotás agarrando en la zona de gol.",
+      "Sin árbitro, en equipo y con disco. En Santa Fe hay canchas abiertas: vení a ver o sumate.",
     historia:
-      "En Santa Fe, los grupos de Ultimate crecen por recomendación entre amigos, plazas y parques.",
+      "En Santa Fe el Ultimate crece porque alguien te dice vení. Acá ves quiénes juegan y dónde encontrarlos: el paso siguiente es ir.",
     dificultad: "INTERMEDIO" as Dificultad,
     jugadoresMin: 7,
     jugadoresMax: 14,
@@ -23,7 +23,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     historiasCount: 2,
     coverUrl: sportCover("ultimate-frisbee"),
     seoTitle: "Ultimate Frisbee en Santa Fe | ALTERNA",
-    seoDescription: "Comunidad, entrenamiento y espíritu deportivo sin árbitros.",
+    seoDescription: "Sumate al Ultimate en Santa Fe: canchas abiertas, equipo y cero árbitros.",
     historias: [
       {
         id: "h1",
@@ -58,8 +58,8 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "newcom",
     nombre: "Newcom",
     descripcion:
-      "Como el vóley, pero la pelota se agarra y se lanza. Red más baja; se juega en clubes.",
-    historia: "Muy arraigado en clubes santafesinos con participación intergeneracional.",
+      "Se agarra, se lanza y se juega en club. Buscá tu equipo en el mapa y preguntá cómo entrar.",
+    historia: "En los clubes santafesinos el Newcom junta generaciones. Si querés entrar, el puente es la gente que ya está ahí: elegí un punto y acercate.",
     dificultad: "PRINCIPIANTE" as Dificultad,
     jugadoresMin: 6,
     jugadoresMax: 12,
@@ -70,7 +70,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     historiasCount: 1,
     coverUrl: sportCover("newcom"),
     seoTitle: "Newcom en Santa Fe | ALTERNA",
-    seoDescription: "Vóley adaptado con fuerte espíritu comunitario.",
+    seoDescription: "Encontrá un club de Newcom en Santa Fe y sumate a la comunidad.",
     historias: [
       {
         id: "h3",
@@ -129,8 +129,8 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     slug: "wingfoil",
     nombre: "Wingfoil",
     descripcion:
-      "Tabla, foil y un ala inflable. El viento te lleva sobre el río o la laguna.",
-    historia: "Práctica en crecimiento sobre el Paraná y lagunas de la región.",
+      "Tabla, ala y el viento del río. El mapa te muestra por dónde arrancar y con quién.",
+    historia: "Sobre el Paraná y la laguna, el wingfoil se aprende de a poco y en grupo. Si el viento te llama, el mapa te deja en la costa.",
     dificultad: "AVANZADO" as Dificultad,
     jugadoresMin: 1,
     jugadoresMax: 1,
@@ -141,7 +141,7 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     historiasCount: 1,
     coverUrl: sportCover("wingfoil"),
     seoTitle: "Wingfoil en Santa Fe | ALTERNA",
-    seoDescription: "Libertad, viento y aprendizaje sobre el agua.",
+    seoDescription: "Arrancá en el wingfoil de Santa Fe: el mapa te acerca al río y a quien ya navega.",
     historias: [
       {
         id: "h4",

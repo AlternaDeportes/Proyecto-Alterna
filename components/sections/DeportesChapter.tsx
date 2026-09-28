@@ -32,10 +32,10 @@ export async function DeportesChapter() {
             id="deportes-capitulo"
             className="ds-display max-w-2xl text-display-sm text-brand-ink sm:text-display-md"
           >
-            Tres deportes, tres formas de jugar
+            Tres deportes, tres formas de entrar
           </h2>
           <p className="mt-4 max-w-lg text-brand-ink/70">
-            Cómo se juega cada uno en Santa Fe.
+            Elegí uno, mirá quién lo juega y encontrá dónde sumarte en Santa Fe.
           </p>
         </Reveal>
       </Container>
@@ -90,7 +90,7 @@ export async function DeportesChapter() {
                       toneClass[tone]
                     )}
                   >
-                    Entrar →
+                    Conocer →
                   </span>
                 </div>
               </Link>
@@ -105,7 +105,7 @@ export async function DeportesChapter() {
           href="/deportes"
           className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-primary transition-colors hover:text-brand-ink focus-ring"
         >
-          Ver todos los deportes →
+          Ver los tres deportes →
         </Link>
       </Container>
     </section>

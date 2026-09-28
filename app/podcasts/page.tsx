@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
@@ -10,13 +11,15 @@ import { podcastService } from "@/modules/podcast/services/podcast.service";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Podcast",
-  description: `Podcast ${siteConfig.name}: en producción. Voces de deportes alternativos en ${siteConfig.defaultCity.name}.`,
+  description: `${siteConfig.podcastShow.title}, el podcast de ${siteConfig.tabName}. Voces de ultimate, newcom y wingfoil en ${siteConfig.defaultCity.name}.`,
   path: "/podcasts",
+  image: siteConfig.podcastShow.cover,
 });
 
 export default async function PodcastsPage() {
   const show = await podcastService.obtenerShow();
   const hayEpisodios = show.episodios.length > 0;
+  const spotify = siteConfig.podcastShow;
 
   return (
     <main id="contenido-principal">
@@ -24,31 +27,45 @@ export default async function PodcastsPage() {
       <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-24">
         <Container>
           <Reveal>
-            <p className="ds-eyebrow ds-eyebrow--primary mb-4">Voces en primera persona</p>
-            <h1 className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md">
-              {show.titulo}
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink/70">
-              {show.descripcion}
-            </p>
-            {!hayEpisodios ? (
-              <p className="mt-6 inline-flex rounded-sm bg-brand-primary/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary">
-                En producción
-              </p>
-            ) : null}
-            <div className="mt-8 flex flex-wrap gap-4">
-              <ButtonLink
-                href={siteConfig.social.spotify}
+            <div className="grid items-center gap-8 sm:grid-cols-[auto_1fr] sm:gap-10">
+              <a
+                href={spotify.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="secondary"
-                size="lg"
+                className="ds-frame ds-frame--paper relative mx-auto block aspect-square w-44 overflow-hidden shadow-lift focus-ring sm:mx-0 sm:w-52"
               >
-                Seguir en Spotify
-              </ButtonLink>
-              <ButtonLink href="/comunidad" variant="outline" size="lg">
-                Comunidad
-              </ButtonLink>
+                <Image
+                  src={spotify.cover}
+                  alt={`Portada de ${spotify.title} en Spotify`}
+                  fill
+                  priority
+                  sizes="208px"
+                  className="object-cover"
+                />
+              </a>
+              <div>
+                <p className="ds-eyebrow ds-eyebrow--primary mb-4">Voces en primera persona</p>
+                <h1 className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md">
+                  {spotify.title}
+                </h1>
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink/70">
+                  {show.descripcion}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <ButtonLink
+                    href={spotify.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="secondary"
+                    size="lg"
+                  >
+                    Escuchar en Spotify
+                  </ButtonLink>
+                  <ButtonLink href="/comunidad" variant="outline" size="lg">
+                    Sumate
+                  </ButtonLink>
+                </div>
+              </div>
             </div>
           </Reveal>
         </Container>
@@ -70,11 +87,10 @@ export default async function PodcastsPage() {
           ) : (
             <Reveal>
               <div className="max-w-xl border border-brand-ink/10 bg-white p-8 sm:p-10">
-                <h2 className="ds-display text-2xl text-brand-ink">Todavía no hay episodios</h2>
+                <h2 className="ds-display text-2xl text-brand-ink">Escuchalo en Spotify</h2>
                 <p className="mt-4 text-brand-ink/70">
-                  Estamos produciendo el podcast. Cuando haya audio publicado, va a aparecer
-                  acá. Mientras tanto podés seguir el perfil en Spotify o sumarte a la
-                  comunidad.
+                  Los episodios están en Spotify, con la misma portada del show. Entrá a
+                  escuchar y, si querés sumar tu voz, escribinos.
                 </p>
               </div>
             </Reveal>

@@ -14,6 +14,7 @@ import type {
   AdminHueco,
   AdminMetricas,
   AdminSerieDia,
+  AdminUso,
 } from "@/modules/administracion/types";
 
 async function contarPeriodo(desde: Date, hasta: Date): Promise<AdminConteoPeriodo> {
@@ -71,16 +72,13 @@ async function contarPeriodo(desde: Date, hasta: Date): Promise<AdminConteoPerio
   };
 }
 
-function huecos(mes: AdminConteoPeriodo, visitasTotales: number): AdminHueco[] {
+function huecos(uso: AdminUso): AdminHueco[] {
   return [
     {
       id: "visitas",
       titulo: "Visitas propias (con consentimiento)",
-      detalle:
-        visitasTotales === 0
-          ? "Todavía no hay pageviews. Entrá al sitio con “Aceptar todas” en cookies para empezar a llenar el mes."
-          : "Ya estamos midiendo páginas vistas, sesiones anónimas y dispositivos en nuestra base.",
-      estado: visitasTotales === 0 ? "parcial" : "listo",
+      detalle: "Páginas vistas, sesiones anónimas y dispositivos en nuestra base.",
+      estado: "listo",
     },
     {
       id: "comunidad",
@@ -97,46 +95,62 @@ function huecos(mes: AdminConteoPeriodo, visitasTotales: number): AdminHueco[] {
     {
       id: "reproducciones",
       titulo: "Reproducciones de podcast y documental",
-      detalle:
-        "Falta registrar play, pause y % visto en los players. Hoy solo vemos el inventario de episodios, no el consumo real.",
-      estado: "falta",
+      detalle: `Plays del teaser y del audio: ${uso.reproducciones}. Avances de escucha: ${uso.avances}.`,
+      estado: "listo",
     },
     {
       id: "mapa",
       titulo: "Uso del mapa",
-      detalle:
-        "Falta contar filtros por deporte, clicks en pines y tiempo en ficha. Hoy sí vemos puntos propuestos vs aprobados.",
-      estado: "parcial",
+      detalle: `Filtros por deporte: ${uso.filtrosMapa}. Clicks en pines: ${uso.pinesMapa}.`,
+      estado: "listo",
     },
     {
       id: "fuentes",
-      titulo: "Fuentes de tráfico (UTM / referrer detallado)",
+      titulo: "Fuentes de tráfico",
       detalle:
-        "Guardamos el host del referrer. Para campañas (Instagram, QR, mail) conviene Plausible o GA4 con UTM.",
-      estado: "parcial",
+        "Referrer y parámetros utm_source, utm_medium y utm_campaign de cada visita.",
+      estado: "listo",
     },
     {
       id: "engagement",
       titulo: "Tiempo en página, rebote y scroll",
       detalle:
-        "El tracker propio solo cuenta la visita. Un proveedor externo cubre bounce, duración y profundidad de lectura.",
-      estado: "falta",
+        uso.duracionMediaSeg === null
+          ? "Ya se registra al salir de la página. Todavía no hay visitas con duración."
+          : `Promedio ${uso.duracionMediaSeg}s en página, scroll ${uso.scrollMedio ?? 0}% y rebote ${uso.rebotePct ?? 0}%.`,
+      estado: "listo",
     },
     {
-      id: "geo",
-      titulo: "Ciudad / dispositivo fino / navegador",
+      id: "navegador",
+      titulo: "Navegador",
       detalle:
-        "Clasificamos mobile / tablet / desktop. No guardamos IP ni ciudad para respetar privacidad.",
-      estado: "parcial",
+        "Chrome, Safari, Firefox, Edge u otro. No guardamos ciudad ni IP.",
+      estado: "listo",
     },
     {
       id: "editorial",
       titulo: "CMS de contenido desde el panel",
       detalle:
-        "El catálogo se ve acá, pero crear/editar deportes, historias y episodios sigue en seed / Prisma Studio.",
+        "El catálogo se ve acá, pero crear y editar fichas sigue en el seed.",
       estado: "falta",
     },
   ];
+}
+
+function promedio(values: number[]) {
+  if (!values.length) return null;
+  return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+}
+
+function topConteo(rows: string[], limit = 6) {
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    counts.set(row, (counts.get(row) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([label, total]) => ({ label, total }));
 }
 
 export const metricasService = {
@@ -148,7 +162,7 @@ export const metricasService = {
     const serieDesde = daysAgoAR(29, ahora);
     const serieHasta = startOfTomorrowAR(ahora);
 
-    const [mesActual, mesAnterior, pageViews, usuarios, comentarios, puntos, mensajes, visitasTotales] =
+    const [mesActual, mesAnterior, pageViews, usuarios, comentarios, puntos, mensajes, vistasMes, eventosMes] =
       await Promise.all([
         contarPeriodo(mesDesde, mesHasta),
         contarPeriodo(anteriorDesde, mesDesde),
@@ -172,7 +186,22 @@ export const metricasService = {
           where: { createdAt: { gte: serieDesde, lt: serieHasta } },
           select: { createdAt: true },
         }),
-        prisma.pageView.count(),
+        prisma.pageView.findMany({
+          where: { createdAt: { gte: mesDesde, lt: mesHasta } },
+          select: {
+            sessionId: true,
+            referrer: true,
+            utmSource: true,
+            browser: true,
+            durationMs: true,
+            scrollPct: true,
+          },
+        }),
+        prisma.analyticsEvent.groupBy({
+          by: ["type"],
+          where: { createdAt: { gte: mesDesde, lt: mesHasta } },
+          _count: { _all: true },
+        }),
       ]);
 
     const byDay = new Map<string, AdminSerieDia>();
@@ -218,6 +247,42 @@ export const metricasService = {
       .slice(0, 8)
       .map(([path, vistas]) => ({ path, vistas }));
 
+    const porTipo = new Map(eventosMes.map((row) => [row.type, row._count._all]));
+    const sesiones = new Map<string, number>();
+    for (const vista of vistasMes) {
+      sesiones.set(vista.sessionId, (sesiones.get(vista.sessionId) ?? 0) + 1);
+    }
+    const sesionesTotales = sesiones.size;
+    const rebote =
+      sesionesTotales === 0
+        ? null
+        : Math.round(
+            ([...sesiones.values()].filter((count) => count === 1).length / sesionesTotales) *
+              100
+          );
+    const fuentes = topConteo(
+      vistasMes.map((vista) => vista.utmSource || vista.referrer || "directo")
+    );
+    const uso: AdminUso = {
+      reproducciones: porTipo.get("play") ?? 0,
+      avances: porTipo.get("progress") ?? 0,
+      filtrosMapa: porTipo.get("map_filter") ?? 0,
+      pinesMapa: porTipo.get("map_pin") ?? 0,
+      duracionMediaSeg: promedio(
+        vistasMes.flatMap((vista) =>
+          vista.durationMs === null ? [] : [Math.round(vista.durationMs / 1000)]
+        )
+      ),
+      scrollMedio: promedio(
+        vistasMes.flatMap((vista) => (vista.scrollPct === null ? [] : [vista.scrollPct]))
+      ),
+      rebotePct: rebote,
+      fuentes,
+      navegadores: topConteo(
+        vistasMes.map((vista) => vista.browser || "otro")
+      ),
+    };
+
     return {
       etiquetaMes: etiquetaMesAR(ahora),
       etiquetaMesAnterior: etiquetaMesAR(anteriorDesde),
@@ -229,7 +294,8 @@ export const metricasService = {
         device,
         total,
       })),
-      huecos: huecos(mesActual, visitasTotales),
+      uso,
+      huecos: huecos(uso),
     };
   },
 };

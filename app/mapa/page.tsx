@@ -9,7 +9,7 @@ import { ubicacionService } from "@/modules/mapa/services/ubicacion.service";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Mapa",
-  description: `Mapa de deportes en Santa Fe y alrededores (hasta 100 km). Filtrá por deporte, explorá la región y sumá tu punto.`,
+  description: `Mapa de ${siteConfig.name}: el puente hacia las canchas, los clubes y la costa en ${siteConfig.defaultCity.name}. Filtrá por deporte y sumá tu punto.`,
   path: "/mapa",
 });
 
@@ -37,9 +37,8 @@ export default async function MapaPage({ searchParams }: MapaPageProps) {
             Encontrá tu deporte
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/70">
-            Clubes de Newcom, Ultimate y Wingfoil en {siteConfig.defaultCity.name},
-            Santo Tomé y Monte Vera. Elegí un deporte a la derecha o tocá un punto
-            en el mapa.
+            Clubes de Newcom, Ultimate y Wingfoil en {siteConfig.defaultCity.name}, Santo
+            Tomé y Monte Vera. Elegí un deporte, tocá un punto y andá a conocer a la gente.
           </p>
         </Container>
       </section>

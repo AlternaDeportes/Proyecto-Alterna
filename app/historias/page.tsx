@@ -37,9 +37,8 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
               Historias
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Personas de Ultimate, Newcom y Wingfoil en{" "}
-              {siteConfig.defaultCity.name}. Las piezas audiovisuales del proyecto siguen
-              en producción; acá ya podés conocer el territorio y las comunidades.
+              Personas de Ultimate, Newcom y Wingfoil en {siteConfig.defaultCity.name}. Leé
+              su historia. Si la tuya también es de acá, escribinos: somos el puente.
             </p>
           </Reveal>
         </Container>

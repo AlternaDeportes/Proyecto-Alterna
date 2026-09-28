@@ -15,7 +15,7 @@ Helpers de metadatos, Schema.org, sitemap y robots.
 
 ## URL canónica
 
-Prioridad: `NEXT_PUBLIC_SITE_URL` → `config/site.ts` (`siteConfig.url`).
+Prioridad: `NEXT_PUBLIC_SITE_URL` (si no es localhost en Vercel) → `AUTH_URL` → host de producción de Vercel → `config/site.ts`.
 
 En producción, seteá el dominio real en `.env`:
 

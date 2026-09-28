@@ -28,15 +28,15 @@ export async function MapaChapter() {
             id="mapa-capitulo"
             className="ds-display max-w-3xl text-display-sm text-brand-ink sm:text-display-md"
           >
-            El mapa es el corazón
+            El mapa es el puente
           </h2>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-brand-ink/70">
-            Una vista previa de dónde se entrena en {siteConfig.defaultCity.name}. Para filtrar,
-            acercarte y sumar puntos, entrá al mapa.
+            De acá salís hacia la cancha, el club o la costa. Encontrá dónde se entrena en{" "}
+            {siteConfig.defaultCity.name} y andá a conocerlos.
           </p>
           <div className="mt-8">
             <ButtonLink href="/mapa" variant="secondary" size="lg">
-              Ir al mapa
+              Encontrá tu lugar
             </ButtonLink>
           </div>
         </Reveal>

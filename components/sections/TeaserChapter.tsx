@@ -1,5 +1,6 @@
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { JsonLdScript } from "@/components/seo/JsonLdScript";
+import { BrandPattern } from "@/components/ui/brand-pattern";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -36,7 +37,12 @@ export function TeaserChapter() {
           },
         }}
       />
-      <ColorStripe className="absolute inset-x-0 top-0" />
+      <BrandPattern variant="ondas" opacity={100} className="scale-110" />
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-brand-ink/75 via-brand-ink/45 to-brand-ink/80"
+        aria-hidden
+      />
+      <ColorStripe className="absolute inset-x-0 top-0 z-raised" />
       <Container className="relative z-raised">
         <Reveal>
           <p className="ds-eyebrow ds-eyebrow--lime mb-4">{siteConfig.teaser.label}</p>
@@ -47,8 +53,8 @@ export function TeaserChapter() {
             El teaser ya está en YouTube
           </h2>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-            Mirá acá el primer vistazo al documental. La serie sigue a quienes juegan
-            ultimate, newcom y wingfoil en Santa Fe.
+            Mirá acá el primer vistazo. Después, el mapa y las historias te llevan hasta
+            quienes juegan ultimate, newcom y wingfoil en Santa Fe.
           </p>
         </Reveal>
 

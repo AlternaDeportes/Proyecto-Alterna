@@ -49,19 +49,19 @@ export function HeroIntro() {
       <ColorStripe className="mt-6 max-w-[10rem] rounded-full" />
 
       <p className="mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg">
-        ALTERNA sigue a quienes juegan ultimate, newcom y wingfoil: entrenamientos,
-        lugares y comunidades.
+        Somos el puente: te acercamos a quienes juegan ultimate, newcom y wingfoil.
+        Mirá el teaser, encontrá el lugar y sumate.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
         <ButtonLink href="#teaser" variant="secondary" size="lg">
-          Volvé al teaser
+          Mirá el teaser
         </ButtonLink>
         <ButtonLink href="/mapa" variant="outlineLight" size="lg">
-          Explorá el mapa
+          Encontrá dónde jugar
         </ButtonLink>
         <ButtonLink href="/deportes" variant="accent" size="lg">
-          Deportes
+          Conocé los deportes
         </ButtonLink>
       </div>
     </Container>

@@ -34,8 +34,8 @@ export default async function DocumentalesPage() {
               {show.titulo}
             </p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/70">
-              El teaser ya está en YouTube. La serie sigue a quienes juegan ultimate, newcom y
-              wingfoil en Santa Fe.
+              El teaser ya está en YouTube. Mirá a quienes juegan ultimate, newcom y wingfoil
+              en Santa Fe, y después andá a buscarlos.
             </p>
             <p className="mt-6 inline-flex rounded-sm bg-brand-secondary px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-ink">
               Teaser en YouTube
@@ -50,8 +50,8 @@ export default async function DocumentalesPage() {
               >
                 Abrir en YouTube
               </ButtonLink>
-              <ButtonLink href="/deportes" variant="outline" size="lg">
-                Ver los deportes
+              <ButtonLink href="/mapa" variant="outline" size="lg">
+                Encontrá dónde juegan
               </ButtonLink>
             </div>
           </Reveal>

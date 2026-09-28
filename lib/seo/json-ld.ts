@@ -9,14 +9,15 @@ export function organizationJsonLd(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
+    name: siteConfig.tabName,
+    alternateName: siteConfig.name,
     description: siteConfig.description,
     url: getSiteUrl(),
     email: siteConfig.contact.email,
     ...(siteConfig.contact.phone
       ? { telephone: siteConfig.contact.phone }
       : {}),
-    logo: absoluteUrl("/brand/logo-blanco-transparent.png"),
+    logo: absoluteUrl("/icons/icon-512.png"),
     sameAs,
     address: {
       "@type": "PostalAddress",
@@ -31,14 +32,14 @@ export function websiteJsonLd(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.name,
-    alternateName: siteConfig.tagline,
+    name: siteConfig.tabName,
+    alternateName: [siteConfig.name, siteConfig.tagline],
     url: getSiteUrl(),
     description: siteConfig.description,
     inLanguage: siteConfig.locale,
     publisher: {
       "@type": "Organization",
-      name: siteConfig.name,
+      name: siteConfig.tabName,
       url: getSiteUrl(),
     },
   };

@@ -38,9 +38,8 @@ export default async function DeportesPage() {
               Deportes por descubrir
             </h1>
             <p className="mt-5 max-w-xl text-lg text-brand-ink/70">
-              Ultimate Frisbee, Newcom y Wingfoil: las tres disciplinas del proyecto
-              ALTERNA en {siteConfig.defaultCity.name}. Cada una tiene historias, territorio
-              y piezas audiovisuales propias.
+              Ultimate, Newcom y Wingfoil. Elegí una puerta, conocé a quien lo juega y
+              encontrá dónde sumarte en {siteConfig.defaultCity.name}.
             </p>
           </Reveal>
         </Container>
@@ -97,7 +96,7 @@ export default async function DeportesPage() {
                       toneClass[tone]
                     )}
                   >
-                    Entrar →
+                    Conocer →
                   </span>
                 </div>
               </Link>
@@ -113,7 +112,7 @@ export default async function DeportesPage() {
             href="/mapa"
             className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-accent hover:text-brand-ink focus-ring"
           >
-            Verlos en el mapa →
+            Encontralos en el mapa →
           </Link>
         </Container>
       </section>

@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 
-/** URL canónica del sitio (env pública o config). */
+function stripSlash(url: string) {
+  return url.replace(/\/$/, "");
+}
+
+function isLocalhostUrl(url: string) {
+  return /localhost|127\.0\.0\.1/i.test(url);
+}
+
+/** URL canónica del sitio (env pública, host de Vercel o config). */
 export function getSiteUrl(): string {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL
+    ? stripSlash(process.env.NEXT_PUBLIC_SITE_URL)
+    : undefined;
+  const authUrl = process.env.AUTH_URL ? stripSlash(process.env.AUTH_URL) : undefined;
+  const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
+  if (fromEnv && !isLocalhostUrl(fromEnv)) return fromEnv;
+  if (authUrl && !isLocalhostUrl(authUrl)) return authUrl;
+  if (vercelProd) return `https://${stripSlash(vercelProd)}`;
   if (fromEnv) return fromEnv;
-  return siteConfig.url.replace(/\/$/, "");
+  return stripSlash(siteConfig.url);
 }
 
 export function absoluteUrl(path = "/"): string {
@@ -22,6 +38,8 @@ export interface PageSeoInput {
   index?: boolean;
   type?: "website" | "article";
   image?: string;
+  /** Si true, el título de la pestaña es exactamente `title` (sin sufijo). */
+  absolute?: boolean;
 }
 
 /** Construye Metadata consistente para páginas del sitio. */
@@ -32,21 +50,23 @@ export function buildPageMetadata({
   index = true,
   type = "website",
   image,
+  absolute = false,
 }: PageSeoInput): Metadata {
   const url = absoluteUrl(path);
   const ogImage = image ? absoluteUrl(image) : absoluteUrl("/opengraph-image");
+  const fullTitle = absolute ? title : `${title} | ${siteConfig.tabName}`;
 
   return {
-    title,
+    title: absolute ? { absolute: title } : title,
     description,
     alternates: {
       canonical: url,
     },
     openGraph: {
-      title: `${title} | ${siteConfig.name}`,
+      title: fullTitle,
       description,
       url,
-      siteName: siteConfig.name,
+      siteName: siteConfig.tabName,
       locale: siteConfig.locale,
       type,
       images: [
@@ -60,7 +80,7 @@ export function buildPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${siteConfig.name}`,
+      title: fullTitle,
       description,
       images: [ogImage],
     },
@@ -77,11 +97,11 @@ export function buildRootMetadata(): Metadata {
   return {
     metadataBase: new URL(base),
     title: {
-      default: `${siteConfig.name} | ${siteConfig.tagline}`,
-      template: `%s | ${siteConfig.name}`,
+      default: siteConfig.tabName,
+      template: `%s | ${siteConfig.tabName}`,
     },
     description: siteConfig.description,
-    applicationName: siteConfig.name,
+    applicationName: siteConfig.tabName,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
     publisher: siteConfig.name,
@@ -93,6 +113,7 @@ export function buildRootMetadata(): Metadata {
       "Wingfoil",
       "documental",
       "transmedia",
+      "Alterna",
       "ALTERNA",
     ],
     alternates: {
@@ -102,8 +123,8 @@ export function buildRootMetadata(): Metadata {
       type: "website",
       locale: siteConfig.locale,
       url: base,
-      siteName: siteConfig.name,
-      title: `${siteConfig.name} | ${siteConfig.tagline}`,
+      siteName: siteConfig.tabName,
+      title: siteConfig.tabName,
       description: siteConfig.description,
       images: [
         {
@@ -116,7 +137,7 @@ export function buildRootMetadata(): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${siteConfig.name} | ${siteConfig.tagline}`,
+      title: siteConfig.tabName,
       description: siteConfig.description,
       images: [absoluteUrl("/opengraph-image")],
     },
@@ -136,7 +157,7 @@ export function buildRootMetadata(): Metadata {
     appleWebApp: {
       capable: true,
       statusBarStyle: "black-translucent",
-      title: siteConfig.name,
+      title: siteConfig.tabName,
     },
     icons: {
       icon: [

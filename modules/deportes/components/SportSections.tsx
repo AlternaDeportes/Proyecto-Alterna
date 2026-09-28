@@ -21,7 +21,7 @@ export function SportHistorias({ historias, colorPrimario }: SportHistoriasProps
         Historias
       </h2>
       <p className="mt-2 max-w-xl text-brand-ink/65">
-        Voces reales del documental vinculadas a esta disciplina.
+        Voces de quien lo vive. Leé y, si querés contar la tuya, escribinos.
       </p>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -44,7 +44,7 @@ export function SportHistorias({ historias, colorPrimario }: SportHistoriasProps
                   href={`/historias/${historia.slug}`}
                   className="mt-2 block rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
                 >
-                  Leer historia →
+                  Leer su historia →
                 </Link>
               </footer>
             </blockquote>
@@ -78,14 +78,14 @@ export function SportUbicaciones({
             Dónde practicar
           </h2>
           <p className="mt-2 text-brand-ink/65">
-            Puntos en Santa Fe para sumarte o conocer la comunidad.
+            Lugares reales en Santa Fe. Elegí uno y andá a conocer la comunidad.
           </p>
         </div>
         <Link
           href={`/mapa?deporte=${deporteSlug}`}
           className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-primary hover:text-brand-ink focus-ring"
         >
-          Ver en el mapa →
+          Verlos en el mapa →
         </Link>
       </div>
 

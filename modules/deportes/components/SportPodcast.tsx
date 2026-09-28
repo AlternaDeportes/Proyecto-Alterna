@@ -24,8 +24,8 @@ export async function SportPodcast({ deporteSlug }: SportPodcastProps) {
           </h2>
           <p className="mt-2 max-w-lg text-brand-ink/65">
             {episodios.length
-              ? "Episodios relacionados con esta disciplina."
-              : "El podcast está en producción. Cuando haya episodios publicados van a aparecer acá."}
+              ? "Episodios para escuchar a quien lo vive."
+              : "Escuchá Alternando voces en Spotify y, si querés sumar la tuya, escribinos."}
           </p>
         </div>
         <div className="flex flex-wrap gap-4">
@@ -33,7 +33,7 @@ export async function SportPodcast({ deporteSlug }: SportPodcastProps) {
             href="/podcasts"
             className="rounded-sm text-sm font-semibold text-brand-primary hover:underline focus-ring"
           >
-            Ir al podcast →
+            Seguí el podcast →
           </Link>
           <a
             href={siteConfig.social.spotify}

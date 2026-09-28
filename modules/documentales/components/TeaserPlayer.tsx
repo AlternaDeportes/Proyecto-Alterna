@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { documentaryCovers, IMAGE_QUALITY } from "@/config/media";
 import { siteConfig, teaserEmbedUrl } from "@/config/site";
+import { trackEvent } from "@/modules/analytics/tracker";
 import { cn } from "@/lib/utils";
 
 interface TeaserPlayerProps {
@@ -39,7 +40,10 @@ export function TeaserPlayer({ className, featured = false }: TeaserPlayerProps)
         ) : (
           <button
             type="button"
-            onClick={() => setPlaying(true)}
+            onClick={() => {
+              trackEvent("play", "teaser");
+              setPlaying(true);
+            }}
             className="group relative h-full w-full focus-ring"
             aria-label={`Reproducir ${siteConfig.teaser.title}`}
           >

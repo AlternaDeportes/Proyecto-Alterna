@@ -33,7 +33,7 @@ export default function PrivacidadPage() {
             "Formularios de contacto / comunidad: nombre, email, mensaje e interés declarado.",
             "Inicio de sesión con Google: nombre, email y foto de perfil que provee el proveedor OAuth.",
             "Aportes al mapa: datos del punto propuesto y vínculo con tu cuenta.",
-            "Analítica opcional (solo si aceptás cookies analíticas): ruta visitada, tipo de dispositivo y un identificador de sesión anónimo. No asociamos esa visita a tu cuenta ni guardamos IP con ese fin.",
+            "Analítica opcional (solo si aceptás cookies analíticas): ruta visitada, tipo de dispositivo, navegador, tiempo aproximado en la página, profundidad de scroll, reproducciones, uso del mapa y un identificador de sesión anónimo. No asociamos esa visita a tu cuenta ni guardamos IP con ese fin.",
             "Datos técnicos básicos del servidor (IP, fecha, user-agent) en logs de seguridad y rate limit.",
           ],
         },

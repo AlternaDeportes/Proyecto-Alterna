@@ -55,7 +55,7 @@ export function AudiovisualChapter() {
                   Teaser
                 </p>
                 <p className="mt-1 text-sm text-white/80">
-                  Mirá el primer vistazo al documental.
+                Mirá y después andá a buscarlos.
                 </p>
               </div>
             </Link>
@@ -66,11 +66,11 @@ export function AudiovisualChapter() {
               id="audiovisual-titulo"
               className="ds-display text-display-sm text-brand-ink sm:text-display-md"
             >
-              La mirada documental
+              Mirá cómo se juega
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/70">
-              El teaser ya está en YouTube. La serie sigue a quienes juegan ultimate, newcom y
-              wingfoil en Santa Fe.
+              El teaser ya está en YouTube. Es el primer puente hacia quienes juegan ultimate,
+              newcom y wingfoil en Santa Fe.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
               <ButtonLink href="#teaser" variant="accent" size="lg">
@@ -80,7 +80,7 @@ export function AudiovisualChapter() {
                 href="/documentales"
                 className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-primary hover:text-brand-ink focus-ring"
               >
-                Más sobre el documental →
+                Seguí al documental →
               </Link>
             </div>
           </Reveal>

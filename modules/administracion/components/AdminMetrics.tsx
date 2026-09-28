@@ -53,6 +53,15 @@ function downloadCsv(metricas: AdminMetricas) {
         `${d.fecha},${d.visitas},${d.usuarios},${d.comentarios},${d.puntos},${d.mensajes}`
     ),
     "",
+    "Reproducciones,Filtros mapa,Pines,Tiempo medio s,Scroll medio,Rebote %",
+    `${metricas.uso.reproducciones},${metricas.uso.filtrosMapa},${metricas.uso.pinesMapa},${metricas.uso.duracionMediaSeg ?? ""},${metricas.uso.scrollMedio ?? ""},${metricas.uso.rebotePct ?? ""}`,
+    "",
+    "Fuente,Visitas",
+    ...metricas.uso.fuentes.map((f) => `${f.label},${f.total}`),
+    "",
+    "Navegador,Visitas",
+    ...metricas.uso.navegadores.map((n) => `${n.label},${n.total}`),
+    "",
     `Comparado contra ${etiquetaMesAnterior}`,
   ];
   const blob = new Blob(["\uFEFF" + lines.join("\n")], {
@@ -172,6 +181,75 @@ export function AdminMetrics({ metricas }: AdminMetricsProps) {
                       style={{ width: `${(d.total / totalDispositivos) * 100}%` }}
                     />
                   </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {(
+          [
+            ["Reproducciones", metricas.uso.reproducciones],
+            ["Filtros del mapa", metricas.uso.filtrosMapa],
+            ["Clicks en pines", metricas.uso.pinesMapa],
+            [
+              "Tiempo medio",
+              metricas.uso.duracionMediaSeg === null
+                ? "—"
+                : `${metricas.uso.duracionMediaSeg}s`,
+            ],
+            [
+              "Scroll medio",
+              metricas.uso.scrollMedio === null ? "—" : `${metricas.uso.scrollMedio}%`,
+            ],
+            [
+              "Rebote",
+              metricas.uso.rebotePct === null ? "—" : `${metricas.uso.rebotePct}%`,
+            ],
+          ] as const
+        ).map(([label, value]) => (
+          <div
+            key={label}
+            className="rounded-2xl border border-brand-ink/10 bg-white px-4 py-4 shadow-soft"
+          >
+            <p className="text-xs uppercase tracking-wide text-brand-ink/45">{label}</p>
+            <p className="mt-1 text-2xl font-bold text-brand-ink">{value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-2xl border border-brand-ink/10 bg-white p-5 shadow-soft">
+          <h3 className="font-display text-sm font-bold uppercase text-brand-ink">
+            De dónde llegan
+          </h3>
+          {!metricas.uso.fuentes.length ? (
+            <p className="mt-3 text-sm text-brand-ink/55">Sin visitas este mes.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {metricas.uso.fuentes.map((fuente) => (
+                <li key={fuente.label} className="flex justify-between gap-3 text-sm">
+                  <span className="truncate text-brand-ink">{fuente.label}</span>
+                  <span className="text-brand-ink/45">{fuente.total}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="rounded-2xl border border-brand-ink/10 bg-white p-5 shadow-soft">
+          <h3 className="font-display text-sm font-bold uppercase text-brand-ink">
+            Navegadores
+          </h3>
+          {!metricas.uso.navegadores.length ? (
+            <p className="mt-3 text-sm text-brand-ink/55">Sin datos este mes.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {metricas.uso.navegadores.map((nav) => (
+                <li key={nav.label} className="flex justify-between gap-3 text-sm capitalize">
+                  <span className="text-brand-ink">{nav.label}</span>
+                  <span className="text-brand-ink/45">{nav.total}</span>
                 </li>
               ))}
             </ul>
