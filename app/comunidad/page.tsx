@@ -3,6 +3,7 @@ import { siteConfig } from "@/config/site";
 import { auth } from "@/lib/auth";
 import { BrandIcon } from "@/components/brand/BrandIcon";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { ClinicBand } from "@/components/clinic/ClinicBand";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
@@ -110,6 +111,7 @@ export default async function ComunidadPage() {
           </Reveal>
         </Container>
       </Section>
+      <ClinicBand />
     </main>
   );
 }

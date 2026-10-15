@@ -41,14 +41,25 @@ export const siteConfig = {
     shortLabel: "En YouTube",
   },
   /**
-   * Nav primaria — máx. 6 ítems (manual: comunicación simple).
-   * Comunidad y Contacto viven en footer / secondaryNav.
+   * Clínica de Ultimate. formUrl queda guardado para enchufar el formulario
+   * cuando published pase a true.
+   */
+  clinica: {
+    title: "Clínica de Ultimate",
+    href: "/clinica",
+    published: false,
+    formUrl:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeMiZK-EGVgxlyPlK-uSliMK_Plyqe8noPPu6bDuA60pSGO0g/viewform",
+  },
+  /**
+   * Nav primaria. Comunidad y Contacto viven en footer / secondaryNav.
    */
   navigation: [
     { label: "Inicio", href: "/" },
     { label: "Documental", href: "/documentales" },
     { label: "Podcast", href: "/podcasts" },
     { label: "Deportes", href: "/deportes" },
+    { label: "Clínica", href: "/clinica" },
     { label: "Historias", href: "/historias" },
     { label: "Mapa", href: "/mapa" },
   ],

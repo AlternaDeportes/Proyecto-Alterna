@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { ClinicBand } from "@/components/clinic/ClinicBand";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -61,6 +62,9 @@ export default async function PodcastsPage() {
                   >
                     Escuchar en Spotify
                   </ButtonLink>
+                  <ButtonLink href="/clinica" variant="accent" size="lg">
+                    Anotate a la clínica
+                  </ButtonLink>
                   <ButtonLink href="/comunidad" variant="outline" size="lg">
                     Sumate
                   </ButtonLink>
@@ -97,6 +101,7 @@ export default async function PodcastsPage() {
           )}
         </Container>
       </section>
+      <ClinicBand />
     </main>
   );
 }

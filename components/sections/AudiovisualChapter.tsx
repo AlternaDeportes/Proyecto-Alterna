@@ -73,8 +73,17 @@ export function AudiovisualChapter() {
               newcom y wingfoil en Santa Fe.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <ButtonLink href="#teaser" variant="accent" size="lg">
+              <ButtonLink
+                href={teaserWatchUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="accent"
+                size="lg"
+              >
                 Ver el teaser
+              </ButtonLink>
+              <ButtonLink href="/clinica" variant="secondary" size="lg">
+                Anotate a la clínica
               </ButtonLink>
               <Link
                 href="/documentales"

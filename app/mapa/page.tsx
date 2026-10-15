@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { ClinicBand } from "@/components/clinic/ClinicBand";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
@@ -48,6 +49,7 @@ export default async function MapaPage({ searchParams }: MapaPageProps) {
           <MapPageClient ubicaciones={ubicaciones} deportes={deportes} deporteInicial={deporte} />
         </Container>
       </section>
+      <ClinicBand />
     </main>
   );
 }

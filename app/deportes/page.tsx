@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { ClinicBand } from "@/components/clinic/ClinicBand";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { siteConfig } from "@/config/site";
@@ -41,6 +43,11 @@ export default async function DeportesPage() {
               Ultimate, Newcom y Wingfoil. Elegí una puerta, conocé a quien lo juega y
               encontrá dónde sumarte en {siteConfig.defaultCity.name}.
             </p>
+            <div className="mt-8">
+              <ButtonLink href="/clinica" variant="accent" size="lg">
+                Anotate a la clínica de Ultimate
+              </ButtonLink>
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -116,6 +123,7 @@ export default async function DeportesPage() {
           </Link>
         </Container>
       </section>
+      <ClinicBand />
     </main>
   );
 }

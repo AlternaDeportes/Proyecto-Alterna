@@ -30,7 +30,7 @@ export function HeroIntro() {
       )}
     >
       <a
-        href="#teaser"
+        href="#audiovisual-capitulo"
         className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-secondary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink shadow-glow-secondary transition-transform duration-300 hover:scale-[1.03] focus-ring sm:text-xs"
       >
         Teaser · {siteConfig.teaser.label}
@@ -54,8 +54,11 @@ export function HeroIntro() {
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <ButtonLink href="#teaser" variant="secondary" size="lg">
+        <ButtonLink href="#audiovisual-capitulo" variant="secondary" size="lg">
           Mirá el teaser
+        </ButtonLink>
+        <ButtonLink href={siteConfig.clinica.href} variant="accent" size="lg">
+          Anotate a la clínica
         </ButtonLink>
         <ButtonLink href="/mapa" variant="outlineLight" size="lg">
           Encontrá dónde jugar

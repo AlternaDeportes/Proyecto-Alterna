@@ -179,10 +179,15 @@ export default async function DeporteDetallePage({ params }: PageProps) {
             ¿Te copa {deporte.nombre}?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
-            Encontrá a quien ya lo juega y sumate. El mapa es el puente.
+            {deporte.slug === "ultimate-frisbee"
+              ? "La clínica ya tiene su lugar en la página. Mientras tanto, el mapa te lleva a verlos jugar."
+              : "Encontrá a quien ya lo juega y sumate. La clínica de Ultimate también tiene su lugar en la página."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <ButtonLink href={`/mapa?deporte=${deporte.slug}`} variant="secondary" size="lg">
+            <ButtonLink href="/clinica" variant="secondary" size="lg">
+              Anotate a la clínica
+            </ButtonLink>
+            <ButtonLink href={`/mapa?deporte=${deporte.slug}`} variant="outlineLight" size="lg">
               Encontrá el lugar
             </ButtonLink>
             <ButtonLink href="/comunidad" variant="outlineLight" size="lg">

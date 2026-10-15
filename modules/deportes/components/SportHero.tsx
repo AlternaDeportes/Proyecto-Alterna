@@ -60,6 +60,9 @@ export function SportHero({ deporte }: SportHeroProps) {
           {deporte.descripcion}
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
+          <ButtonLink href="/clinica" variant="secondary" size="lg">
+            Anotate a la clínica
+          </ButtonLink>
           <ButtonLink href="/mapa" variant="primary" size="lg">
             Encontrá dónde jugar
           </ButtonLink>

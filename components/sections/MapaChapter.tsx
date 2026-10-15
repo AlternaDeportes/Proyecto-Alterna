@@ -34,9 +34,12 @@ export async function MapaChapter() {
             De acá salís hacia la cancha, el club o la costa. Encontrá dónde se entrena en{" "}
             {siteConfig.defaultCity.name} y andá a conocerlos.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-4">
             <ButtonLink href="/mapa" variant="secondary" size="lg">
               Encontrá tu lugar
+            </ButtonLink>
+            <ButtonLink href="/clinica" variant="accent" size="lg">
+              Anotate a la clínica
             </ButtonLink>
           </div>
         </Reveal>

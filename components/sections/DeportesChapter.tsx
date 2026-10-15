@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
+import { ButtonLink } from "@/components/ui/button";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -37,6 +38,11 @@ export async function DeportesChapter() {
           <p className="mt-4 max-w-lg text-brand-ink/70">
             Elegí uno, mirá quién lo juega y encontrá dónde sumarte en Santa Fe.
           </p>
+          <div className="mt-6">
+            <ButtonLink href="/clinica" variant="accent" size="lg">
+              Anotate a la clínica de Ultimate
+            </ButtonLink>
+          </div>
         </Reveal>
       </Container>
 

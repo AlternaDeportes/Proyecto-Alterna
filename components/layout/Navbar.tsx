@@ -43,7 +43,7 @@ export function Navbar() {
           priority
         />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Principal">
           {siteConfig.navigation.map((item) => {
             const active =
               item.href === "/"
@@ -76,7 +76,7 @@ export function Navbar() {
         <button
           type="button"
           className={cn(
-            "inline-flex h-10 w-10 items-center justify-center rounded-full border focus-ring lg:hidden",
+            "inline-flex h-10 w-10 items-center justify-center rounded-full border focus-ring xl:hidden",
             overDark
               ? "border-white/30 text-white"
               : "border-brand-ink/20 text-brand-ink"
@@ -110,7 +110,7 @@ export function Navbar() {
       <div
         id="menu-mobile"
         className={cn(
-          "border-t border-brand-ink/10 bg-brand-surface lg:hidden",
+          "border-t border-brand-ink/10 bg-brand-surface xl:hidden",
           open ? "block" : "hidden"
         )}
       >

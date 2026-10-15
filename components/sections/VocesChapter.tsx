@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
+import { ButtonLink } from "@/components/ui/button";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -38,12 +39,17 @@ export async function VocesChapter() {
                 historia también es de acá, escribinos.
               </p>
             </div>
-            <Link
-              href="/historias"
-              className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-accent transition-colors hover:text-brand-ink focus-ring"
-            >
-              Conocé las voces →
-            </Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <ButtonLink href="/clinica" variant="accent" size="md">
+                Anotate a la clínica
+              </ButtonLink>
+              <Link
+                href="/historias"
+                className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-accent transition-colors hover:text-brand-ink focus-ring"
+              >
+                Conocé las voces →
+              </Link>
+            </div>
           </div>
         </Reveal>
 

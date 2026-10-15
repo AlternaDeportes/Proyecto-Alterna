@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand/BrandIcon";
 import { ColorStripe } from "@/components/brand/ColorStripe";
+import { ClinicBand } from "@/components/clinic/ClinicBand";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -100,6 +101,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
           )}
         </Container>
       </section>
+      <ClinicBand />
     </main>
   );
 }
