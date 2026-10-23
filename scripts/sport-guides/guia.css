@@ -1,0 +1,432 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #1d1d1b;
+  font-family: Inter, "Segoe UI", sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  page-break-after: always;
+  break-after: page;
+}
+
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.bars {
+  display: flex;
+  height: 7px;
+}
+
+.bars span {
+  flex: 1;
+}
+
+.bars span:nth-child(1) {
+  background: #2a5ff4;
+}
+
+.bars span:nth-child(2) {
+  background: #afeb00;
+}
+
+.bars span:nth-child(3) {
+  background: #ffa300;
+}
+
+.pad {
+  padding: 11mm 14mm 0;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  height: 34px;
+  width: auto;
+  display: block;
+}
+
+.tag {
+  margin: 0;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tag small {
+  display: block;
+  margin-top: 2px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.62;
+}
+
+.city {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  margin: 11mm 0 0;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1d1d1b;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--sport);
+  vertical-align: 1px;
+}
+
+h1 {
+  margin: 3mm 0 0;
+  max-width: 150mm;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.lead {
+  margin: 5mm 0 0;
+  max-width: 118mm;
+  font-size: 15px;
+  line-height: 1.45;
+  color: rgba(29, 29, 27, 0.78);
+}
+
+.stage {
+  position: absolute;
+  left: 14mm;
+  right: 14mm;
+  bottom: 16mm;
+  height: 118mm;
+  border-radius: 28px 18px 36px 20px;
+  background: var(--sport);
+  color: var(--on);
+  overflow: hidden;
+}
+
+.stage svg {
+  position: absolute;
+  right: 2mm;
+  bottom: 24mm;
+  width: 88mm;
+  height: 72mm;
+}
+
+.stage-copy {
+  position: relative;
+  z-index: 1;
+  width: 78mm;
+  padding: 8mm 0 0 8mm;
+}
+
+.stage-copy p {
+  margin: 0;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.stage-copy span {
+  display: block;
+  margin-top: 4mm;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 12.5px;
+  line-height: 1.4;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.facts {
+  position: absolute;
+  z-index: 2;
+  left: 8mm;
+  right: 8mm;
+  bottom: 6mm;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3mm;
+}
+
+.facts div {
+  padding-top: 2mm;
+  border-top: 1.5px solid currentColor;
+}
+
+.facts strong {
+  display: block;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.facts em {
+  display: block;
+  margin-top: 1mm;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.foot {
+  position: absolute;
+  left: 14mm;
+  right: 14mm;
+  bottom: 6mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(29, 29, 27, 0.45);
+}
+
+.close {
+  position: absolute;
+  left: 14mm;
+  right: 14mm;
+  bottom: 14mm;
+  padding: 5mm 6mm;
+  border-radius: 18px 12px 22px 14px;
+  background: #1d1d1b;
+  color: #fff;
+}
+
+.close strong {
+  display: block;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.close span {
+  display: block;
+  margin-top: 1.5mm;
+  color: #afeb00;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+h2 {
+  margin: 8mm 0 0;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.deck {
+  margin: 3mm 0 0;
+  max-width: 165mm;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(29, 29, 27, 0.72);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin-top: 6mm;
+}
+
+.card {
+  min-height: 38mm;
+  padding: 4.5mm 5mm;
+  border: 1.5px solid rgba(29, 29, 27, 0.12);
+  border-radius: 18px 12px 22px 14px;
+  background: #fff;
+}
+
+.card b {
+  display: block;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card b i {
+  display: inline-block;
+  margin-right: 2mm;
+  padding: 0.4mm 1.8mm 0.2mm;
+  border-radius: 999px;
+  background: var(--sport);
+  color: var(--on);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.card p {
+  margin: 2mm 0 0;
+  font-size: 12px;
+  line-height: 1.38;
+  color: rgba(29, 29, 27, 0.78);
+}
+
+.table {
+  margin-top: 5mm;
+  border-top: 1.5px solid #1d1d1b;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 38mm 1fr;
+  gap: 4mm;
+  padding: 2.6mm 0;
+  border-bottom: 1px solid rgba(29, 29, 27, 0.14);
+  font-size: 12px;
+}
+
+.row span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(29, 29, 27, 0.5);
+}
+
+.row strong {
+  font-weight: 600;
+}
+
+.note {
+  margin-top: 4mm;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: rgba(29, 29, 27, 0.55);
+}
+
+.quote {
+  margin: 6mm 0 0;
+  padding: 5mm 6mm;
+  border-radius: 18px 12px 22px 14px;
+  background: var(--sport);
+  color: var(--on);
+}
+
+.quote p {
+  margin: 0;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 2.5mm;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.places {
+  margin: 5mm 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm 6mm;
+}
+
+.places article {
+  padding-top: 2mm;
+  border-top: 2px solid var(--sport);
+}
+
+.places strong {
+  display: block;
+  font-family: "Montserrat Alternates", Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.places span {
+  display: block;
+  margin-top: 1mm;
+  font-size: 11px;
+  color: rgba(29, 29, 27, 0.65);
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 58% 42% 62% 38% / 46% 58% 42% 54%;
+  background: var(--sport);
+  opacity: 0.18;
+}

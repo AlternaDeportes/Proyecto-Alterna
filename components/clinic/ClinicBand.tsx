@@ -12,7 +12,7 @@ export function ClinicBand() {
             {siteConfig.clinica.title}
           </p>
           <p className="mt-2 max-w-xl text-base text-white/85">
-            El lugar de la clínica ya está en la página. La inscripción se abre más adelante.
+            La inscripción está abierta. Completá tus datos y subí el comprobante.
           </p>
         </div>
         <ButtonLink href={siteConfig.clinica.href} variant="secondary" size="lg">

@@ -10,6 +10,7 @@ import { JsonLdScript } from "@/components/seo/JsonLdScript";
 import { sportGallery } from "@/config/media";
 import { breadcrumbJsonLd, sportJsonLd } from "@/lib/seo/json-ld";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import { SportGuia } from "@/modules/deportes/components/SportGuia";
 import { SportHero } from "@/modules/deportes/components/SportHero";
 import { SportMeta } from "@/modules/deportes/components/SportMeta";
 import {
@@ -90,6 +91,14 @@ export default async function DeporteDetallePage({ params }: PageProps) {
           </Reveal>
           <Reveal delay={100}>
             <SportMeta deporte={deporte} />
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section density="tight" aria-labelledby="guia-deporte">
+        <Container>
+          <Reveal>
+            <SportGuia slug={deporte.slug} nombre={deporte.nombre} />
           </Reveal>
         </Container>
       </Section>
@@ -180,8 +189,8 @@ export default async function DeporteDetallePage({ params }: PageProps) {
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
             {deporte.slug === "ultimate-frisbee"
-              ? "La clínica ya tiene su lugar en la página. Mientras tanto, el mapa te lleva a verlos jugar."
-              : "Encontrá a quien ya lo juega y sumate. La clínica de Ultimate también tiene su lugar en la página."}
+              ? "La inscripción a la clínica está abierta. Completala con tus datos y el comprobante."
+              : "Encontrá a quien ya lo juega y sumate. La clínica de Ultimate tiene la inscripción abierta."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/clinica" variant="secondary" size="lg">

@@ -41,13 +41,12 @@ export const siteConfig = {
     shortLabel: "En YouTube",
   },
   /**
-   * Clínica de Ultimate. formUrl queda guardado para enchufar el formulario
-   * cuando published pase a true.
+   * Clínica de Ultimate. El formulario vive en Google y se abre en otra pestaña.
    */
   clinica: {
     title: "Clínica de Ultimate",
     href: "/clinica",
-    published: false,
+    published: true,
     formUrl:
       "https://docs.google.com/forms/d/e/1FAIpQLSeMiZK-EGVgxlyPlK-uSliMK_Plyqe8noPPu6bDuA60pSGO0g/viewform",
   },
