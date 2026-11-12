@@ -18,6 +18,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/historias/luchi-farias",
+        destination: "/historias/guillermo-calamante",
+        permanent: true,
+      },
+      {
+        source: "/historias/monica-lovecchio",
+        destination: "/historias/susana",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

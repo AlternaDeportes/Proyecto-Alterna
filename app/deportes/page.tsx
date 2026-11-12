@@ -32,7 +32,7 @@ export default async function DeportesPage() {
   return (
     <main id="contenido-principal">
       <ColorStripe />
-      <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <section className="border-b border-brand-ink/10 bg-brand-surface pt-24 pb-10 sm:pt-28 sm:pb-12">
         <Container>
           <Reveal>
             <p className="ds-eyebrow ds-eyebrow--primary mb-4">Explorá</p>
@@ -45,7 +45,7 @@ export default async function DeportesPage() {
             </p>
             <div className="mt-8">
               <ButtonLink href="/clinica" variant="accent" size="lg">
-                Anotate a la clínica de Ultimate
+                Ver la clínica
               </ButtonLink>
             </div>
           </Reveal>

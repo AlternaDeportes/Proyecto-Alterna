@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { handlers, isAuthConfigured } from "@/lib/auth";
 
+export const runtime = "nodejs";
+
 async function guard(
   request: NextRequest,
   handler: (req: NextRequest) => Promise<Response>
@@ -10,7 +12,7 @@ async function guard(
       {
         ok: false,
         message:
-          "Auth no configurado. Completá AUTH_SECRET, AUTH_GOOGLE_ID y AUTH_GOOGLE_SECRET en .env.local. " +
+          "Auth no configurado. Completá AUTH_SECRET (y Google o DATABASE_URL) en .env.local / Vercel. " +
           "No abras /api/auth/callback/google a mano: esa URL solo la usa Google después del login. " +
           "Para ingresar andá a /ingresar.",
         hint: "/ingresar",

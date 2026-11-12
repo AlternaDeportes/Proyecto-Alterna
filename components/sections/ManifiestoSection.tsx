@@ -11,7 +11,7 @@ import { Reveal } from "@/components/ui/reveal";
 export function ManifiestoSection() {
   return (
     <section
-      className="relative min-h-[85dvh] overflow-hidden bg-brand-ink py-24 sm:py-32"
+      className="relative overflow-hidden bg-brand-ink py-16 sm:py-20"
       aria-labelledby="manifiesto-titulo"
     >
       <BrandPattern variant="marksDiagonal" opacity={22} className="scale-110" />
@@ -20,7 +20,7 @@ export function ManifiestoSection() {
         aria-hidden
       />
 
-      <Container className="relative z-raised flex min-h-[60dvh] flex-col justify-center">
+      <Container className="relative z-raised">
         <Reveal>
           <h2
             id="manifiesto-titulo"
@@ -49,7 +49,7 @@ export function ManifiestoSection() {
               Conocé a la gente
             </ButtonLink>
             <ButtonLink href="/clinica" variant="accent" size="lg">
-              Anotate a la clínica
+              Ver la clínica
             </ButtonLink>
             <ButtonLink href="/mapa" variant="outlineLight" size="lg">
               Encontrá un lugar

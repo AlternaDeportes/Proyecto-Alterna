@@ -16,7 +16,7 @@ interface SportHeroProps {
 export function SportHero({ deporte }: SportHeroProps) {
   return (
     <section
-      className="relative overflow-hidden pb-16 pt-28 sm:pt-32"
+      className="relative overflow-hidden pb-10 pt-24 sm:pt-28"
       aria-labelledby="deporte-titulo"
     >
       <ColorStripe className="absolute inset-x-0 top-0 z-raised" />
@@ -61,13 +61,13 @@ export function SportHero({ deporte }: SportHeroProps) {
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <ButtonLink href="/clinica" variant="secondary" size="lg">
-            Anotate a la clínica
+            Ver la clínica
           </ButtonLink>
           <ButtonLink href="/mapa" variant="primary" size="lg">
             Encontrá dónde jugar
           </ButtonLink>
           <ButtonLink href="/documentales" variant="outlineLight" size="lg">
-            Mirá el teaser
+            Ver el documental
           </ButtonLink>
           <ButtonLink href="/historias" variant="accent" size="lg">
             Conocé las historias

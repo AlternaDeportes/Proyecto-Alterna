@@ -30,10 +30,10 @@ export function HeroIntro() {
       )}
     >
       <a
-        href="#audiovisual-capitulo"
+        href="/documentales"
         className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-secondary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink shadow-glow-secondary transition-transform duration-300 hover:scale-[1.03] focus-ring sm:text-xs"
       >
-        Teaser · {siteConfig.teaser.label}
+        Documental · {siteConfig.teaser.label}
         <span aria-hidden>→</span>
       </a>
 
@@ -50,15 +50,15 @@ export function HeroIntro() {
 
       <p className="mt-6 max-w-xl text-base leading-relaxed text-white sm:text-lg">
         Somos el puente: te acercamos a quienes juegan ultimate, newcom y wingfoil.
-        Mirá el teaser, encontrá el lugar y sumate.
+        Mirá el documental, encontrá el lugar y sumate.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-4">
-        <ButtonLink href="#audiovisual-capitulo" variant="secondary" size="lg">
-          Mirá el teaser
+        <ButtonLink href="/documentales" variant="secondary" size="lg">
+          Ver el documental
         </ButtonLink>
         <ButtonLink href={siteConfig.clinica.href} variant="accent" size="lg">
-          Anotate a la clínica
+          Ver la clínica
         </ButtonLink>
         <ButtonLink href="/mapa" variant="outlineLight" size="lg">
           Encontrá dónde jugar

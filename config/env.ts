@@ -47,3 +47,8 @@ export const env = parseEnv();
 export function isDatabaseConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL);
 }
+
+/** Resend listo para mandar verificación, magic link y reset. */
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
+}

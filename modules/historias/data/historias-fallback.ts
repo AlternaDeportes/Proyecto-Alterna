@@ -9,11 +9,9 @@ function excerptFrom(cuerpo: string, max = 160) {
 }
 
 const CUERPOS = {
-  "luchi-farias": `Lucila Farías — «Luchi» para el equipo — llegó al Ultimate casi de casualidad. Una amiga la invitó a un entrenamiento en el Parque Federal y, en pocas semanas, el disco pasó de ser un juego raro a una forma de habitar la ciudad.
+  "guillermo-calamante": `Guillermo «Lobo» Calamante juega Ultimate con Malón. En la cancha se lo ve con el disco en la mano, en pleno lance, con la camiseta del equipo.
 
-En Santa Fe, el Ultimate crece por recomendación. No hay reflectores ni contratos: hay pases, corridas y un pacto tácito de fair play. Luchi lo resume sin dramatizar: el equipo es más grande que el resultado.
-
-Hoy juega, invita a principiantes y aparece en el documental ALTERNA como una de las voces que sostienen la disciplina lejos del show mediático. Su historia es la de muchas: descubrir un deporte porque alguien te dijo “vení, probá”.`,
+En Santa Fe el partido se arma en el pasto, sin reflectores. ALTERNA lo suma entre quienes ya están en la cancha y abren el paso a quien quiere acercarse.`,
 
   "ciclo-dussex": `Adriel Dussex — «Ciclo» — entrena grupos de Ultimate con una obsesión concreta: que nadie se quede afuera. En Santa Fe arma espacios donde el primer entrenamiento no intimida y el segundo ya se siente comunidad.
 
@@ -21,11 +19,11 @@ Ciclo habla poco de talento y mucho de constancia. El disco enseña lectura cole
 
 En ALTERNA su testimonio abre la puerta a una generación que sostiene el deporte amateur sin esperar reconocimiento masivo. La cancha es plaza, parque, cualquier rectángulo de pasto que aguante un disco volando.`,
 
-  "monica-lovecchio": `Mónica Lovecchio encontró en el Newcom algo que no buscaba: una red. Clubes, centros vecinales y torneos barriales tejen una escena intergeneracional donde el partido dura más que el marcador.
+  susana: `Susana tiene 75 años y juega Newcom. No sabía qué era el deporte: se lo dijeron el primer día, se enganchó y siguió.
 
-En Santa Fe el Newcom se sostiene con autogestión. Hay redes bajas, reglas propias y un clima que mezcla competencia con cuidado. Mónica lo describe como una familia que no sabía que necesitaba: gente con quien entrenar, charlar y volver la semana siguiente.
+Hoy va a la práctica, compite y lo disfruta. Ella lo dice así: es un deporte que la atrapó, y nunca pensó que a esta edad iba a estar haciéndolo. Hasta que le den los huesos, sigue.
 
-Su historia en el documental es también la de un deporte poco mediático que, sin embargo, llena gimnasios y armarios de clubes. ALTERNA la escucha para que esa comunidad deje de ser invisible.`,
+En ALTERNA aparece en la cancha, con la camiseta del Newcom, como una de las voces que sostienen el juego.`,
 
   "lucio-cinaglia": `Lucio Cinaglia enseña Wingfoil mirando el río como parte del juego, no como decorado. En la Laguna Setúbal y costas del Paraná, el viento define la clase tanto como la tabla.
 
@@ -36,24 +34,24 @@ En ALTERNA su voz conecta territorio y práctica: Santa Fe no es solo ciudad de 
 
 export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
   {
-    id: "hist-luchi",
-    slug: "luchi-farias",
-    titulo: "Lucila «Luchi» Farías",
-    pullQuote: "El Ultimate me enseñó que el equipo es más grande que el resultado.",
+    id: "hist-guillermo",
+    slug: "guillermo-calamante",
+    titulo: "Guillermo «Lobo» Calamante",
+    pullQuote: null,
     destacada: true,
-    cuerpo: CUERPOS["luchi-farias"],
-    excerpt: excerptFrom(CUERPOS["luchi-farias"]),
+    cuerpo: CUERPOS["guillermo-calamante"],
+    excerpt: excerptFrom(CUERPOS["guillermo-calamante"]),
     deporte: {
       nombre: "Ultimate Frisbee",
       slug: "ultimate-frisbee",
       colorPrimario: designTokens.sports.ultimate,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
-    coverUrl: storyCover("luchi-farias"),
-    seoTitle: "Lucila Farías — Ultimate Frisbee | ALTERNA",
+    coverUrl: storyCover("guillermo-calamante"),
+    seoTitle: "Guillermo Calamante — Ultimate Frisbee | ALTERNA",
     seoDescription:
-      "Historia de Luchi Farías, jugadora de Ultimate Frisbee en Santa Fe, en el documental ALTERNA.",
-    galeria: storyGallery("luchi-farias"),
+      "Guillermo «Lobo» Calamante juega Ultimate con Malón, en el documental ALTERNA.",
+    galeria: storyGallery("guillermo-calamante"),
   },
   {
     id: "hist-ciclo",
@@ -76,24 +74,25 @@ export const HISTORIAS_FALLBACK: HistoriaDetalle[] = [
     galeria: storyGallery("ciclo-dussex"),
   },
   {
-    id: "hist-monica",
-    slug: "monica-lovecchio",
-    titulo: "Mónica Lovecchio",
-    pullQuote: "En Newcom encontré una familia que no sabía que necesitaba.",
+    id: "hist-susana",
+    slug: "susana",
+    titulo: "Susana",
+    pullQuote:
+      "Un deporte que me atrapó, que yo nunca pensé que a esta edad iba a estar haciendo deporte.",
     destacada: true,
-    cuerpo: CUERPOS["monica-lovecchio"],
-    excerpt: excerptFrom(CUERPOS["monica-lovecchio"]),
+    cuerpo: CUERPOS["susana"],
+    excerpt: excerptFrom(CUERPOS["susana"]),
     deporte: {
       nombre: "Newcom",
       slug: "newcom",
       colorPrimario: designTokens.sports.newcom,
     },
     publishedAt: "2026-07-01T12:00:00.000Z",
-    coverUrl: storyCover("monica-lovecchio"),
-    seoTitle: "Mónica Lovecchio — Newcom | ALTERNA",
+    coverUrl: storyCover("susana"),
+    seoTitle: "Susana — Newcom | ALTERNA",
     seoDescription:
-      "Historia de Mónica Lovecchio y la comunidad de Newcom en Santa Fe.",
-    galeria: storyGallery("monica-lovecchio"),
+      "Susana juega Newcom en Santa Fe y cuenta cómo el deporte la atrapó a los 75 años.",
+    galeria: storyGallery("susana"),
   },
   {
     id: "hist-lucio",

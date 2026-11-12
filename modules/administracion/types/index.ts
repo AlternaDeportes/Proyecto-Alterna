@@ -66,7 +66,14 @@ export interface AdminUsuario {
 }
 
 export interface AdminContenidoItem {
-  tipo: "deporte" | "historia" | "podcast" | "documental" | "evento";
+  tipo:
+    | "deporte"
+    | "historia"
+    | "podcast"
+    | "podcastShow"
+    | "documental"
+    | "documentalShow"
+    | "evento";
   id: string;
   titulo: string;
   href: string;

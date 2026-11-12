@@ -44,7 +44,7 @@ export function ProposeLocationForm() {
           Sumar un punto al mapa
         </h2>
         <p className="mt-2 text-sm text-brand-ink/65">
-          Para proponer un lugar de práctica necesitás iniciar sesión con Google. El punto
+          Para proponer un lugar de práctica necesitás iniciar sesión. El punto
           queda pendiente de aprobación. Ultimate, Newcom y Wingfoil son el proyecto; otros
           deportes solo suman como punto en el mapa (Santa Fe y alrededores, hasta{" "}
           {MAP_REGION.radiusKm} km).
@@ -53,7 +53,7 @@ export function ProposeLocationForm() {
           href="/ingresar?callbackUrl=/comunidad%23sumar-punto"
           className="mt-5 inline-flex h-11 items-center rounded-full bg-brand-secondary px-6 text-sm font-semibold text-brand-ink"
         >
-          Ingresar con Google
+          Ingresar
         </Link>
       </Card>
     );

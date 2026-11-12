@@ -27,7 +27,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
   return (
     <main id="contenido-principal">
       <ColorStripe />
-      <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <section className="border-b border-brand-ink/10 bg-brand-surface pt-24 pb-10 sm:pt-28 sm:pb-12">
         <Container>
           <Reveal>
             <div className="mb-4 flex items-center gap-3">
@@ -65,7 +65,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                           fill
                           sizes="(max-width: 640px) 100vw, 50vw"
                           quality={88}
-                          className="ds-media-zoom object-cover"
+                          className="ds-media-zoom object-cover object-top"
                           priority={i < 2}
                         />
                       ) : (

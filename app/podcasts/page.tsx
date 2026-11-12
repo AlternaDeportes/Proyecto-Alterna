@@ -25,7 +25,7 @@ export default async function PodcastsPage() {
   return (
     <main id="contenido-principal">
       <ColorStripe />
-      <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-24">
+      <section className="border-b border-brand-ink/10 bg-brand-surface pt-24 pb-10 sm:pt-28 sm:pb-12">
         <Container>
           <Reveal>
             <div className="grid items-center gap-8 sm:grid-cols-[auto_1fr] sm:gap-10">
@@ -63,7 +63,7 @@ export default async function PodcastsPage() {
                     Escuchar en Spotify
                   </ButtonLink>
                   <ButtonLink href="/clinica" variant="accent" size="lg">
-                    Anotate a la clínica
+                    Ver la clínica
                   </ButtonLink>
                   <ButtonLink href="/comunidad" variant="outline" size="lg">
                     Sumate
@@ -75,7 +75,7 @@ export default async function PodcastsPage() {
         </Container>
       </section>
 
-      <section className="py-16 sm:py-20" aria-label="Episodios">
+      <section className="py-12 sm:py-14" aria-label="Episodios">
         <Container>
           {hayEpisodios ? (
             <>

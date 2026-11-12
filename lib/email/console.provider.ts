@@ -7,7 +7,7 @@ export const consoleEmailProvider: EmailProvider = {
       to: message.to,
       subject: message.subject,
       replyTo: message.replyTo,
-      preview: message.text.slice(0, 200),
+      preview: message.text.slice(0, 400),
     });
   },
 };

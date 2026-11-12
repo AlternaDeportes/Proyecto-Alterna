@@ -40,7 +40,7 @@ export async function DeportesChapter() {
           </p>
           <div className="mt-6">
             <ButtonLink href="/clinica" variant="accent" size="lg">
-              Anotate a la clínica de Ultimate
+              Ver la clínica
             </ButtonLink>
           </div>
         </Reveal>

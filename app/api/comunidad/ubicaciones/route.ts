@@ -19,6 +19,12 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   }
+  if (session.user.emailVerificado === false) {
+    return NextResponse.json(
+      { ok: false, message: "Verificá tu email para sumar un punto." },
+      { status: 403 }
+    );
+  }
 
   const limit = checkRateLimit(`comunidad-ubi:${session.user.id}`, {
     limit: 5,

@@ -5,7 +5,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { documentaryCovers, IMAGE_QUALITY } from "@/config/media";
-import { teaserWatchUrl } from "@/config/site";
+import { documentalWatchUrl } from "@/config/site";
 
 /**
  * Capítulo audiovisual — teaser publicado y portada del documental.
@@ -14,7 +14,7 @@ export function AudiovisualChapter() {
   return (
     <section
       id="audiovisual-capitulo"
-      className="relative scroll-mt-20 overflow-hidden bg-brand-surface py-20 sm:py-28"
+      className="relative scroll-mt-20 overflow-hidden bg-brand-surface py-14 sm:py-16"
       aria-labelledby="audiovisual-titulo"
     >
       <ColorStripe className="absolute inset-x-0 top-0" />
@@ -22,14 +22,12 @@ export function AudiovisualChapter() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <Reveal>
             <Link
-              href={teaserWatchUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/documentales"
               className="group ds-frame ds-frame--accent relative block aspect-video overflow-hidden bg-brand-ink shadow-lift focus-ring"
             >
               <Image
                 src={documentaryCovers.trailer}
-                alt="Teaser ALTERNA — Ultimate Frisbee en Santa Fe"
+                alt="Documental ALTERNA — se ve en la web"
                 fill
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 quality={IMAGE_QUALITY}
@@ -49,13 +47,13 @@ export function AudiovisualChapter() {
               </span>
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-secondary">
-                  Disponible en YouTube
+                  Se ve en la web
                 </p>
                 <p className="mt-2 font-display text-2xl font-black uppercase text-white sm:text-3xl">
-                  Teaser
+                  Documental
                 </p>
                 <p className="mt-1 text-sm text-white/80">
-                Mirá y después andá a buscarlos.
+                  Mirá y después andá a buscarlos.
                 </p>
               </div>
             </Link>
@@ -69,27 +67,23 @@ export function AudiovisualChapter() {
               Mirá cómo se juega
             </h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/70">
-              El teaser ya está en YouTube. Es el primer puente hacia quienes juegan ultimate,
-              newcom y wingfoil en Santa Fe.
+              El documental ya se ve en la web. Es el puente hacia quienes juegan ultimate,
+              newcom y wingfoil en Santa Fe. El teaser queda como la versión corta.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <ButtonLink
-                href={teaserWatchUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="accent"
-                size="lg"
-              >
-                Ver el teaser
+              <ButtonLink href="/documentales" variant="accent" size="lg">
+                Ver el documental
               </ButtonLink>
               <ButtonLink href="/clinica" variant="secondary" size="lg">
-                Anotate a la clínica
+                Ver la clínica
               </ButtonLink>
               <Link
-                href="/documentales"
+                href={documentalWatchUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-sm text-sm font-semibold uppercase tracking-wider text-brand-primary hover:text-brand-ink focus-ring"
               >
-                Seguí al documental →
+                Abrir en YouTube →
               </Link>
             </div>
           </Reveal>

@@ -23,6 +23,7 @@ export function createResendProvider(): EmailProvider {
           to: [message.to],
           subject: message.subject,
           text: message.text,
+          html: message.html,
           reply_to: message.replyTo,
         }),
       });

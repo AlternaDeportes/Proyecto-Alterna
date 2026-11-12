@@ -17,7 +17,7 @@ export async function VocesChapter() {
 
   return (
     <section
-      className="relative bg-brand-surface py-20 text-brand-ink sm:py-28"
+      className="relative bg-brand-surface py-14 text-brand-ink sm:py-16"
       aria-labelledby="voces-capitulo"
     >
       <ColorStripe className="absolute inset-x-0 top-0" />
@@ -41,7 +41,7 @@ export async function VocesChapter() {
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <ButtonLink href="/clinica" variant="accent" size="md">
-                Anotate a la clínica
+                Ver la clínica
               </ButtonLink>
               <Link
                 href="/historias"
@@ -68,7 +68,7 @@ export async function VocesChapter() {
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
                       quality={88}
-                      className="ds-media-zoom object-cover"
+                      className="ds-media-zoom object-cover object-top"
                     />
                   ) : (
                     <div

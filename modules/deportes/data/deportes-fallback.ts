@@ -27,9 +27,9 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     historias: [
       {
         id: "h1",
-        slug: "luchi-farias",
-        titulo: "Lucila «Luchi» Farías",
-        pullQuote: "El Ultimate me enseñó que el equipo es más grande que el resultado.",
+        slug: "guillermo-calamante",
+        titulo: "Guillermo «Lobo» Calamante",
+        pullQuote: null,
       },
       {
         id: "h2",
@@ -74,9 +74,10 @@ export const DEPORTES_FALLBACK: DeporteDetalle[] = [
     historias: [
       {
         id: "h3",
-        slug: "monica-lovecchio",
-        titulo: "Mónica Lovecchio",
-        pullQuote: "En Newcom encontré una familia que no sabía que necesitaba.",
+        slug: "susana",
+        titulo: "Susana",
+        pullQuote:
+          "Un deporte que me atrapó, que yo nunca pensé que a esta edad iba a estar haciendo deporte.",
       },
     ],
     ubicaciones: [

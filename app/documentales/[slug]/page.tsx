@@ -77,7 +77,7 @@ export default async function DocumentalEpisodioPage({ params }: PageProps) {
         ]}
       />
 
-      <header className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <header className="border-b border-brand-ink/10 bg-brand-surface pt-24 pb-10 sm:pt-28 sm:pb-12">
         <div className="ds-container max-w-3xl">
           <p className="ds-eyebrow ds-eyebrow--accent mb-4">
             {meta}

@@ -8,7 +8,7 @@ import { HeroIntro } from "@/components/layout/HeroIntro";
 export function Hero() {
   return (
     <section
-      className="relative flex min-h-[100dvh] items-end overflow-hidden bg-brand-ink pb-20 pt-28 sm:items-end sm:pb-24 sm:pt-32"
+      className="relative flex min-h-[88dvh] items-end overflow-hidden bg-brand-ink pb-12 pt-24 sm:pb-16 sm:pt-28"
       aria-labelledby="hero-titulo"
     >
       <div className="absolute inset-0">

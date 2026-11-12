@@ -20,7 +20,7 @@ export default function ContactoPage() {
   return (
     <main id="contenido-principal">
       <ColorStripe />
-      <section className="border-b border-brand-ink/10 bg-brand-surface pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <section className="border-b border-brand-ink/10 bg-brand-surface pt-24 pb-10 sm:pt-28 sm:pb-12">
         <Container>
           <Reveal>
             <BrandIcon id="comunidadRed" size="md" className="mb-5" />

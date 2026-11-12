@@ -210,9 +210,9 @@ async function main() {
 
   const historiasData = [
     {
-      slug: "luchi-farias",
-      titulo: "Lucila «Luchi» Farías",
-      pullQuote: "El Ultimate me enseñó que el equipo es más grande que el resultado.",
+      slug: "guillermo-calamante",
+      titulo: "Guillermo «Lobo» Calamante",
+      pullQuote: null,
       deporteSlug: "ultimate-frisbee",
     },
     {
@@ -222,9 +222,10 @@ async function main() {
       deporteSlug: "ultimate-frisbee",
     },
     {
-      slug: "monica-lovecchio",
-      titulo: "Mónica Lovecchio",
-      pullQuote: "En Newcom encontré una familia que no sabía que necesitaba.",
+      slug: "susana",
+      titulo: "Susana",
+      pullQuote:
+        "Un deporte que me atrapó, que yo nunca pensé que a esta edad iba a estar haciendo deporte.",
       deporteSlug: "newcom",
     },
     {
@@ -354,7 +355,7 @@ async function main() {
     update: {
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos en Santa Fe. Mirá el teaser y después encontrá a esa gente en el mapa.",
+        "El documental de ALTERNA ya se ve en la web. Ultimate, Newcom y Wingfoil en Santa Fe: miralo y después encontrá a esa gente en el mapa.",
       coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },
@@ -362,7 +363,7 @@ async function main() {
       slug: "alterna-documental",
       titulo: "ALTERNA — Deportes por descubrir",
       sinopsis:
-        "Serie documental sobre deportes alternativos en Santa Fe. Mirá el teaser y después encontrá a esa gente en el mapa.",
+        "El documental de ALTERNA ya se ve en la web. Ultimate, Newcom y Wingfoil en Santa Fe: miralo y después encontrá a esa gente en el mapa.",
       coverUrl: "/media/documentales/teaser-cover.webp",
       publishedAt: new Date(),
     },
@@ -377,6 +378,16 @@ async function main() {
       duracionSeg: 90,
       videoUrl: "https://youtu.be/EVA-VO6IL14",
       publishedAt: new Date("2026-09-16T00:00:00-03:00"),
+    },
+    {
+      slug: "documental",
+      titulo: "Documental",
+      sinopsis:
+        "El documental de ALTERNA, para ver en la web. Ultimate, Newcom y Wingfoil en Santa Fe.",
+      numero: 1,
+      duracionSeg: null,
+      videoUrl: "https://youtu.be/uveTwIEViSA",
+      publishedAt: new Date("2026-11-12T00:00:00-03:00"),
     },
     {
       slug: "episodio-01-ultimate",

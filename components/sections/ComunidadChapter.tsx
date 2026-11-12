@@ -11,7 +11,7 @@ import { Reveal } from "@/components/ui/reveal";
 export function ComunidadChapter() {
   return (
     <section
-      className="relative overflow-hidden border-t border-brand-ink/10 bg-brand-surface py-24 sm:py-32"
+      className="relative overflow-hidden border-t border-brand-ink/10 bg-brand-surface py-14 sm:py-16"
       aria-labelledby="comunidad-capitulo"
     >
       <ColorStripe className="absolute inset-x-0 top-0" />
@@ -35,7 +35,7 @@ export function ComunidadChapter() {
               Sumate
             </ButtonLink>
             <ButtonLink href="/clinica" variant="accent" size="lg">
-              Anotate a la clínica
+              Ver la clínica
             </ButtonLink>
             <ButtonLink href="/contacto" variant="outline" size="lg">
               Escribinos

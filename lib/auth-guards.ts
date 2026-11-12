@@ -23,6 +23,13 @@ export class DatabaseRequiredError extends Error {
   }
 }
 
+export class EmailNotVerifiedError extends Error {
+  constructor(message = "Verificá tu email para participar.") {
+    super(message);
+    this.name = "EmailNotVerifiedError";
+  }
+}
+
 export async function requireSession() {
   const session = await auth();
   if (!session?.user?.id || !session.user.email) {
@@ -43,8 +50,16 @@ export async function requireDbUserId() {
   });
   if (!usuario) {
     throw new DatabaseRequiredError(
-      "Tu sesión no está vinculada a la base de datos. Volvé a ingresar con Google."
+      "Tu sesión no está vinculada a la base de datos. Volvé a ingresar."
     );
+  }
+  return session;
+}
+
+export async function requireVerifiedDbUser() {
+  const session = await requireDbUserId();
+  if (session.user.emailVerificado === false) {
+    throw new EmailNotVerifiedError();
   }
   return session;
 }
@@ -57,6 +72,14 @@ export async function requireStaff() {
   const session = await requireDbUserId();
   if (!isStaffRole(session.user.rol)) {
     throw new ForbiddenError("Solo moderadores o administradores.");
+  }
+  return session;
+}
+
+export async function requireAdmin() {
+  const session = await requireDbUserId();
+  if (session.user.rol !== "ADMIN") {
+    throw new ForbiddenError("Solo la cuenta de administración puede editar el contenido.");
   }
   return session;
 }

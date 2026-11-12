@@ -333,7 +333,7 @@ export const adminService = {
   },
 
   async listarContenido() {
-    const [deportes, historias, podcasts, docs, eventos] = await Promise.all([
+    const [deportes, historias, podcastShows, podcasts, docShows, docs, eventos] = await Promise.all([
       prisma.deporte.findMany({
         where: { deletedAt: null },
         orderBy: { nombre: "asc" },
@@ -348,7 +348,7 @@ export const adminService = {
       prisma.historia.findMany({
         where: { deletedAt: null },
         orderBy: { createdAt: "desc" },
-        take: 20,
+        take: 80,
         select: {
           id: true,
           slug: true,
@@ -357,10 +357,15 @@ export const adminService = {
           publishedAt: true,
         },
       }),
+      prisma.podcast.findMany({
+        where: { deletedAt: null },
+        orderBy: { titulo: "asc" },
+        select: { id: true, slug: true, titulo: true, publishedAt: true },
+      }),
       prisma.podcastEpisodio.findMany({
         where: { deletedAt: null },
         orderBy: { numero: "asc" },
-        take: 20,
+        take: 80,
         select: {
           id: true,
           slug: true,
@@ -369,10 +374,15 @@ export const adminService = {
           publishedAt: true,
         },
       }),
+      prisma.documental.findMany({
+        where: { deletedAt: null },
+        orderBy: { titulo: "asc" },
+        select: { id: true, slug: true, titulo: true, publishedAt: true },
+      }),
       prisma.documentalEpisodio.findMany({
         where: { deletedAt: null },
         orderBy: { numero: "asc" },
-        take: 20,
+        take: 80,
         select: {
           id: true,
           slug: true,
@@ -384,7 +394,7 @@ export const adminService = {
       prisma.evento.findMany({
         where: { deletedAt: null },
         orderBy: { fechaInicio: "desc" },
-        take: 10,
+        take: 40,
         select: {
           id: true,
           slug: true,
@@ -412,6 +422,14 @@ export const adminService = {
         meta: h.destacada ? "Destacada" : "Historia",
         publishedAt: h.publishedAt?.toISOString() ?? null,
       })),
+      ...podcastShows.map((p) => ({
+        tipo: "podcastShow" as const,
+        id: p.id,
+        titulo: p.titulo,
+        href: "/podcasts",
+        meta: "Programa",
+        publishedAt: p.publishedAt?.toISOString() ?? null,
+      })),
       ...podcasts.map((p) => ({
         tipo: "podcast" as const,
         id: p.id,
@@ -419,6 +437,14 @@ export const adminService = {
         href: `/podcasts/${p.slug}`,
         meta: `Ep. ${p.numero}`,
         publishedAt: p.publishedAt?.toISOString() ?? null,
+      })),
+      ...docShows.map((d) => ({
+        tipo: "documentalShow" as const,
+        id: d.id,
+        titulo: d.titulo,
+        href: "/documentales",
+        meta: "Ficha",
+        publishedAt: d.publishedAt?.toISOString() ?? null,
       })),
       ...docs.map((d) => ({
         tipo: "documental" as const,

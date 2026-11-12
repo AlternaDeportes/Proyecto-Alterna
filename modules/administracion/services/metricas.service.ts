@@ -131,8 +131,8 @@ function huecos(uso: AdminUso): AdminHueco[] {
       id: "editorial",
       titulo: "CMS de contenido desde el panel",
       detalle:
-        "El catálogo se ve acá, pero crear y editar fichas sigue en el seed.",
-      estado: "falta",
+        "La cuenta admin edita textos de deportes, historias, lugares, eventos y fichas.",
+      estado: "listo",
     },
   ];
 }

@@ -13,7 +13,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
   return (
     <header className="relative overflow-hidden border-b border-white/10">
       <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[50dvh] lg:min-h-[85dvh]">
+        <div className="relative min-h-[42dvh] lg:min-h-[68dvh]">
           {historia.coverUrl ? (
             <Image
               src={historia.coverUrl}
@@ -22,7 +22,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
               quality={88}
-              className="object-cover"
+              className="object-cover object-top"
             />
           ) : (
             <div
@@ -34,7 +34,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
           )}
         </div>
 
-        <div className="relative flex flex-col justify-end bg-brand-ink px-6 py-16 pt-28 sm:px-10 sm:py-20 sm:pt-32 lg:px-14">
+        <div className="relative flex min-w-0 flex-col justify-end bg-brand-ink px-6 py-16 pt-28 sm:px-10 sm:py-20 sm:pt-32 lg:px-14">
           <div
             className="pointer-events-none absolute inset-0 opacity-30"
             style={{
@@ -48,7 +48,7 @@ export function StoryHero({ historia }: StoryHeroProps) {
               {historia.titulo}
             </h1>
             {historia.pullQuote ? (
-              <blockquote className="mt-8 border-l-4 border-brand-secondary pl-5 text-xl font-medium italic leading-snug text-white/90 sm:text-2xl lg:text-3xl">
+              <blockquote className="mt-8 max-w-full border-l-4 border-brand-secondary pl-5 text-xl font-medium italic leading-snug text-white/90 sm:text-2xl lg:text-3xl">
                 «{historia.pullQuote}»
               </blockquote>
             ) : null}

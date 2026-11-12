@@ -165,7 +165,7 @@ export default async function DeporteDetallePage({ params }: PageProps) {
       </Section>
 
       <Section density="tight">
-        <Container className="space-y-20">
+        <Container className="space-y-12">
           <SportUbicaciones
             ubicaciones={deporte.ubicaciones}
             deporteSlug={deporte.slug}
@@ -180,7 +180,7 @@ export default async function DeporteDetallePage({ params }: PageProps) {
       </Section>
 
       <section
-        className="py-16 sm:py-20"
+        className="py-12 sm:py-14"
         style={{ backgroundColor: deporte.colorPrimario }}
       >
         <Container className="text-center">
@@ -189,12 +189,12 @@ export default async function DeporteDetallePage({ params }: PageProps) {
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
             {deporte.slug === "ultimate-frisbee"
-              ? "La inscripción a la clínica está abierta. Completala con tus datos y el comprobante."
-              : "Encontrá a quien ya lo juega y sumate. La clínica de Ultimate tiene la inscripción abierta."}
+              ? "Mirá las fotos de la clínica y, si te copa, andá a la cancha."
+              : "Encontrá a quien ya lo juega y sumate. En la clínica hay fotos que no están en esta página."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/clinica" variant="secondary" size="lg">
-              Anotate a la clínica
+              Ver la clínica
             </ButtonLink>
             <ButtonLink href={`/mapa?deporte=${deporte.slug}`} variant="outlineLight" size="lg">
               Encontrá el lugar

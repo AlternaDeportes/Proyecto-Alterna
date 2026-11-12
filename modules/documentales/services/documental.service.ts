@@ -134,15 +134,15 @@ export function toYoutubeEmbed(url: string): string | null {
     const u = new URL(url);
     if (u.hostname.includes("youtu.be")) {
       const id = u.pathname.slice(1);
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+      return id ? `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1` : null;
     }
     if (u.hostname.includes("youtube.com")) {
       const id = u.searchParams.get("v");
-      if (id) return `https://www.youtube.com/embed/${id}`;
+      if (id) return `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`;
       const parts = u.pathname.split("/");
       const embedIdx = parts.indexOf("embed");
       if (embedIdx >= 0 && parts[embedIdx + 1]) {
-        return `https://www.youtube.com/embed/${parts[embedIdx + 1]}`;
+        return `https://www.youtube-nocookie.com/embed/${parts[embedIdx + 1]}?rel=0&modestbranding=1`;
       }
     }
   } catch {

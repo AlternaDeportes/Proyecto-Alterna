@@ -40,15 +40,17 @@ export const siteConfig = {
     label: "Ya disponible",
     shortLabel: "En YouTube",
   },
-  /**
-   * Clínica de Ultimate. El formulario vive en Google y se abre en otra pestaña.
-   */
+  /** Documental completo, para ver en la web. */
+  documental: {
+    youtubeId: "uveTwIEViSA",
+    published: true,
+    title: "Documental ALTERNA",
+  },
+  /** Clínica de Ultimate: galería de fotos. */
   clinica: {
     title: "Clínica de Ultimate",
     href: "/clinica",
     published: true,
-    formUrl:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeMiZK-EGVgxlyPlK-uSliMK_Plyqe8noPPu6bDuA60pSGO0g/viewform",
   },
   /**
    * Nav primaria. Comunidad y Contacto viven en footer / secondaryNav.
@@ -84,9 +86,18 @@ export function teaserEmbedUrl(autoplay = false): string {
   return `https://www.youtube-nocookie.com/embed/${siteConfig.teaser.youtubeId}?${params.toString()}`;
 }
 
+export function documentalWatchUrl(): string {
+  return `https://youtu.be/${siteConfig.documental.youtubeId}`;
+}
+
+export function documentalEmbedUrl(): string {
+  const params = new URLSearchParams({ rel: "0", modestbranding: "1" });
+  return `https://www.youtube-nocookie.com/embed/${siteConfig.documental.youtubeId}?${params.toString()}`;
+}
+
 /** Enlaces de redes con etiqueta para UI */
 export const socialLinks = [
-  { key: "youtube" as const, label: "YouTube", hint: "Teaser disponible" },
+  { key: "youtube" as const, label: "YouTube", hint: "Documental disponible" },
   { key: "instagram" as const, label: "Instagram", hint: "Comunidad" },
   { key: "spotify" as const, label: "Spotify", hint: "Alternando voces" },
 ] as const;

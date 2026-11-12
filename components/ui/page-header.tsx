@@ -71,7 +71,7 @@ export function PageHeader({
         tone={tone}
         border="bottom"
         blobs={showBlobs ? "section" : false}
-        className={cn("pt-28 sm:pt-32", className)}
+        className={cn("pt-24 sm:pt-28", className)}
         aria-labelledby={headingId}
       >
         <Container>

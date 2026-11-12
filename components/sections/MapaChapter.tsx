@@ -15,7 +15,7 @@ export async function MapaChapter() {
 
   return (
     <section
-      className="relative overflow-hidden bg-brand-surface py-20 sm:py-28"
+      className="relative overflow-hidden bg-brand-surface py-14 sm:py-16"
       aria-labelledby="mapa-capitulo"
     >
       <ColorStripe className="absolute inset-x-0 top-0" />
@@ -39,7 +39,7 @@ export async function MapaChapter() {
               Encontrá tu lugar
             </ButtonLink>
             <ButtonLink href="/clinica" variant="accent" size="lg">
-              Anotate a la clínica
+              Ver la clínica
             </ButtonLink>
           </div>
         </Reveal>

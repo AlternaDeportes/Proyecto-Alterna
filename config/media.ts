@@ -132,14 +132,14 @@ export const sportGalleries: Record<
       label: "El disco",
     },
     {
-      src: "/media/historias/luchi-farias-g2.webp",
-      alt: "Ultimate — Luchi lanza el disco al atardecer",
-      label: "Partido",
+      src: "/media/hero/pool/ultimate-02.webp",
+      alt: "Cancha de Ultimate, con el rodaje en primer plano",
+      label: "En la cancha",
     },
     {
-      src: "/media/historias/ciclo-dussex-g2.webp",
-      alt: "Ultimate — entrenamiento en línea sobre el césped",
-      label: "Entrenamiento",
+      src: "/media/hero/pool/ultimate-05.webp",
+      alt: "Partido de Ultimate en un parque de Santa Fe",
+      label: "Partido",
     },
   ],
   newcom: [
@@ -185,48 +185,33 @@ export const storyMedia: Record<
     gallery: { src: string; alt: string; label: string }[];
   }
 > = {
-  "luchi-farias": {
-    cover: "/media/historias/luchi-farias.webp",
+  "guillermo-calamante": {
+    cover: "/media/historias/guillermo-calamante.webp",
     gallery: [
       {
-        src: "/media/historias/luchi-farias.webp",
-        alt: "Ultimate en el parque",
-        label: "Entrenamiento",
-      },
-      {
-        src: "/media/historias/luchi-farias-g2.webp",
-        alt: "Ultimate — Luchi lanza el disco al atardecer",
-        label: "Partido",
+        src: "/media/historias/guillermo-calamante.webp",
+        alt: "Guillermo «Lobo» Calamante lanza el disco con la camiseta de Malón",
+        label: "En la cancha",
       },
     ],
   },
   "ciclo-dussex": {
-    cover: "/media/historias/ciclo-dussex.webp",
+    cover: "/media/historias/ciclo-dussex-retrato.webp",
     gallery: [
       {
-        src: "/media/historias/ciclo-dussex.webp",
-        alt: "Ultimate — práctica Ciclo",
-        label: "Práctica",
-      },
-      {
-        src: "/media/historias/ciclo-dussex-g2.webp",
-        alt: "Ultimate — entrenamiento en línea sobre el césped",
-        label: "Entrenamiento",
+        src: "/media/historias/ciclo-dussex-retrato.webp",
+        alt: "Adriel «Ciclo» Dussex con el disco, camiseta de Malón",
+        label: "En la cancha",
       },
     ],
   },
-  "monica-lovecchio": {
-    cover: "/media/deportes/newcom-02.webp",
+  susana: {
+    cover: "/media/historias/susana-brazos.webp",
     gallery: [
       {
-        src: "/media/deportes/newcom-02.webp",
-        alt: "Newcom — jugadoras en cancha",
-        label: "Juego",
-      },
-      {
-        src: "/media/deportes/newcom.webp",
-        alt: "Newcom — partido",
-        label: "Partido",
+        src: "/media/historias/susana-brazos.webp",
+        alt: "Susana en la cancha de Newcom, con los brazos cruzados y la camiseta 37",
+        label: "En la cancha",
       },
     ],
   },
@@ -246,6 +231,19 @@ export const storyMedia: Record<
     ],
   },
 };
+
+/**
+ * Fotos de la clínica en Malón Querandí.
+ * No incluyen los retratos que ya están en las historias.
+ */
+export const clinicGallery: { src: string; alt: string; label: string }[] = Array.from(
+  { length: 44 },
+  (_, index) => ({
+    src: `/media/clinica/clinica-${String(index + 1).padStart(2, "0")}.webp`,
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+  })
+);
 
 /** Prefiere URL de CMS/Cloudinary; si no, catálogo local. */
 export function resolveCover(

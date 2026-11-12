@@ -62,11 +62,11 @@
 
   /* Ritmo vertical de sección */
   .ds-section {
-    @apply relative py-20 sm:py-24;
+    @apply relative py-12 sm:py-16;
   }
 
   .ds-section--tight {
-    @apply relative py-14 sm:py-16;
+    @apply relative py-8 sm:py-10;
   }
 
   /* Título display de marca */

@@ -67,7 +67,7 @@ export default async function HistoriaDetallePage({ params }: PageProps) {
 
       <StoryHero historia={historia} />
 
-      <article className="border-b border-brand-ink/10 bg-brand-surface py-16 text-brand-ink sm:py-24">
+      <article className="border-b border-brand-ink/10 bg-brand-surface py-12 text-brand-ink sm:py-16">
         <Container narrow>
           {paragraphs.map((p, i) => (
             <p
@@ -95,7 +95,7 @@ export default async function HistoriaDetallePage({ params }: PageProps) {
         </Container>
       </article>
 
-      <section className="bg-brand-ink py-16 sm:py-20">
+      <section className="bg-brand-ink py-12 sm:py-14">
         <Container>
           <StoryGallery
             items={historia.galeria}

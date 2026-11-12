@@ -2,7 +2,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/config/site";
 
-/** Franja corta para llevar a la inscripción de la clínica. */
+/** Franja corta hacia las fotos de la clínica. */
 export function ClinicBand() {
   return (
     <section className="border-t border-white/10 bg-brand-ink py-10 sm:py-12" aria-label="Clínica de Ultimate">
@@ -12,11 +12,11 @@ export function ClinicBand() {
             {siteConfig.clinica.title}
           </p>
           <p className="mt-2 max-w-xl text-base text-white/85">
-            La inscripción está abierta. Completá tus datos y subí el comprobante.
+            La clínica de Ultimate, en fotos. Gracias a Malón Querandí por el espacio y la predisposición.
           </p>
         </div>
         <ButtonLink href={siteConfig.clinica.href} variant="secondary" size="lg">
-          Anotate a la clínica
+          Ver la clínica
         </ButtonLink>
       </Container>
     </section>

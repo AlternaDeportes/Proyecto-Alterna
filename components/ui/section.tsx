@@ -24,7 +24,7 @@ const sectionVariants = cva("ds-section", {
     },
     density: {
       default: "",
-      tight: "ds-section--tight !py-14 sm:!py-16",
+      tight: "ds-section--tight !py-10 sm:!py-12",
     },
   },
   defaultVariants: {

@@ -33,6 +33,12 @@ export async function POST(request: Request) {
       { status: 401 }
     );
   }
+  if (session.user.emailVerificado === false) {
+    return NextResponse.json(
+      { ok: false, message: "Verificá tu email para comentar." },
+      { status: 403 }
+    );
+  }
 
   const limit = checkRateLimit(`comunidad-com:${session.user.id}`, {
     limit: 10,

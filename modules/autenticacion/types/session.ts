@@ -7,6 +7,7 @@ export interface SessionUser {
   name: string;
   image?: string | null;
   rol: RolNombre;
+  emailVerificado: boolean;
 }
 
 export interface AuthStatus {

@@ -16,7 +16,7 @@ export function TeaserChapter() {
   return (
     <section
       id="teaser"
-      className="relative scroll-mt-20 overflow-hidden bg-brand-ink pt-28 pb-16 sm:pt-32 sm:pb-24"
+      className="relative scroll-mt-20 overflow-hidden bg-brand-ink pt-24 pb-10 sm:pt-28 sm:pb-12"
       aria-labelledby="teaser-titulo"
     >
       <JsonLdScript

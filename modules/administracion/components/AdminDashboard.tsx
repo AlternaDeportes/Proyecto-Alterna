@@ -6,6 +6,8 @@ import { ColorStripe } from "@/components/brand/ColorStripe";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
+import { AdminEditor } from "@/modules/administracion/components/AdminEditor";
+import { AdminLugares } from "@/modules/administracion/components/AdminLugares";
 import { AdminMetrics } from "@/modules/administracion/components/AdminMetrics";
 import { ContactMessages } from "@/modules/administracion/components/ContactMessages";
 import { ModerateComments } from "@/modules/administracion/components/ModerateComments";
@@ -103,6 +105,8 @@ export function AdminDashboard({
   auditoria,
 }: AdminDashboardProps) {
   const [tab, setTab] = useState<AdminTabId>(isTab(initialTab) ? initialTab : "resumen");
+  const [editando, setEditando] = useState<{ tipo: string; id: string } | null>(null);
+  const puedeEditar = staffRol === "ADMIN";
   const [modSub, setModSub] = useState<"puntos" | "comentarios">(
     resumen.comentariosPendientes > 0 && resumen.pendientes === 0
       ? "comentarios"
@@ -125,7 +129,9 @@ export function AdminDashboard({
       deporte: [],
       historia: [],
       podcast: [],
+      podcastShow: [],
       documental: [],
+      documentalShow: [],
       evento: [],
     };
     for (const item of contenido) groups[item.tipo].push(item);
@@ -138,7 +144,7 @@ export function AdminDashboard({
         tone="ink"
         border="bottom"
         blobs="section"
-        className="pt-28 sm:pt-32"
+        className="pt-24 sm:pt-28"
         aria-labelledby="admin-title"
       >
         <Container>
@@ -412,15 +418,18 @@ export function AdminDashboard({
         {tab === "contenido" ? (
           <div className="space-y-8">
             <p className="text-sm text-brand-ink/55">
-              Inventario publicado. La edición editorial todavía se hace en seed / Prisma
-              Studio; acá ves qué hay al aire y saltás a la ficha pública.
+              {puedeEditar
+                ? "Editá textos, horarios y datos públicos. Los cambios se ven en la página al guardar."
+                : "Inventario publicado. La edición la hace la cuenta de administración."}
             </p>
             {(
               [
                 ["deporte", "Deportes"],
                 ["historia", "Historias"],
-                ["podcast", "Podcast"],
-                ["documental", "Documentales"],
+                ["podcastShow", "Podcast — programa"],
+                ["podcast", "Podcast — episodios"],
+                ["documentalShow", "Documental — ficha"],
+                ["documental", "Documental — episodios"],
                 ["evento", "Eventos"],
               ] as const
             ).map(([tipo, titulo]) => (
@@ -434,24 +443,44 @@ export function AdminDashboard({
                   <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                     {contenidoPorTipo[tipo].map((item) => (
                       <li key={item.id}>
-                        <Link
-                          href={item.href}
-                          className="flex items-center justify-between gap-3 rounded-xl border border-brand-ink/10 bg-white px-4 py-3 text-sm shadow-soft hover:border-brand-primary/40"
-                        >
-                          <span>
-                            <span className="font-semibold text-brand-ink">{item.titulo}</span>
-                            <span className="mt-0.5 block text-xs text-brand-ink/40">
-                              {item.meta}
+                        <div className="rounded-xl border border-brand-ink/10 bg-white px-4 py-3 text-sm shadow-soft">
+                          <div className="flex items-center justify-between gap-3">
+                            <span>
+                              <span className="font-semibold text-brand-ink">{item.titulo}</span>
+                              <span className="mt-0.5 block text-xs text-brand-ink/40">
+                                {item.meta}
+                              </span>
                             </span>
-                          </span>
-                          <span className="text-xs text-brand-primary">Ver</span>
-                        </Link>
+                            <span className="flex shrink-0 gap-3">
+                              {puedeEditar ? (
+                                <button
+                                  type="button"
+                                  className="text-xs font-semibold text-brand-ink"
+                                  onClick={() => setEditando({ tipo: item.tipo, id: item.id })}
+                                >
+                                  Editar
+                                </button>
+                              ) : null}
+                              <Link href={item.href} className="text-xs text-brand-primary">
+                                Ver
+                              </Link>
+                            </span>
+                          </div>
+                          {editando?.tipo === item.tipo && editando.id === item.id ? (
+                            <AdminEditor
+                              tipo={item.tipo}
+                              id={item.id}
+                              onClose={() => setEditando(null)}
+                            />
+                          ) : null}
+                        </div>
                       </li>
                     ))}
                   </ul>
                 )}
               </section>
             ))}
+            {puedeEditar ? <AdminLugares /> : null}
           </div>
         ) : null}
 

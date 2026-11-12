@@ -1,5 +1,5 @@
 import { documentaryCovers } from "@/config/media";
-import { teaserWatchUrl } from "@/config/site";
+import { documentalWatchUrl, teaserWatchUrl } from "@/config/site";
 import type {
   DocumentalEpisodioDetalle,
   DocumentalShow,
@@ -21,7 +21,28 @@ const TRAILER: DocumentalEpisodioDetalle = {
     slug: "alterna-documental",
     titulo: "ALTERNA — Deportes por descubrir",
     sinopsis:
-      "Mirá el teaser y después encontrá a quienes juegan ultimate, newcom y wingfoil en Santa Fe.",
+      "El documental de ALTERNA ya se ve en la web. Ultimate, Newcom y Wingfoil en Santa Fe.",
+  },
+};
+
+const DOCUMENTAL: DocumentalEpisodioDetalle = {
+  id: "doc-documental",
+  slug: "documental",
+  titulo: "Documental",
+  sinopsis:
+    "El documental de ALTERNA, para ver en la web. Ultimate, Newcom y Wingfoil en Santa Fe.",
+  numero: 1,
+  duracionSeg: null,
+  videoUrl: documentalWatchUrl(),
+  coverUrl: documentaryCovers.trailer,
+  publishedAt: "2026-11-12T00:00:00-03:00",
+  proximo: false,
+  etiqueta: "Documental",
+  documental: {
+    slug: "alterna-documental",
+    titulo: "ALTERNA — Deportes por descubrir",
+    sinopsis:
+      "El documental de ALTERNA ya se ve en la web. Ultimate, Newcom y Wingfoil en Santa Fe.",
   },
 };
 
@@ -30,10 +51,10 @@ const SHOW: DocumentalShow = {
   slug: "alterna-documental",
   titulo: "ALTERNA — Deportes por descubrir",
   sinopsis:
-    "Mirá el teaser y después encontrá a quienes juegan ultimate, newcom y wingfoil en Santa Fe.",
+    "El documental de ALTERNA ya se ve en la web. Ultimate, Newcom y Wingfoil en Santa Fe.",
   coverUrl: documentaryCovers.trailer,
   publishedAt: "2026-09-16T00:00:00-03:00",
-  episodios: [TRAILER],
+  episodios: [TRAILER, DOCUMENTAL],
 };
 
 export function obtenerDocumentalFallback(): DocumentalShow {
@@ -43,10 +64,11 @@ export function obtenerDocumentalFallback(): DocumentalShow {
 export function obtenerEpisodioDocFallback(
   slug: string
 ): DocumentalEpisodioDetalle | null {
-  if (slug !== TRAILER.slug) return null;
-  return TRAILER;
+  if (slug === TRAILER.slug) return TRAILER;
+  if (slug === DOCUMENTAL.slug) return DOCUMENTAL;
+  return null;
 }
 
 export function listarEpisodioDocSlugsFallback(): string[] {
-  return [TRAILER.slug];
+  return [TRAILER.slug, DOCUMENTAL.slug];
 }
