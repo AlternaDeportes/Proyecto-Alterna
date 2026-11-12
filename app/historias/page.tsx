@@ -57,7 +57,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                     href={`/historias/${historia.slug}`}
                     className="group block focus-ring rounded-frame"
                   >
-                    <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden bg-brand-ink">
+                    <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden">
                       {historia.coverUrl ? (
                         <Image
                           src={historia.coverUrl}
@@ -65,7 +65,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                           fill
                           sizes="(max-width: 640px) 100vw, 50vw"
                           quality={88}
-                          className="object-contain object-center"
+                          className="object-cover object-center"
                           priority={i < 2}
                         />
                       ) : (

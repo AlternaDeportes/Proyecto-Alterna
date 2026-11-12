@@ -60,7 +60,7 @@ export async function VocesChapter() {
                 href={`/historias/${historia.slug}`}
                 className="group block rounded-frame focus-ring"
               >
-                <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden bg-brand-ink">
+                <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden">
                   {historia.coverUrl ? (
                     <Image
                       src={historia.coverUrl}
@@ -68,7 +68,7 @@ export async function VocesChapter() {
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
                       quality={88}
-                      className="object-contain object-center"
+                      className="object-cover object-center"
                     />
                   ) : (
                     <div

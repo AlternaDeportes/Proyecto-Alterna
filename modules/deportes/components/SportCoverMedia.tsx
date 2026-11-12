@@ -22,7 +22,7 @@ export function SportCoverMedia({
         priority={priority}
         quality={IMAGE_QUALITY}
         sizes="(max-width: 768px) 100vw, 33vw"
-        className="ds-media-zoom object-contain object-center"
+        className="ds-media-zoom object-cover object-center"
       />
     );
   }

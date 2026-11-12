@@ -122,7 +122,7 @@ export default async function DeporteDetallePage({ params }: PageProps) {
                     key={`${foto.src}-${foto.label}`}
                     className={i === 0 ? "sm:col-span-2" : undefined}
                   >
-                    <figure className="ds-frame ds-frame--ink overflow-hidden bg-brand-ink">
+                    <figure className="ds-frame ds-frame--ink overflow-hidden">
                       <Image
                         src={foto.src}
                         alt={foto.alt}

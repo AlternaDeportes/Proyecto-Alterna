@@ -30,7 +30,7 @@ export function StoryGallery({ items, accentColor, titulo }: StoryGalleryProps) 
               accentColor={accentColor}
               tone="ink"
               ratio="person"
-              imageClassName="object-contain"
+              imageClassName="object-cover object-center"
               sizes="(max-width: 640px) 100vw, 50vw"
               placeholderLabel={item.label}
             />

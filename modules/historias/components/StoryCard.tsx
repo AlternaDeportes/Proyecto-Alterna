@@ -22,7 +22,7 @@ export function StoryCard({ historia, className }: StoryCardProps) {
         accentColor={historia.deporte.colorPrimario}
         tone="paper"
         ratio="person"
-        imageClassName="object-contain"
+        imageClassName="object-cover object-center"
         frameClassName="rounded-none rounded-t-[inherit] ring-0"
         sizes="(max-width: 640px) 100vw, 50vw"
         placeholderLabel={historia.titulo}

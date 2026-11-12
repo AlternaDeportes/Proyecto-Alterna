@@ -42,7 +42,7 @@ export default function ClinicaPage() {
           <ul className="mt-10 grid grid-cols-2 gap-2 sm:mt-12 sm:gap-4 lg:grid-cols-3">
             {clinicGallery.map((foto) => (
               <li key={foto.src}>
-                <figure className="ds-frame ds-frame--ink overflow-hidden bg-brand-ink">
+                <figure className="ds-frame ds-frame--ink overflow-hidden">
                   <Image
                     src={foto.src}
                     alt={foto.alt}

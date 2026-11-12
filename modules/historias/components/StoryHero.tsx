@@ -13,16 +13,16 @@ export function StoryHero({ historia }: StoryHeroProps) {
   return (
     <header className="relative overflow-hidden border-b border-white/10 pt-16">
       <div className="grid lg:grid-cols-[minmax(0,24rem)_1fr]">
-        <div className="relative mx-auto h-[min(calc(100dvh-4.5rem),40rem)] w-full max-w-[24rem] bg-brand-ink">
+        <div className="relative mx-auto aspect-[3/5] w-full max-w-[24rem] overflow-hidden">
           {historia.coverUrl ? (
             <Image
               src={historia.coverUrl}
               alt={historia.titulo}
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 28rem"
+              sizes="(max-width: 1024px) 100vw, 24rem"
               quality={88}
-              className="object-contain object-center"
+              className="object-cover object-center"
             />
           ) : (
             <div
