@@ -74,9 +74,6 @@ export function AudiovisualChapter() {
               <ButtonLink href="/documentales" variant="accent" size="lg">
                 Ver el documental
               </ButtonLink>
-              <ButtonLink href="/clinica" variant="secondary" size="lg">
-                Ver la clínica
-              </ButtonLink>
               <Link
                 href={documentalWatchUrl()}
                 target="_blank"

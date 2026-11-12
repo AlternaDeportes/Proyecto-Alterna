@@ -60,7 +60,6 @@ export const siteConfig = {
     { label: "Documental", href: "/documentales" },
     { label: "Podcast", href: "/podcasts" },
     { label: "Deportes", href: "/deportes" },
-    { label: "Clínica", href: "/clinica" },
     { label: "Historias", href: "/historias" },
     { label: "Mapa", href: "/mapa" },
   ],

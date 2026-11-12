@@ -29,7 +29,8 @@ export function StoryGallery({ items, accentColor, titulo }: StoryGalleryProps) 
               alt={item.alt}
               accentColor={accentColor}
               tone="ink"
-              ratio="video"
+              ratio="person"
+              imageClassName="object-contain"
               sizes="(max-width: 640px) 100vw, 50vw"
               placeholderLabel={item.label}
             />

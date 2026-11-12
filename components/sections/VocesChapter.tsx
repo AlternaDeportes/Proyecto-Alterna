@@ -40,8 +40,8 @@ export async function VocesChapter() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <ButtonLink href="/clinica" variant="accent" size="md">
-                Ver la clínica
+              <ButtonLink href="/documentales" variant="accent" size="md">
+                Ver el documental
               </ButtonLink>
               <Link
                 href="/historias"
@@ -60,7 +60,7 @@ export async function VocesChapter() {
                 href={`/historias/${historia.slug}`}
                 className="group block rounded-frame focus-ring"
               >
-                <div className="ds-frame ds-frame--paper relative aspect-[4/5] overflow-hidden bg-brand-ink sm:aspect-[3/4]">
+                <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden bg-brand-ink">
                   {historia.coverUrl ? (
                     <Image
                       src={historia.coverUrl}
@@ -68,7 +68,7 @@ export async function VocesChapter() {
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
                       quality={88}
-                      className="ds-media-zoom object-cover object-top"
+                      className="object-contain object-center"
                     />
                   ) : (
                     <div
@@ -78,23 +78,19 @@ export async function VocesChapter() {
                       }}
                     />
                   )}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-brand-ink/95 via-brand-ink/20 to-transparent"
-                    aria-hidden
-                  />
-                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand-secondary">
-                      {historia.deporte.nombre}
+                </div>
+                <div className="mt-4">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand-primary">
+                    {historia.deporte.nombre}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl font-black uppercase text-brand-ink sm:text-2xl">
+                    {historia.titulo}
+                  </h3>
+                  {historia.pullQuote ? (
+                    <p className="mt-3 line-clamp-3 text-sm italic leading-relaxed text-brand-ink/70">
+                      «{historia.pullQuote}»
                     </p>
-                    <h3 className="mt-2 font-display text-xl font-black uppercase text-white sm:text-2xl">
-                      {historia.titulo}
-                    </h3>
-                    {historia.pullQuote ? (
-                      <p className="mt-3 line-clamp-3 text-sm italic leading-relaxed text-white/80">
-                        «{historia.pullQuote}»
-                      </p>
-                    ) : null}
-                  </div>
+                  ) : null}
                 </div>
               </Link>
             </Reveal>

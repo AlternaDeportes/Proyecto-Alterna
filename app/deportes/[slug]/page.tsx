@@ -122,13 +122,14 @@ export default async function DeporteDetallePage({ params }: PageProps) {
                     key={`${foto.src}-${foto.label}`}
                     className={i === 0 ? "sm:col-span-2" : undefined}
                   >
-                    <figure className="ds-frame ds-frame--ink relative aspect-[4/3] overflow-hidden sm:aspect-[3/2]">
+                    <figure className="ds-frame ds-frame--ink overflow-hidden bg-brand-ink">
                       <Image
                         src={foto.src}
                         alt={foto.alt}
-                        fill
+                        width={foto.width}
+                        height={foto.height}
                         quality={88}
-                        className="object-cover"
+                        className="h-auto w-full"
                         sizes={
                           i === 0
                             ? "(max-width: 640px) 100vw, 72rem"
@@ -136,11 +137,7 @@ export default async function DeporteDetallePage({ params }: PageProps) {
                         }
                         priority={i === 0}
                       />
-                      <div
-                        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/80 to-transparent p-3 pt-10 sm:p-4"
-                        aria-hidden
-                      />
-                      <figcaption className="absolute bottom-3 left-3 z-raised text-[10px] font-bold uppercase tracking-wider text-white sm:bottom-4 sm:left-4 sm:text-xs">
+                      <figcaption className="px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-white sm:px-4 sm:text-xs">
                         {foto.label}
                       </figcaption>
                     </figure>
@@ -189,12 +186,12 @@ export default async function DeporteDetallePage({ params }: PageProps) {
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-white/90">
             {deporte.slug === "ultimate-frisbee"
-              ? "Mirá las fotos de la clínica y, si te copa, andá a la cancha."
-              : "Encontrá a quien ya lo juega y sumate. En la clínica hay fotos que no están en esta página."}
+              ? "Mirá el documental y, si te copa, andá a la cancha."
+              : "Encontrá a quien ya lo juega y sumate. El documental muestra cómo se vive."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <ButtonLink href="/clinica" variant="secondary" size="lg">
-              Ver la clínica
+            <ButtonLink href="/documentales" variant="secondary" size="lg">
+              Ver el documental
             </ButtonLink>
             <ButtonLink href={`/mapa?deporte=${deporte.slug}`} variant="outlineLight" size="lg">
               Encontrá el lugar

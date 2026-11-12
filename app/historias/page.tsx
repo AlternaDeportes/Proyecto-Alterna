@@ -57,7 +57,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                     href={`/historias/${historia.slug}`}
                     className="group block focus-ring rounded-frame"
                   >
-                    <div className="ds-frame ds-frame--paper relative aspect-[3/4] overflow-hidden bg-brand-ink">
+                    <div className="ds-frame ds-frame--paper relative aspect-[3/5] overflow-hidden bg-brand-ink">
                       {historia.coverUrl ? (
                         <Image
                           src={historia.coverUrl}
@@ -65,7 +65,7 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                           fill
                           sizes="(max-width: 640px) 100vw, 50vw"
                           quality={88}
-                          className="ds-media-zoom object-cover object-top"
+                          className="object-contain object-center"
                           priority={i < 2}
                         />
                       ) : (
@@ -76,23 +76,19 @@ export default async function HistoriasPage({ searchParams }: HistoriasPageProps
                           }}
                         />
                       )}
-                      <div
-                        className="absolute inset-0 bg-gradient-to-t from-brand-ink/95 via-brand-ink/25 to-transparent"
-                        aria-hidden
-                      />
-                      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand-secondary">
-                          {historia.deporte.nombre}
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-brand-primary">
+                        {historia.deporte.nombre}
+                      </p>
+                      <h2 className="mt-2 font-display text-xl font-black uppercase text-brand-ink sm:text-2xl">
+                        {historia.titulo}
+                      </h2>
+                      {historia.pullQuote ? (
+                        <p className="mt-3 line-clamp-3 text-sm italic text-brand-ink/70">
+                          «{historia.pullQuote}»
                         </p>
-                        <h2 className="mt-2 font-display text-xl font-black uppercase text-white sm:text-2xl">
-                          {historia.titulo}
-                        </h2>
-                        {historia.pullQuote ? (
-                          <p className="mt-3 line-clamp-3 text-sm italic text-white/75">
-                            «{historia.pullQuote}»
-                          </p>
-                        ) : null}
-                      </div>
+                      ) : null}
                     </div>
                   </Link>
                 </Reveal>

@@ -57,9 +57,6 @@ export function HeroIntro() {
         <ButtonLink href="/documentales" variant="secondary" size="lg">
           Ver el documental
         </ButtonLink>
-        <ButtonLink href={siteConfig.clinica.href} variant="accent" size="lg">
-          Ver la clínica
-        </ButtonLink>
         <ButtonLink href="/mapa" variant="outlineLight" size="lg">
           Encontrá dónde jugar
         </ButtonLink>

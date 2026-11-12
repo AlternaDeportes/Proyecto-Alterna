@@ -14,6 +14,7 @@ const frameVariants = cva("ds-frame", {
       video: "aspect-video",
       square: "aspect-square",
       portrait: "aspect-[3/4]",
+      person: "aspect-[3/5]",
       wide: "aspect-[21/9]",
       auto: "",
     },

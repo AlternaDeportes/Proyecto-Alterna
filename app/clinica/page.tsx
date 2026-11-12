@@ -42,13 +42,14 @@ export default function ClinicaPage() {
           <ul className="mt-10 grid grid-cols-2 gap-2 sm:mt-12 sm:gap-4 lg:grid-cols-3">
             {clinicGallery.map((foto) => (
               <li key={foto.src}>
-                <figure className="ds-frame ds-frame--ink relative aspect-[3/4] overflow-hidden sm:aspect-[4/3]">
+                <figure className="ds-frame ds-frame--ink overflow-hidden bg-brand-ink">
                   <Image
                     src={foto.src}
                     alt={foto.alt}
-                    fill
+                    width={foto.width}
+                    height={foto.height}
                     quality={IMAGE_QUALITY}
-                    className="object-cover"
+                    className="h-auto w-full"
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </figure>

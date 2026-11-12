@@ -11,18 +11,18 @@ interface StoryHeroProps {
 /** Hero editorial — quote monumental + retrato. */
 export function StoryHero({ historia }: StoryHeroProps) {
   return (
-    <header className="relative overflow-hidden border-b border-white/10">
-      <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[42dvh] lg:min-h-[68dvh]">
+    <header className="relative overflow-hidden border-b border-white/10 pt-16">
+      <div className="grid lg:grid-cols-[minmax(0,24rem)_1fr]">
+        <div className="relative mx-auto h-[min(calc(100dvh-4.5rem),40rem)] w-full max-w-[24rem] bg-brand-ink">
           {historia.coverUrl ? (
             <Image
               src={historia.coverUrl}
               alt={historia.titulo}
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 28rem"
               quality={88}
-              className="object-cover object-top"
+              className="object-contain object-center"
             />
           ) : (
             <div

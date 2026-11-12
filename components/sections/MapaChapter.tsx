@@ -38,8 +38,8 @@ export async function MapaChapter() {
             <ButtonLink href="/mapa" variant="secondary" size="lg">
               Encontrá tu lugar
             </ButtonLink>
-            <ButtonLink href="/clinica" variant="accent" size="lg">
-              Ver la clínica
+            <ButtonLink href="/documentales" variant="accent" size="lg">
+              Ver el documental
             </ButtonLink>
           </div>
         </Reveal>

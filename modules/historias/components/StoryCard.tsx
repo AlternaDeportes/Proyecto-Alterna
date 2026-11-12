@@ -21,7 +21,8 @@ export function StoryCard({ historia, className }: StoryCardProps) {
         alt={historia.titulo}
         accentColor={historia.deporte.colorPrimario}
         tone="paper"
-        ratio="video"
+        ratio="person"
+        imageClassName="object-contain"
         frameClassName="rounded-none rounded-t-[inherit] ring-0"
         sizes="(max-width: 640px) 100vw, 50vw"
         placeholderLabel={historia.titulo}

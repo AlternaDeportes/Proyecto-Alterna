@@ -98,7 +98,7 @@ function HeroLayer({
       priority={priority}
       sizes="100vw"
         className={cn(
-        "object-cover will-change-[opacity]",
+        "object-contain object-center will-change-[opacity]",
         visible ? "opacity-100" : "opacity-0"
       )}
       quality={88}

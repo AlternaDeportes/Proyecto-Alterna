@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ColorStripe } from "@/components/brand/ColorStripe";
-import { ClinicBand } from "@/components/clinic/ClinicBand";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
@@ -53,9 +52,6 @@ export default async function DocumentalesPage() {
               >
                 Abrir en YouTube
               </ButtonLink>
-              <ButtonLink href="/clinica" variant="secondary" size="lg">
-                Ver la clínica
-              </ButtonLink>
               <ButtonLink href="/mapa" variant="outline" size="lg">
                 Encontrá dónde juegan
               </ButtonLink>
@@ -104,7 +100,6 @@ export default async function DocumentalesPage() {
           ) : null}
         </Container>
       </section>
-      <ClinicBand />
     </main>
   );
 }

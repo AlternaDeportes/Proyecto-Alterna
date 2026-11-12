@@ -44,8 +44,8 @@ export default async function DeportesPage() {
               encontrá dónde sumarte en {siteConfig.defaultCity.name}.
             </p>
             <div className="mt-8">
-              <ButtonLink href="/clinica" variant="accent" size="lg">
-                Ver la clínica
+              <ButtonLink href="/documentales" variant="accent" size="lg">
+                Ver el documental
               </ButtonLink>
             </div>
           </Reveal>
@@ -60,7 +60,7 @@ export default async function DeportesPage() {
             <Reveal key={deporte.id} delay={i * 80} className="h-full">
               <Link
                 href={`/deportes/${deporte.slug}`}
-                className="group relative block h-full min-h-[58dvh] overflow-hidden rounded-frame focus-ring md:min-h-[68dvh]"
+                className="group relative block h-full min-h-[58dvh] overflow-hidden rounded-frame bg-brand-ink focus-ring md:min-h-[68dvh]"
               >
                 <SportCoverMedia
                   image={deporte.coverUrl}

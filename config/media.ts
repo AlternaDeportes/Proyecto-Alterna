@@ -123,23 +123,29 @@ export const documentaryCovers = {
 /** Galería por deporte (fotos reales) — sección detalle. */
 export const sportGalleries: Record<
   string,
-  { src: string; alt: string; label: string }[]
+  { src: string; alt: string; label: string; width: number; height: number }[]
 > = {
   "ultimate-frisbee": [
     {
       src: "/media/deportes/ultimate-frisbee.webp",
       alt: "Ultimate — jugador con el disco, listo para el pase",
       label: "El disco",
+      width: 2400,
+      height: 1600,
     },
     {
       src: "/media/hero/pool/ultimate-02.webp",
       alt: "Cancha de Ultimate, con el rodaje en primer plano",
       label: "En la cancha",
+      width: 1500,
+      height: 2000,
     },
     {
       src: "/media/hero/pool/ultimate-05.webp",
       alt: "Partido de Ultimate en un parque de Santa Fe",
       label: "Partido",
+      width: 2000,
+      height: 1500,
     },
   ],
   newcom: [
@@ -147,16 +153,22 @@ export const sportGalleries: Record<
       src: "/media/deportes/newcom.webp",
       alt: "Newcom — partido en el club",
       label: "Partido",
+      width: 1350,
+      height: 2400,
     },
     {
       src: "/media/deportes/newcom-02.webp",
       alt: "Newcom — jugadoras en cancha",
       label: "Juego",
+      width: 1350,
+      height: 2400,
     },
     {
       src: "/media/deportes/newcom-03.webp",
       alt: "Newcom — entrenamiento",
       label: "Entrenamiento",
+      width: 1350,
+      height: 2400,
     },
   ],
   wingfoil: [
@@ -164,16 +176,22 @@ export const sportGalleries: Record<
       src: "/media/deportes/wingfoil.webp",
       alt: "Wingfoil en el agua",
       label: "En el agua",
+      width: 1350,
+      height: 2400,
     },
     {
       src: "/media/historias/lucio-cinaglia.webp",
       alt: "Wingfoil — equipo en la costa",
       label: "Equipo",
+      width: 1350,
+      height: 2400,
     },
     {
       src: "/media/historias/lucio-cinaglia-g2.webp",
       alt: "Wingfoil en la laguna",
       label: "Laguna",
+      width: 1350,
+      height: 2400,
     },
   ],
 };
@@ -236,14 +254,316 @@ export const storyMedia: Record<
  * Fotos de la clínica en Malón Querandí.
  * No incluyen los retratos que ya están en las historias.
  */
-export const clinicGallery: { src: string; alt: string; label: string }[] = Array.from(
-  { length: 44 },
-  (_, index) => ({
-    src: `/media/clinica/clinica-${String(index + 1).padStart(2, "0")}.webp`,
+export const clinicGallery: { src: string; alt: string; label: string; width: number; height: number }[] = [
+  {
+    src: "/media/clinica/clinica-01.webp",
     alt: "Clínica de Ultimate en la cancha de Malón Querandí",
     label: "Clínica",
-  })
-);
+    width: 780,
+    height: 1386,
+  },
+  {
+    src: "/media/clinica/clinica-02.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 978,
+    height: 1739,
+  },
+  {
+    src: "/media/clinica/clinica-03.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 838,
+    height: 1489,
+  },
+  {
+    src: "/media/clinica/clinica-04.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 865,
+    height: 1538,
+  },
+  {
+    src: "/media/clinica/clinica-05.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-06.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 799,
+    height: 1420,
+  },
+  {
+    src: "/media/clinica/clinica-07.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 860,
+    height: 1529,
+  },
+  {
+    src: "/media/clinica/clinica-08.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-09.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-10.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1020,
+    height: 1814,
+  },
+  {
+    src: "/media/clinica/clinica-11.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-12.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-13.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 889,
+    height: 1580,
+  },
+  {
+    src: "/media/clinica/clinica-14.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-15.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 933,
+    height: 1659,
+  },
+  {
+    src: "/media/clinica/clinica-16.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1920,
+    height: 1080,
+  },
+  {
+    src: "/media/clinica/clinica-17.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-18.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 941,
+    height: 1672,
+  },
+  {
+    src: "/media/clinica/clinica-19.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1237,
+    height: 2200,
+  },
+  {
+    src: "/media/clinica/clinica-20.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-21.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-22.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 969,
+    height: 1723,
+  },
+  {
+    src: "/media/clinica/clinica-23.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-24.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 930,
+    height: 1653,
+  },
+  {
+    src: "/media/clinica/clinica-25.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1920,
+    height: 1080,
+  },
+  {
+    src: "/media/clinica/clinica-26.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 2200,
+    height: 1237,
+  },
+  {
+    src: "/media/clinica/clinica-27.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 894,
+    height: 1590,
+  },
+  {
+    src: "/media/clinica/clinica-28.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-29.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 972,
+    height: 1728,
+  },
+  {
+    src: "/media/clinica/clinica-30.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 932,
+    height: 1658,
+  },
+  {
+    src: "/media/clinica/clinica-31.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-32.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 793,
+    height: 1410,
+  },
+  {
+    src: "/media/clinica/clinica-33.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 874,
+    height: 1553,
+  },
+  {
+    src: "/media/clinica/clinica-34.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-35.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 951,
+    height: 1690,
+  },
+  {
+    src: "/media/clinica/clinica-36.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 838,
+    height: 1490,
+  },
+  {
+    src: "/media/clinica/clinica-37.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1482,
+    height: 834,
+  },
+  {
+    src: "/media/clinica/clinica-38.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 976,
+    height: 1735,
+  },
+  {
+    src: "/media/clinica/clinica-39.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 833,
+    height: 1481,
+  },
+  {
+    src: "/media/clinica/clinica-40.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 975,
+    height: 1733,
+  },
+  {
+    src: "/media/clinica/clinica-41.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 724,
+    height: 1287,
+  },
+  {
+    src: "/media/clinica/clinica-42.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 919,
+    height: 1634,
+  },
+  {
+    src: "/media/clinica/clinica-43.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+  {
+    src: "/media/clinica/clinica-44.webp",
+    alt: "Clínica de Ultimate en la cancha de Malón Querandí",
+    label: "Clínica",
+    width: 1080,
+    height: 1920,
+  },
+];
 
 /** Prefiere URL de CMS/Cloudinary; si no, catálogo local. */
 export function resolveCover(
@@ -258,7 +578,7 @@ export function sportCover(slug: string, override?: string | null): string | nul
   return resolveCover(override, sportCovers[slug]);
 }
 
-export function sportGallery(slug: string): { src: string; alt: string; label: string }[] {
+export function sportGallery(slug: string): { src: string; alt: string; label: string; width: number; height: number }[] {
   return sportGalleries[slug] ?? [];
 }
 

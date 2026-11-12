@@ -48,8 +48,8 @@ export function ManifiestoSection() {
             <ButtonLink href="/historias" variant="secondary" size="lg">
               Conocé a la gente
             </ButtonLink>
-            <ButtonLink href="/clinica" variant="accent" size="lg">
-              Ver la clínica
+            <ButtonLink href="/documentales" variant="accent" size="lg">
+              Ver el documental
             </ButtonLink>
             <ButtonLink href="/mapa" variant="outlineLight" size="lg">
               Encontrá un lugar
