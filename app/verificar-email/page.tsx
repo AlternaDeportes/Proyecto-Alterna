@@ -26,7 +26,7 @@ export default async function VerificarEmailPage({ searchParams }: VerificarPage
   const { token, code, email } = await searchParams;
   const raw = (code ?? token ?? "").trim();
   let ok = false;
-  let attempted = Boolean(raw);
+  const attempted = Boolean(raw);
   let message = "Ingresá el código de 6 dígitos o abrí el enlace del correo.";
 
   if (raw) {

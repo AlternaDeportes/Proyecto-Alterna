@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ColorStripe } from "@/components/brand/ColorStripe";
 import { siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/button";
@@ -29,13 +30,13 @@ export function HeroIntro() {
         ready ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
       )}
     >
-      <a
+      <Link
         href="/documentales"
         className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-secondary px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-ink shadow-glow-secondary transition-transform duration-300 hover:scale-[1.03] focus-ring sm:text-xs"
       >
         Documental · {siteConfig.teaser.label}
         <span aria-hidden>→</span>
-      </a>
+      </Link>
 
       <p className="ds-eyebrow ds-eyebrow--secondary mb-5">{siteConfig.defaultCity.name}</p>
 
